@@ -129,32 +129,6 @@ footer {
 }
 
 /* Add this CSS to your existing stylesheet or create a new one */
-
-.portfolio-images-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.portfolio-image {
-  margin: 0 10px;
-  border: 2px solid #ecf0f1;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-}
-
-.portfolio-image img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.portfolio-image:hover {
-  transform: scale(1.05);
-}
-
 /* Add this CSS to your existing stylesheet or create a new one */
 
 .social-media {
@@ -240,13 +214,6 @@ footer {
 }
 
 /* Badge styles */
-.badge-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
-
 .badge {
   text-align: center;
   text-decoration: none;
@@ -255,6 +222,8 @@ footer {
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column; /* Change to column layout */
 }
 
 .badge img {
@@ -266,8 +235,12 @@ footer {
 }
 
 .badge p {
-  margin: 15px 0;
+  margin: 10px 15px;
   font-size: 14px;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .badge:hover {
@@ -275,34 +248,6 @@ footer {
 }
 
 /* Add this CSS to your existing stylesheet or create a new one */
-
-.portfolio-images-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 30px;
-}
-
-.portfolio-image {
-  text-align: center;
-  text-decoration: none;
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out;
-  margin-bottom: 20px;
-  border: 1px solid #ecf0f1;
-  border-radius: 8px;
-}
-
-.portfolio-image img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-}
-
-.portfolio-image:hover {
-  transform: scale(1.05);
-}
 /* About Me section */
 #about h2 {
   font-size: 2.5rem;
@@ -343,6 +288,14 @@ footer {
   left: 0;
 }
 /* Add this CSS to your existing stylesheet or create a new one */
+.profile-image {
+  width: 120px; /* Adjust the width as needed */
+  height: 120px; /* Adjust the height as needed */
+  border-radius: 50%; /* Create a rounded shape */
+  margin-right: 10px; /* Adjust the margin as needed */
+  overflow: hidden;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
 
 @keyframes fadeIn {
   from {
@@ -476,39 +429,6 @@ form button:hover {
 .social-media-box img:hover {
   transform: scale(1.2); /* Scale effect on hover */
 }
-.portfolio-image img,
-.badge img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px; /* Adjust border radius if needed */
-}
-
-.portfolio-image {
-    text-align: center;
-    text-decoration: none;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-    margin-bottom: 20px;
-    border: 1px solid #ddd; /* Add a border for a clean look */
-    border-radius: 8px; /* Add border-radius for rounded corners */
-}
-
-.portfolio-image:hover {
-    transform: scale(1.05); /* Scale effect on hover */
-}
-
-.badge img {
-    max-width: 50%;
-    height: auto;
-    display: block;
-    border-bottom: 2px solid #ddd; /* Border color for the image */
-    border-radius: 10px 10px 0 0; /* Adjust border radius */
-}
-
-.badge:hover {
-    transform: scale(1.05); /* Scale effect on hover */
-}
 /* Add this CSS to your existing stylesheet or create a new one */
 
 /* Existing styles... */
@@ -539,4 +459,19 @@ form button:hover {
     height: 80px; /* Adjust the height for smaller screens */
     margin-right: 5px; /* Adjust the margin as needed */
   }
+}
+
+     .contact h2 {
+      color: #3498db; /* Change the color to your preference */
+    
+}
+ /* Add this CSS to your existing stylesheet or create a new one */
+
+/* Circular mask for the favicon */
+/* Add this CSS to your existing stylesheet or create a new one */
+
+/* Circular mask for the favicon */
+#round-favicon {
+  border-radius: 50%;
+  overflow: hidden;
 }
