@@ -1,0 +1,604 @@
+/* Reset some default styles */
+body,
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Navigation styles */
+nav {
+  background-color: #2c3e50;
+  padding: 1rem 0;
+}
+
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  font-size: 1.5rem;
+  color: #ecf0f1;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ecf0f1;
+  margin: 0 1rem;
+  transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  color: #3498db;
+}
+
+/* Hero section styles */
+.hero {
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("assets/images/hero-background.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #ecf0f1;
+  padding: 4rem 0;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #3498db, #2c3e50);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+/* General section styles */
+.section {
+  padding: 4rem 0;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Container styles */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Footer styles */
+footer {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  nav .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    margin-top: 1rem;
+  }
+
+  nav a {
+    margin: 0.5rem 0;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Add this CSS to your existing stylesheet or create a new one */
+/* Add this CSS to your existing stylesheet or create a new one */
+
+.social-media {
+  margin-top: 20px;
+}
+
+.social-media ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.social-media li {
+  margin-right: 20px;
+}
+
+.social-media img {
+  width: 30px;
+  height: auto;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+/* Add this CSS to your existing stylesheet or create a new one */
+
+.contact-info {
+  margin-top: 20px;
+}
+
+.contact-info p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.contact-info img {
+  width: 20px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.social-media {
+  margin-top: 20px;
+}
+
+.social-media ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.social-media li {
+  margin-right: 20px;
+}
+
+.social-media img {
+  width: 30px;
+  height: auto;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+/* Styles for specific icons */
+.social-media li.github img {
+  fill: #211f1f;
+}
+
+.social-media li.linkedin img {
+  fill: #0077b5;
+}
+
+/* Optional: Add a hover effect */
+.social-media li:hover img {
+  transform: scale(1.2);
+}
+
+/* Add this CSS to your existing stylesheet or create a new one */
+
+#portfolio {
+  margin-top: 50px;
+}
+
+/* Badge styles */
+.badge {
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #ecf0f1;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column; /* Change to column layout */
+}
+
+.badge img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 2px solid #ecf0f1;
+  border-radius: 10px 10px 0 0;
+}
+
+.badge p {
+  margin: 10px 15px;
+  font-size: 14px;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+/* Add this CSS to your existing stylesheet or create a new one */
+/* About Me section */
+#about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #3498db; /* Blue color */
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+#about h2::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #3498db; /* Blue color */
+  bottom: 0;
+  left: 0;
+}
+
+/* Portfolio section */
+#portfolio h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2ecc71; /* Green color */
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+#portfolio h2::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #2ecc71; /* Green color */
+  bottom: 0;
+  left: 0;
+}
+/* Add this CSS to your existing stylesheet or create a new one */
+.profile-image {
+  width: 120px; /* Adjust the width as needed */
+  height: 120px; /* Adjust the height as needed */
+  border-radius: 50%; /* Create a rounded shape */
+  margin-right: 10px; /* Adjust the margin as needed */
+  overflow: hidden;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+nav {
+  background-color: #333;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+nav h1 {
+  font-size: 1.5rem;
+  color: white;
+  display: flex;
+  align-items: center; /* Center the image vertically */
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  margin: 0 1rem;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Rest of your existing styles */
+/* Add this CSS to your existing stylesheet or create a new one */
+
+/* Contact section styles */
+#contact {
+  background-color: #f8f9fa; /* Light background color */
+  color: #333;
+  padding: 4rem 0;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-form {
+  flex: 1;
+}
+
+.contact-info {
+  flex: 1;
+  margin-left: 2rem;
+}
+
+.contact-info p {
+  margin-bottom: 1rem;
+}
+
+/* Form styles */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+form label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+form button {
+  background-color: #007bff; /* Primary button color */
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+form button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+/* Add this CSS to your existing stylesheet or create a new one */
+
+.social-media-box {
+  background-color: #333; /* Background color for the social media box */
+  padding: 20px; /* Adjust padding as needed */
+  border-radius: 10px; /* Adjust border radius for rounded corners */
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+.social-media-box h3 {
+  color: white; /* Text color for the heading */
+}
+
+.social-media-box ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.social-media-box li {
+  margin-right: 20px;
+}
+
+.social-media-box img {
+  width: 30px; /* Adjust the width as needed */
+  height: auto;
+  display: inline-block;
+}
+.social-media-box img:hover {
+  transform: scale(1.2); /* Scale effect on hover */
+}
+/* Add this CSS to your existing stylesheet or create a new one */
+
+/* Existing styles... */
+
+/* Profile image styles */
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-right: 10px;
+  overflow: hidden;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .profile-image {
+    width: 80px; /* Adjust the width for smaller screens */
+    height: 80px; /* Adjust the height for smaller screens */
+    margin-right: 5px; /* Adjust the margin as needed */
+  }
+}
+
+     .contact h2 {
+      color: #3498db; /* Change the color to your preference */
+    
+}
+ /* Add this CSS to your existing stylesheet or create a new one */
+
+/* Circular mask for the favicon */
+/* Add this CSS to your existing stylesheet or create a new one */
+
+/* Circular mask for the favicon */
+#round-favicon {
+  border-radius: 50%;
+  overflow: hidden;
+}
+/* Skills Section Enhancements */
+#skills {
+  background-color: #1e1e1e; /* Sophisticated dark grey for the background */
+  color: #ffffff; /* High contrast white text */
+  padding: 60px 0; /* Generous padding for visual spacing */
+  text-align: left; /* Central alignment for a cohesive look */
+}
+
+.skills-container {
+  max-width: 960px; /* Optimal width for readability */
+  margin: 0 auto; /* Center align the container */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adaptive grid for responsiveness */
+  gap: 20px; /* Adequate spacing between skills */
+}
+
+.skill {
+  background-color: #ffffff; /* Clean white background for each skill item */
+  padding: 30px; /* Balanced padding for content */
+  border-radius: 12px; /* Smoothed corners for a modern look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition for interactive elements */
+}
+
+.skill:hover {
+  transform: translateY(-10px); /* Lift effect for interaction */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+}
+
+.skill h4 {
+  color: #333333; /* Dark grey for titles, ensuring legibility */
+  font-size: 20px; /* Appropriately sized headings */
+  margin-bottom: 10px; /* Spaced out from the content */
+}
+
+.skill p {
+  color: #666666; /* Medium grey for descriptions, easing readability */
+  font-size: 16px; /* Comfortable reading size */
+  margin-bottom: 20px; /* Separation from the progress bar */
+}
+
+.progress-bar {
+  background-color: #e0e0e0; /* Neutral light grey for the progress background */
+  border-radius: 25px; /* Fully rounded edges for a modern progress bar */
+  overflow: hidden; /* Ensures the progress fill stays within bounds */
+}
+
+.progress {
+  background-color: #3498db; /* Vibrant progress fill color */
+  height: 20px; /* Optimal height for visibility */
+  border-radius: 25px; /* Consistency with the progress bar's rounded edges */
+  transition: width 0.6s ease; /* Smooth width transition for visual feedback */
+}
+
+.skill:hover .progress {
+  background-color: #2980b9; /* Darker shade on hover for a dynamic effect */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+  .skills-container {
+    grid-template-columns: 1fr; /* Stacks skills vertically for smaller screens */
+  }
+}
+
+/* Apply these enhancements to elevate the visual appeal and user experience of your skills section. */
+/* Skills Section Text Styling */
+#skills h2 {
+  font-size: 2.5rem; /* Large, prominent heading size */
+  margin-bottom: 1rem; /* Standard margin below the heading */
+  color: #b1ec0c; /* Green color for visual consistency */
+  position: relative; /* Allows for pseudo-element styling */
+  display: inline-block; /* Inline-block for pseudo-element positioning */
+  padding-bottom: 0.5rem; /* Adds space below the heading */
+}
+
+#skills h2::after {
+  content: ""; /* Create a pseudo-element for the underline effect */
+  position: absolute; /* Position the pseudo-element */
+  width: 100%; /* Full width of the heading container */
+  height: 3px; /* Thickness of the underline */
+  background-color: #b1ec0c; /* Green color for the underline */
+  bottom: 0; /* Align the underline to the bottom of the heading */
+  left: 0; /* Start the underline from the left edge */
+}
+/* Center the download button */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem; /* Adjust margin as needed */
+}
+
+/* Style for the download button */
+.btn-download {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem; /* Slightly larger font size for better readability */
+  font-weight: 700; /* Bold font weight for clearer visibility */
+  text-decoration: none;
+  color: #fff; /* Text color */
+  background-color: #ff5733; /* Button background color */
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s;
+  cursor: pointer; /* Changes the mouse cursor to indicate clickable items */
+  box-shadow: 0 2px 4px rgba(255, 87, 51, 0.4); /* Adds subtle shadow for depth */
+}
+
+.btn-download:hover, .btn-download:focus {
+  background-color: #e54923; /* Darker shade on hover/focus */
+  color: #ffffff; /* Keeps text color consistent */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+  box-shadow: 0 4px 6px rgba(255, 87, 51, 0.5); /* Enhanced shadow on hover for depth */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .button-container {
+    margin-top: 2rem; /* Adjust margin for smaller screens */
+  }
+
+  .btn-download {
+    padding: 0.5rem 1rem; /* Adjust padding for smaller screens */
+    font-size: 1rem; /* Adjust font size for smaller screens to ensure readability */
+  }
+}

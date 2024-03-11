@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nehal Chauhan - Portfolio</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css.css">
+  <link rel="icon" type="image/png" href="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" class="round-favicon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <style>
+    /* Custom styles for the portfolio section */
+    body {
+      background-color: #1e1e1e;
+      /* Dark background color */
+      color: #fff;
+      /* Light text color */
+    }
+
+/* Add this CSS to your existing stylesheet or create a new one */
+
+#portfolio .badge-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.badge {
+  text-align: center;
+  max-width: 150px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1);
+  transition: transform 0.3s ease;
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+.badge img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Add the following styles to limit text width and handle overflow */
+.badge p {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 8px 0; /* Adjust the margin as needed */
+}
+
+
+    #contact h2 {
+      color: #3498db;
+      text-decoration: underline;
+    }
+
+    /* Add this CSS to your existing stylesheet or create a new one */
+  </style>
+  <!-- Add Typed.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+
+<body>
+  <!-- Your existing HTML content... -->
+<header id="home">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image" class="profile-image">
+        <a class="navbar-brand" href="#">Nehal Chauhan</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+          <h2>Hello, I'm Nehal Chauhan</h2>
+          <span class="typed-text">Welcome to my portfolio.</span>
+          <div class="button-container">
+            <a href="Resume (3).pdf" download="NehalChauhan_Resume" class="btn btn-download">Download Resume</a>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>About Me</h2>
+      <div class="paragraph" data-aos="fade-up">
+        <div class="arrow">➤</div>
+        <p>I am a passionate computer science and engineering student at Parul University, dedicated to expanding my knowledge and skills in the field. Currently pursuing my academic journey, I thrive on challenging projects that allow me to explore innovative solutions and technologies.</p>
+      </div>
+
+      <div class="paragraph" data-aos="fade-up">
+        <div class="arrow">➤</div>
+        <p>Outside the academic realm, I channel my creativity into designing Snapchat lenses. This venture not only allows me to express my artistic side but also sharpens my skills in augmented reality development. I am constantly exploring new ways to bring engaging and delightful experiences to users through my lens creations.</p>
+      </div>
+
+      <div class="paragraph" data-aos="fade-up">
+        <div class="arrow">➤</div>
+        <p>Driven by a deep interest in cybersecurity, I am an enthusiastic ethical hacker. I enjoy the continuous process of learning and refining my abilities to address cybersecurity challenges. Exploring vulnerabilities and securing systems is not just a profession for me but a thrilling journey towards creating a safer digital environment.</p>
+      </div>
+
+      <div class="paragraph" data-aos="fade-up">
+        <div class="arrow">➤</div>
+        <p>Beyond the world of technology, I am a sports enthusiast with a profound love for cricket, football, tennis, F1 racing, and kabaddi. Sports not only provide me with a recreational outlet but also teach me valuable lessons in teamwork, discipline, and perseverance.</p>
+      </div>
+    </div>
+  </section>
+  <section id="skills" class="section">
+    <div class="container" data-aos="fade-up">
+        <h2>Skills</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="skill">
+                    <h4>Languages & Frameworks</h4>
+                    <p>Proficient in HTML, CSS, JavaScript; familiar with React and Node.js.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="skill">
+                    <h4>Tools & Technologies</h4>
+                    <p>Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="skill">
+                    <h4>Interests</h4>
+                    <p>Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="skill">
+                    <h4>Soft Skills</h4>
+                    <p>Time Management, Teamwork, Work Ethic.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <section id="portfolio" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>Portfolio</h2>
+
+      <!-- Badge container to display badges in one row -->
+      <div class="badge-container" data-aos="fade-up">
+        <a href="https://i.ibb.co/Lv440T2/Whats-App-Image-2023-12-07-at-8-00-45-PM-1.jpg" target="_blank" rel="noopener noreferrer" class="badge" data-aos="fade-up">
+          <img src="https://i.ibb.co/Lv440T2/Whats-App-Image-2023-12-07-at-8-00-45-PM-1.jpg" alt="Badge 1">
+          <p>This is my badge</p>
+        </a>
+        <a href="https://i.ibb.co/HXFJh0g/Whats-App-Image-2023-12-07-at-8-00-45-PM.jpg" target="_blank" rel="noopener noreferrer" class="badge" data-aos="fade-up">
+          <img src="https://i.ibb.co/HXFJh0g/Whats-App-Image-2023-12-07-at-8-00-45-PM.jpg" alt="Badge 2">
+          <p>This is my badge</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>Contact</h2>
+
+      <div class="contact-container">
+        <div class="contact-info" data-aos="fade-up">
+          <!-- Phone icon with link -->
+          <p>
+            <img src="https://i.ibb.co/tL1pmCw/phone-call-597177.png" alt="Phone Icon">
+            <a href="tel:+919913161524">+919913161524</a>
+          </p>
+          <!-- Email icon with link -->
+          <p>
+            <img src="https://i.ibb.co/34DhNXw/gmail-732200.png" alt="Email Icon">
+            <a href="mailto:cnehal194@gmail.com">cnehal194@gmail.com</a>
+          </p>
+        </div>
+
+        <div class="social-media-box" data-aos="fade-up">
+          <h3>Connect with me on social media:</h3>
+          <ul>
+            <!-- Instagram icon with a link -->
+            <li>
+              <a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer">
+                <img src="https://i.ibb.co/p1B8nbr/instagram-2111463.png" alt="Instagram Logo">
+              </a>
+            </li>
+            <!-- Twitter icon with a link -->
+            <li class="twitter">
+              <a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer">
+                <img src="https://i.ibb.co/XZZMGDS/twitter-5968830.png" alt="Twitter Logo">
+              </a>
+            </li>
+            <!-- GitHub icon with a link -->
+            <li class="github">
+              <a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer">
+                <img src="https://i.ibb.co/M857rD7/github-733609.png" alt="GitHub Logo">
+              </a>
+            </li>
+            <!-- LinkedIn icon with a link -->
+            <li class="linkedin">
+              <a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer">
+                <img src="https://i.ibb.co/3mBzRBD/linkedin-3536505.png" alt="LinkedIn Logo">
+              </a>
+              <span>LinkedIn</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" data-aos="fade-up">
+      <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS
+    AOS.init();
+  });
+</script>
+
+</html>
