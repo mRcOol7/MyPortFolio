@@ -69,8 +69,6 @@
 
     /* Add this CSS to your existing stylesheet or create a new one */
   </style>
-  <!-- Add Typed.js library -->
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </head>
 
 <body>
@@ -184,62 +182,51 @@
   <section id="contact" class="section">
     <div class="container" data-aos="fade-up">
       <h2>Contact</h2>
-
-      <div class="contact-container">
+      <div class="contact-flex-container">
         <div class="contact-info" data-aos="fade-up">
-          <!-- Phone icon with link -->
-          <p>
-            <img src="https://i.ibb.co/tL1pmCw/phone-call-597177.png" alt="Phone Icon">
-            <a href="tel:+919913161524">+919913161524</a>
-          </p>
-          <!-- Email icon with link -->
-          <p>
-            <img src="https://i.ibb.co/34DhNXw/gmail-732200.png" alt="Email Icon">
-            <a href="mailto:cnehal194@gmail.com">cnehal194@gmail.com</a>
-          </p>
+          <h3>Get in Touch</h3>
+          <p><img src="https://i.ibb.co/tL1pmCw/phone-call-597177.png" alt="Phone Icon"> <a href="tel:+919913161524">+919913161524</a></p>
+          <p><img src="https://i.ibb.co/34DhNXw/gmail-732200.png" alt="Email Icon"> <a href="mailto:cnehal194@gmail.com">cnehal194@gmail.com</a></p>
         </div>
-
-        <div class="social-media-box" data-aos="fade-up">
-          <h3>Connect with me on social media:</h3>
-          <ul>
-            <!-- Instagram icon with a link -->
-            <li>
-              <a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.ibb.co/p1B8nbr/instagram-2111463.png" alt="Instagram Logo">
-              </a>
-            </li>
-            <!-- Twitter icon with a link -->
-            <li class="twitter">
-              <a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.ibb.co/XZZMGDS/twitter-5968830.png" alt="Twitter Logo">
-              </a>
-            </li>
-            <!-- GitHub icon with a link -->
-            <li class="github">
-              <a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.ibb.co/M857rD7/github-733609.png" alt="GitHub Logo">
-              </a>
-            </li>
-            <!-- LinkedIn icon with a link -->
-            <li class="linkedin">
-              <a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer">
-                <img src="https://i.ibb.co/3mBzRBD/linkedin-3536505.png" alt="LinkedIn Logo">
-              </a>
-              <span>LinkedIn</span>
-            </li>
-          </ul>
+        <div class="contact-form" data-aos="fade-up">
+          <h3>Contact Form</h3>
+          <form id="contactForm" action="submit_contact_form.php" method="POST">
+            <input type="text" name="name" id="name" placeholder="Your Name" required>
+            <input type="email" name="email" id="email" placeholder="Your Email" required>
+            <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+            <button type="submit" id="submitBtn">Send Message</button>
+          </form>
+          <div id="successMessage" style="display: none; color: green;">Message sent successfully!</div>
         </div>
       </div>
     </div>
   </section>
-
+  
+<section>
   <footer>
-    <div class="container" data-aos="fade-up">
-      <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image">
+          <span>Nehal Chauhan</span>
+        </div>
+        <div class="footer-info">
+          <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
+          <ul class="social-icons">
+            <li><a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </footer>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</section>
+  <button onclick="scrollToTop()" id="scrollToTopBtn" aria-label="Scroll to top">
+  </button>
+<script src="main.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -249,6 +236,64 @@
     // Initialize AOS
     AOS.init();
   });
+
+  // Scroll to Top function
+  function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // Show or hide the button based on scroll position
+  window.addEventListener('scroll', function() {
+    var scrollButton = document.getElementById('scrollToTopBtn');
+    if (window.scrollY > 100) {
+      scrollButton.style.display = 'block';
+    } else {
+      scrollButton.style.display = 'none';
+    }
+  });
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+  
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+  
+      const formData = new FormData(form);
+  
+      // Use Fetch API to submit the form data asynchronously
+      fetch('submit_contact_form.php', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => response.json()) // Assuming your PHP script sends back a JSON response
+      .then(data => {
+        console.log(data); // For debugging purposes, to see the response in the console
+        // Check if the submission was successful based on your PHP response
+        if (data.success) {
+          successMessage.style.display = 'block'; // Show success message
+          form.reset(); // Reset the form fields
+          // Optionally, hide the success message after a few seconds
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 5000); // Adjust time as needed
+        } else {
+          // If the submission was not successful, do nothing or handle as needed
+          // In this case, we simply reset the form without showing any alert message
+          form.reset();
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // If there's an error, reset the form without showing any alert message
+        form.reset();
+      });
+    });
+  });
+  </script>
+  
+  
+</body>
 
 </html>
