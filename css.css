@@ -131,61 +131,28 @@ footer {
 /* Add this CSS to your existing stylesheet or create a new one */
 /* Add this CSS to your existing stylesheet or create a new one */
 
-.social-media {
-  margin-top: 20px;
-}
-
-.social-media ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-}
-
-.social-media li {
-  margin-right: 20px;
-}
-
-.social-media img {
-  width: 30px;
-  height: auto;
-  display: inline-block;
-  margin-right: 5px;
-  border-radius: 50%;
-}
-
-/* Add this CSS to your existing stylesheet or create a new one */
-
+/* General styles for social media and contact info sections */
+.social-media,
 .contact-info {
   margin-top: 20px;
 }
 
+.social-media ul,
 .contact-info p {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.contact-info img {
-  width: 20px;
-  height: auto;
-  margin-right: 10px;
-}
-
-.social-media {
-  margin-top: 20px;
-}
-
-.social-media ul {
   list-style: none;
   padding: 0;
   display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
 }
 
-.social-media li {
+.social-media li,
+.contact-info p {
   margin-right: 20px;
+  margin-bottom: 10px; /* Add margin bottom to create space between items */
 }
 
-.social-media img {
+.social-media img,
+.contact-info img {
   width: 30px;
   height: auto;
   display: inline-block;
@@ -205,6 +172,19 @@ footer {
 /* Optional: Add a hover effect */
 .social-media li:hover img {
   transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .social-media li,
+  .contact-info p {
+    margin-right: 10px; /* Reduce margin for smaller screens */
+  }
+
+  .social-media img,
+  .contact-info img {
+    width: 25px; /* Reduce icon size for smaller screens */
+  }
 }
 
 /* Add this CSS to your existing stylesheet or create a new one */
@@ -348,14 +328,15 @@ nav a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
 
-.contact-form {
+.contact-form, .contact-info {
   flex: 1;
+  margin: 1rem; /* Ensure some spacing around elements */
 }
 
 .contact-info {
-  flex: 1;
   margin-left: 2rem;
 }
 
@@ -363,72 +344,61 @@ nav a {
   margin-bottom: 1rem;
 }
 
-/* Form styles */
-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-form label {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-form input,
-form textarea {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-}
-
-form button {
-  background-color: #007bff; /* Primary button color */
-  color: #fff;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-form button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
-}
-/* Add this CSS to your existing stylesheet or create a new one */
-
 .social-media-box {
   background-color: #333; /* Background color for the social media box */
-  padding: 20px; /* Adjust padding as needed */
-  border-radius: 10px; /* Adjust border radius for rounded corners */
-  margin-top: 20px; /* Adjust margin as needed */
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 .social-media-box h3 {
-  color: white; /* Text color for the heading */
+  color: white;
 }
 
 .social-media-box ul {
   list-style: none;
   padding: 0;
   display: flex;
+  justify-content: center; /* Center the social media icons */
+  flex-wrap: wrap; /* Allow icons to wrap on smaller screens */
 }
 
 .social-media-box li {
-  margin-right: 20px;
+  margin: 10px; /* Provide more space around icons */
 }
 
 .social-media-box img {
-  width: 30px; /* Adjust the width as needed */
+  width: 30px;
   height: auto;
   display: inline-block;
 }
+
 .social-media-box img:hover {
-  transform: scale(1.2); /* Scale effect on hover */
+  transform: scale(1.2);
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-info {
+    margin-left: 0;
+    margin-top: 2rem; /* Add some space above for better separation on small screens */
+  }
+
+  .social-media-box ul {
+    justify-content: space-around; /* Adjust alignment for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .social-media-box li {
+    margin: 5px; /* Reduce margin for very small screens */
+  }
+}
+
 /* Add this CSS to your existing stylesheet or create a new one */
 
 /* Existing styles... */
