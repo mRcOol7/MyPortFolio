@@ -1,12 +1,7 @@
-/* Reset some default styles */
-body,
-h1,
-h2,
-h3,
-p,
-ul {
+body, h1, h2, h3, p,ul {
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 /* Set minimum height for sections */
 .section {
@@ -23,60 +18,124 @@ body {
   flex-direction: column;
 }
 
-/* Navigation styles */
+/* Base Navigation styles */
 nav {
-  background-color: #2c3e50;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(44, 62, 80, 0.85); /* Slightly transparent */
+  backdrop-filter: blur(10px); /* Blur effect for the background */
   padding: 1rem 0;
+  transition: background-color 0.3s ease;
+}
+
+nav.bg-scroll {
+  background-color: #2c3e50; /* Solid color on scroll */
 }
 
 nav .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 nav h1 {
   font-size: 1.5rem;
   color: #ecf0f1;
+  transition: transform 0.3s ease-in-out;
+}
+
+nav h1:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
 nav ul {
   list-style: none;
   display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 10px;
 }
 
 nav a {
   text-decoration: none;
   color: #ecf0f1;
   margin: 0 1rem;
+  position: relative;
   transition: color 0.3s ease-in-out;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #3498db;
+  left: 50%;
+  bottom: -5px;
+  transition: all 0.3s ease-in-out;
 }
 
 nav a:hover {
   color: #3498db;
 }
 
-/* Hero section styles */
+nav a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Responsive Navigation styles */
+@media (max-width: 768px) {
+  nav .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav a {
+    margin: 0.5rem 0;
+  }
+}
+/* Base Hero section styles */
 .hero {
   position: relative;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("assets/images/hero-background.jpg");
-  background-size: cover;
-  background-position: center;
+  background: #2c3e50; /* A deep, sophisticated background color */
   color: #ecf0f1;
   padding: 4rem 0;
+  text-align: center;
 }
 
 .hero-content {
-  text-align: center;
+  max-width: 900px;
+  margin: auto;
   position: relative;
   z-index: 1;
 }
 
-.hero h2 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
+.hero h1 {
+  font-size: 3rem; /* Adjusted for responsiveness below */
+  margin-bottom: 1rem;
   color: #fff;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.25rem; /* Adjusted for responsiveness below */
+  margin-bottom: 2rem;
+  color: #ecf0f1;
+  line-height: 1.5;
 }
 
 .hero::before {
@@ -87,26 +146,69 @@ nav a:hover {
   width: 100%;
   height: 100%;
   background: linear-gradient(to right, #3498db, #2c3e50);
-  opacity: 0.8;
+  opacity: 0.85;
   z-index: -1;
 }
 
-/* General section styles */
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hero h1 {
+    font-size: 2.5rem; /* Slightly smaller for tablets and below */
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1rem; /* Smaller padding for smaller devices */
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding: 0 20px; /* Ensure some padding inside the hero content */
+  }
+
+  .hero h1 {
+    font-size: 2rem; /* Even smaller for mobile devices */
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.75rem; /* Small screens require smaller headings */
+  }
+
+  .hero p {
+    font-size: 0.9rem; /* Adjust paragraph font size for small screens */
+  }
+}
+/* General Layout Improvements */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+
 .section {
   padding: 4rem 0;
+  clear: both;
+  display: block;
 }
 
 .section h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  color: #333;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
-/* Container styles */
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
 /* Footer styles */
 footer {
   background-color: #2c3e50;
@@ -248,13 +350,48 @@ footer {
 .badge:hover {
   transform: scale(1.05);
 }
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
 
-/* Add this CSS to your existing stylesheet or create a new one */
-/* About Me section */
+.section {
+  padding: 60px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.col-lg-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+/* Specific About Me Section Styles */
 #about h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #3498db; /* Blue color */
+  color: #3498db; /* Blue color for the title */
   position: relative;
   display: inline-block;
   padding-bottom: 0.5rem;
@@ -265,10 +402,36 @@ footer {
   position: absolute;
   width: 100%;
   height: 3px;
-  background-color: #3498db; /* Blue color */
+  background-color: #3498db; /* Blue underline */
   bottom: 0;
   left: 0;
 }
+
+/* Highlighting Proficiency and Familiarity */
+#about p span {
+  font-weight: bold;
+  /* You can use JavaScript or other technology colors here */
+}
+
+/* React and Node.js Color Highlighting */
+#about p span:nth-child(1) {
+  color: #007bff; /* Adjust the color for HTML, CSS, JavaScript */
+}
+
+#about p span:nth-child(2) {
+  color: #28a745; /* Adjust the color for React and Node.js */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h2 {
+      font-size: 2rem;
+  }
+  p {
+      font-size: 1rem;
+  }
+}
+
 
 /* Portfolio section */
 #portfolio h2 {
@@ -368,107 +531,103 @@ nav a {
       color: #3498db; /* Change the color to your preference */
     
 }
- /* Add this CSS to your existing stylesheet or create a new one */
-
-/* Circular mask for the favicon */
-/* Add this CSS to your existing stylesheet or create a new one */
 
 /* Circular mask for the favicon */
 #round-favicon {
   border-radius: 50%;
   overflow: hidden;
 }
-/* Skills Section Enhancements */
+/* Skills Section */
 #skills {
-  background-color: #1e1e1e; /* Sophisticated dark grey for the background */
-  color: #ffffff; /* High contrast white text */
-  padding: 60px 0; /* Generous padding for visual spacing */
-  text-align: left; /* Central alignment for a cohesive look */
+  background-color: #1e1e1e; /* Dark background */
+  color: #ffffff; /* White text */
+  padding: 60px 0;
+  text-align: left;
 }
 
 .skills-container {
-  max-width: 960px; /* Optimal width for readability */
-  margin: 0 auto; /* Center align the container */
+  max-width: 960px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adaptive grid for responsiveness */
-  gap: 20px; /* Adequate spacing between skills */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
 .skill {
-  background-color: #ffffff; /* Clean white background for each skill item */
-  padding: 30px; /* Balanced padding for content */
-  border-radius: 12px; /* Smoothed corners for a modern look */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  transition: all 0.3s ease; /* Smooth transition for interactive elements */
+  background-color: #ffffff; /* White background */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Combined transition */
 }
 
 .skill:hover {
-  transform: translateY(-10px); /* Lift effect for interaction */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  transform: translateY(-10px); /* Lift effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
 
 .skill h4 {
-  color: #333333; /* Dark grey for titles, ensuring legibility */
-  font-size: 20px; /* Appropriately sized headings */
-  margin-bottom: 10px; /* Spaced out from the content */
+  color: #333333; /* Dark grey for titles */
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .skill p {
-  color: #666666; /* Medium grey for descriptions, easing readability */
-  font-size: 16px; /* Comfortable reading size */
-  margin-bottom: 20px; /* Separation from the progress bar */
+  color: #666666; /* Medium grey for descriptions */
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .progress-bar {
-  background-color: #e0e0e0; /* Neutral light grey for the progress background */
-  border-radius: 25px; /* Fully rounded edges for a modern progress bar */
-  overflow: hidden; /* Ensures the progress fill stays within bounds */
+  background-color: #e0e0e0; /* Light grey background */
+  border-radius: 25px;
+  overflow: hidden;
 }
 
 .progress {
-  background-color: #3498db; /* Vibrant progress fill color */
-  height: 20px; /* Optimal height for visibility */
-  border-radius: 25px; /* Consistency with the progress bar's rounded edges */
-  transition: width 0.6s ease; /* Smooth width transition for visual feedback */
+  background-color: #3498db; /* Blue progress fill color */
+  height: 20px;
+  border-radius: 25px;
+  transition: width 0.6s ease; /* Smooth width transition */
 }
 
 .skill:hover .progress {
-  background-color: #2980b9; /* Darker shade on hover for a dynamic effect */
+  background-color: #2980b9; /* Darker blue on hover */
 }
 
-/* Responsive Design Adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
   .skills-container {
-    grid-template-columns: 1fr; /* Stacks skills vertically for smaller screens */
+    grid-template-columns: 1fr;
   }
 }
 
-/* Apply these enhancements to elevate the visual appeal and user experience of your skills section. */
-/* Skills Section Text Styling */
+/* Text Styling */
 #skills h2 {
-  font-size: 2.5rem; /* Large, prominent heading size */
-  margin-bottom: 1rem; /* Standard margin below the heading */
-  color: #b1ec0c; /* Green color for visual consistency */
-  position: relative; /* Allows for pseudo-element styling */
-  display: inline-block; /* Inline-block for pseudo-element positioning */
-  padding-bottom: 0.5rem; /* Adds space below the heading */
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #b1ec0c; /* Green color */
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
 }
 
 #skills h2::after {
-  content: ""; /* Create a pseudo-element for the underline effect */
-  position: absolute; /* Position the pseudo-element */
-  width: 100%; /* Full width of the heading container */
-  height: 3px; /* Thickness of the underline */
-  background-color: #b1ec0c; /* Green color for the underline */
-  bottom: 0; /* Align the underline to the bottom of the heading */
-  left: 0; /* Start the underline from the left edge */
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #b1ec0c; /* Green underline */
+  bottom: 0;
+  left: 0;
 }
+
 /* Center the download button */
 .button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem; /* Adjust margin as needed */
+  margin-top: 3rem;
 }
 
 /* Style for the download button */
@@ -490,8 +649,8 @@ nav a {
 .btn-download:hover, .btn-download:focus {
   background-color: #e54923; /* Darker shade on hover/focus */
   color: #ffffff; /* Keeps text color consistent */
-  transform: translateY(-2px); /* Slight lift effect on hover */
-  box-shadow: 0 4px 6px rgba(255, 87, 51, 0.5); /* Enhanced shadow on hover for depth */
+  transform: translateY(-2px) scale(1.05); /* Slight lift and grow effect on hover */
+  box-shadow: 0 8px 12px rgba(255, 87, 51, 0.6); /* Enhanced shadow on hover for depth */
 }
 
 /* Responsive adjustments */
@@ -505,6 +664,7 @@ nav a {
     font-size: 1rem; /* Adjust font size for smaller screens to ensure readability */
   }
 }
+
 /* Contact Section Styles */
 #contact {
   background-color: #f9f9f9;
@@ -515,6 +675,7 @@ nav a {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap; /* Ensure elements wrap properly on smaller screens */
 }
 
 .contact-info, .contact-form {
@@ -558,9 +719,7 @@ nav a {
   border-radius: 5px;
   font-size: 16px;
 }
-.contact h2{
-  color: #1e1e1e;
-}
+
 .contact-form form textarea {
   height: 150px;
   resize: vertical;
@@ -581,6 +740,7 @@ nav a {
   background-color: #2980b9;
 }
 
+/* Media Query for Responsive Design */
 @media (max-width: 768px) {
   .contact-flex-container {
     flex-direction: column;
@@ -590,6 +750,7 @@ nav a {
     width: 100%;
   }
 }
+
 /* Scroll to Top Button Styles */
 #scrollToTopBtn {
   position: fixed;
@@ -616,6 +777,12 @@ nav a {
 
 #scrollToTopBtn:hover {
   background-color: #2980b9; /* Darker color on hover */
+  transform: scale(1.1); /* Slightly increase size on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Increase shadow for depth */
+}
+
+#scrollToTopBtn:active {
+  transform: scale(0.9); /* Slightly decrease size when clicked */
 }
 
 #scrollToTopBtn::before {
@@ -623,7 +790,7 @@ nav a {
   display: block;
 }
 
-/* Media query for responsive design */
+/* Adjustments for smaller screens */
 @media screen and (max-width: 768px) {
   #scrollToTopBtn {
     bottom: 15px;
@@ -632,5 +799,17 @@ nav a {
     height: 40px;
     font-size: 14px;
     padding: 8px;
+  }
+}
+
+/* Very small devices */
+@media screen and (max-width: 480px) {
+  #scrollToTopBtn {
+    right: 10px;
+    bottom: 10px;
+    width: 35px;
+    height: 35px;
+    font-size: 12px;
+    padding: 6px;
   }
 }

@@ -10,7 +10,7 @@ const Home = () => {
     AOS.init({
       duration: 800,
       easing: 'ease-in-out',
-      once: true, // Whether animation should happen only once - while scrolling down
+      once: true,
     });
 
     const handleScroll = () => {
@@ -18,19 +18,14 @@ const Home = () => {
       setShowScrollTopButton(position > 200);
 
       if (navbarRef.current) {
-        if (position > 50) {
-          navbarRef.current.classList.add('bg-scroll', 'navbar-shadow');
-        } else {
-          navbarRef.current.classList.remove('bg-scroll', 'navbar-shadow');
-        }
+        navbarRef.current.style.backgroundColor = position > 50 ? 'rgba(44, 62, 80, 0.95)' : 'transparent'; // Adjust navbar background dynamically
+        const action = position > 50 ? 'add' : 'remove';
+        navbarRef.current.classList[action]('bg-scroll', 'navbar-shadow');
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Call this in case of dynamic content changes
     AOS.refresh();
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -39,66 +34,55 @@ const Home = () => {
       top: 0,
       behavior: 'smooth',
     });
-    // Optionally, refresh AOS after scrolling to ensure animations trigger correctly.
     AOS.refresh();
   };
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contactForm');
-    const successMessage = document.getElementById('successMessage');
-  
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the default form submission
-  
-      const formData = new FormData(form);
-  
-      // Use Fetch API to submit the form data asynchronously
-      fetch('submit_contact_form.php', {
+  // Updated handleSubmit method with async/await for form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('submit_contact_form.php', {
         method: 'POST',
         body: formData,
-      })
-      .then(response => response.json()) // Assuming your PHP script sends back a JSON response
-      .then(data => {
-        console.log(data); // For debugging purposes, to see the response in the console
-        // Check if the submission was successful based on your PHP response
-        if (data.success) {
-          successMessage.style.display = 'block'; // Show success message
-          form.reset(); // Reset the form fields
-          // Optionally, hide the success message after a few seconds
-          setTimeout(() => {
-            successMessage.style.display = 'none';
-          }, 5000); // Adjust time as needed
-        } else {
-          // If the submission was not successful, do nothing or handle as needed
-          // In this case, we simply reset the form without showing any alert message
-          form.reset();
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // If there's an error, reset the form without showing any alert message
-        form.reset();
       });
-    });
-  });
-  
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        alert("Thank you for your message! I'll get back to you soon.");
+        form.reset(); // Reset form after successful submission
+      } else {
+        alert("Oops! There was a problem with your submission. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert("There was a problem with your submission: " + error.message);
+    }
+  };
+
   return (
     <div>
       <nav ref={navbarRef} className="navbar">
-        {/* Navbar content here */}
+        {/* Enhanced Navbar content here */}
       </nav>
 
-      {/* Other component content */}
+      {/* Enhanced other component content */}
 
       {showScrollTopButton && (
-        <button onClick={scrollToTop} id="scrollToTopBtn" style={{ display: 'block' }} aria-label="Scroll to top">
-          Scroll to Top
+        <button onClick={scrollToTop} id="scrollToTopBtn" className="scroll-to-top" aria-label="Scroll to top">
+          &#8679; Scroll to Top
         </button>
       )}
 
       <footer data-aos="fade-up">
         <div className="container">
-          <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Nehal Chauhan. All rights reserved.</p>
         </div>
       </footer>
     </div>
