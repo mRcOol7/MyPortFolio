@@ -317,18 +317,31 @@ footer {
 .section-title {
   text-align: center;
   margin-bottom: 30px;
-  font-size: 36px;
+  font-size: 42px;
   color: #fff; /* White text color */
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .projects-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .project {
   width: calc(50% - 15px);
   margin-bottom: 50px;
+  background-color: #1f1f1f; /* Dark background color */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project:hover {
+  transform: translateY(-10px); /* Hover effect */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Shadow on hover */
 }
 
 .project-link {
@@ -340,45 +353,53 @@ footer {
 
 .project-image {
   width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  transition: filter 0.3s ease;
+}
+
+.project:hover .project-image {
+  filter: brightness(0.8); /* Dim image on hover */
 }
 
 .project-info {
-  text-align: left;
+  padding: 30px;
 }
 
 .project-title {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 10px;
   color: #fff; /* White text color */
 }
 
 .project-description {
   font-size: 18px;
-  line-height: 1.5;
-  color: #eee; /* Lighter gray text color */
+  line-height: 1.6;
+  color: #ccc; /* Light gray text color */
 }
 
 .github-button {
   display: inline-block;
   background-color: #4CAF50; /* Green color */
   color: #fff; /* White text color */
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 10px;
   text-decoration: none;
-  margin-top: 10px;
-  transition: background-color 0.3s; /* Smooth transition */
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
   border: none;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .github-button:hover {
   background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Button lift effect */
 }
 
 .github-button:active {
-  text-decoration: underline;
+  transform: translateY(2px); /* Button press effect */
 }
 
 .github-logo {
@@ -391,6 +412,13 @@ footer {
 .github-link {
   color: #fff; /* White text color */
   text-decoration: none;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .project {
+    width: 100%;
+  }
 }
 
 /* General Styles */
