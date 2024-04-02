@@ -309,47 +309,90 @@ footer {
     font-size: 2rem;
   }
 }
-
-
-/* Add this CSS to your existing stylesheet or create a new one */
-
-#portfolio {
-  margin-top: 50px;
+/* Project Section */
+.section {
+  padding: 60px 0;
 }
-/* Badge styles */
-.badge {
+
+.section-title {
   text-align: center;
-  text-decoration: none;
-  color: #333;
-  border: 2px solid #ecf0f1;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+  margin-bottom: 30px;
+  font-size: 36px;
+  color: #fff; /* White text color */
+}
+
+.projects-container {
   display: flex;
-  flex-direction: column; /* Change to column layout */
+  justify-content: space-between;
 }
 
-.badge img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border-bottom: 2px solid #ecf0f1;
-  border-radius: 10px 10px 0 0;
+.project {
+  width: calc(50% - 15px);
+  margin-bottom: 50px;
 }
 
-.badge p {
-  margin: 10px 15px;
-  font-size: 14px;
-  max-height: 60px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.project-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Add hover effect to the badge */
-.badge:hover {
-  transform: scale(1.05);
+.project-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
+
+.project-info {
+  text-align: left;
+}
+
+.project-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #fff; /* White text color */
+}
+
+.project-description {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #eee; /* Lighter gray text color */
+}
+
+.github-button {
+  display: inline-block;
+  background-color: #4CAF50; /* Green color */
+  color: #fff; /* White text color */
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: background-color 0.3s; /* Smooth transition */
+  border: none;
+  cursor: pointer;
+}
+
+.github-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.github-button:active {
+  text-decoration: underline;
+}
+
+.github-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.github-link {
+  color: #fff; /* White text color */
+  text-decoration: none;
+}
+
 /* General Styles */
 body {
   font-family: 'Arial', sans-serif;
