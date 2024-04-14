@@ -20,59 +20,62 @@
       /* Light text color */
     }
 
-/* Add this CSS to your existing stylesheet or create a new one */
+    /* Add this CSS to your existing stylesheet or create a new one */
 
-#portfolio .badge-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
+    #portfolio .badge-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
 
-.badge {
-  text-align: center;
-  max-width: 150px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: scale(1);
-  transition: transform 0.3s ease;
-  margin-bottom: 20px; /* Adjust the margin as needed */
-}
+    .badge {
+      text-align: center;
+      max-width: 150px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transform: scale(1);
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+      /* Adjust the margin as needed */
+    }
 
-.badge:hover {
-  transform: scale(1.05);
-}
+    .badge:hover {
+      transform: scale(1.05);
+    }
 
-.badge img {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  display: block;
-}
+    .badge img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      display: block;
+    }
 
-/* Add the following styles to limit text width and handle overflow */
-.badge p {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin: 8px 0; /* Adjust the margin as needed */
-}
-
+    /* Add the following styles to limit text width and handle overflow */
+    .badge p {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 8px 0;
+      /* Adjust the margin as needed */
+    }
 
     #contact h2 {
-      color: #3498db;
-      text-decoration: underline;
-    }
+  color: #3498db;
+  text-decoration: underline;
+  text-align: left; /* Adding this line to align the text to the left */
+}
+
 
     /* Add this CSS to your existing stylesheet or create a new one */
   </style>
 </head>
 
 <body>
-<header id="home">
+  <header id="home">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image" class="profile-image">
@@ -98,7 +101,7 @@
           <span class="typed-text">Welcome to my portfolio.</span>
           <div class="button-container">
             <a href="Nehal Chauhan Resume.pdf" download="NehalChauhan_Resume" class="btn btn-download">Download Resume</a>
-          </div>          
+          </div>
         </div>
       </div>
     </div>
@@ -106,59 +109,59 @@
 
   <section id="about" class="section">
     <div class="container" data-aos="fade-up">
-        <h2>About Me</h2>
-        <div class="row">
-            <div class="col-lg-12" data-aos="fade-up">
-                <p>Greetings! I'm an aspiring <strong>Computer Science and Engineering</strong> scholar at Parul University, with a keen interest in <strong>technology and web development</strong>. Proficient in <span style="color: #007bff;"><strong>HTML, CSS, JavaScript</strong></span>, and familiar with <span style="color: #28a745;"><strong>React and Node.js</strong></span>, I'm committed to crafting innovative solutions and embracing new challenges in the digital realm.</p>
-                
-                <p>My academic and project work spans from <strong>augmented reality lens creation</strong> to <strong>ethical hacking</strong>, underpinned by a passion for continuous learning and cybersecurity.</p>
-                
-                <p>Outside of tech, my world orbits around sports, where I draw inspiration and resilience from <strong>cricket, football, tennis, F1 racing,</strong> and <strong>kabaddi</strong>.</p>
-                
-                <p>Welcome to my portfolio. Dive in to explore how I blend <strong>creativity with technical prowess</strong> to drive meaningful digital innovation.</p>
-            </div>
+      <h2>About Me</h2>
+      <div class="row">
+        <div class="col-lg-12" data-aos="fade-up">
+          <p>Greetings! I'm an aspiring <strong>Computer Science and Engineering</strong> scholar at Parul University, with a keen interest in <strong>technology and web development</strong>. Proficient in <span style="color: #007bff;"><strong>HTML, CSS, JavaScript</strong></span>, and familiar with <span style="color: #28a745;"><strong>React and Node.js</strong></span>, I'm committed to crafting innovative solutions and embracing new challenges in the digital realm.</p>
+
+          <p>My academic and project work spans from <strong>augmented reality lens creation</strong> to <strong>ethical hacking</strong>, underpinned by a passion for continuous learning and cybersecurity.</p>
+
+          <p>Outside of tech, my world orbits around sports, where I draw inspiration and resilience from <strong>cricket, football, tennis, F1 racing,</strong> and <strong>kabaddi</strong>.</p>
+
+          <p>Welcome to my portfolio. Dive in to explore how I blend <strong>creativity with technical prowess</strong> to drive meaningful digital innovation.</p>
         </div>
+      </div>
     </div>
-</section>
+  </section>
 
   <section id="skills" class="section">
     <div class="container" data-aos="fade-up">
-        <h2>Skills</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="skill">
-                    <h4>Languages & Frameworks</h4>
-                    <p>Proficient in HTML, CSS, JavaScript; familiar with React and Node.js.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="skill">
-                    <h4>Tools & Technologies</h4>
-                    <p>Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="skill">
-                    <h4>Interests</h4>
-                    <p>Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="skill">
-                    <h4>Soft Skills</h4>
-                    <p>Time Management, Teamwork, Work Ethic.</p>
-                </div>
-            </div>
+      <h2>Skills</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Languages & Frameworks</h4>
+            <p>Proficient in HTML, CSS, JavaScript; familiar with React and Node.js.</p>
+          </div>
         </div>
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Tools & Technologies</h4>
+            <p>Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Interests</h4>
+            <p>Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Soft Skills</h4>
+            <p>Time Management, Teamwork, Work Ethic.</p>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
-<section id="portfolio" class="section">
-  <div class="container" data-aos="fade-up">
-    <h2 class="section-title">Projects</h2>
+  </section>
+  <section id="portfolio" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Projects</h2>
 
-    <div class="projects-container">
-      <!-- First project -->
-      <div class="project" data-aos="fade-up">
+      <div class="projects-container">
+        <!-- First project -->
+        <div class="project" data-aos="fade-up">
           <img src="https://i.ibb.co/bNxhc1T/React-App.png" alt="BMI Calculator" class="project-image">
           <div class="project-info">
             <h3 class="project-title">BMI Calculator</h3>
@@ -168,11 +171,10 @@
               View on GitHub
             </a>
           </div>
-        </a>
-      </div>
+        </div>
 
-      <!-- Second project -->
-      <div class="project" data-aos="fade-up">
+        <!-- Second project -->
+        <div class="project" data-aos="fade-up">
           <img src="https://i.ibb.co/fNK9jJ5/React-App-1.png" alt="DNA Sequence" class="project-image">
           <div class="project-info">
             <h3 class="project-title">DNA Sequence</h3>
@@ -182,11 +184,10 @@
               View on GitHub
             </a>
           </div>
-        </a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
   <section id="contact" class="section">
@@ -199,7 +200,7 @@
         </div>
         <div class="contact-form" data-aos="fade-up">
           <h3>Contact Form</h3>
-          <form id="contactForm" action="submit_contact_form.php" method="POST">
+          <form id="contactForm" action="http://localhost:3000/submit_contact_form" method="POST">
             <input type="text" name="name" id="name" placeholder="Your Name" required>
             <input type="email" name="email" id="email" placeholder="Your Email" required>
             <textarea name="message" id="message" placeholder="Your Message" required></textarea>
@@ -207,102 +208,112 @@
           </form>
           <div id="successMessage" style="display: none; color: green;">Message sent successfully!</div>
         </div>
-      </div>
-    </div>
+        
   </section>
-  
-<section>
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image">
-          <span>Nehal Chauhan</span>
-        </div>
-        <div class="footer-info">
-          <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
-          <ul class="social-icons">
-            <li><a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
+
+  <section>
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image">
+            <span>Nehal Chauhan</span>
+          </div>
+          <div class="footer-info">
+            <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
+            <ul class="social-icons">
+              <li><a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></li>
+              <li><a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a></li>
+              <li><a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
+              <li><a href="https://medium.com/@cnehal194" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-medium"></i></a></li>
           </ul>
+          
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</section>
+    </footer>
+  </section>
   <button onclick="scrollToTop()" id="scrollToTopBtn" aria-label="Scroll to top">
   </button>
-<script src="main.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS
-    AOS.init();
-  });
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize AOS
+      AOS.init();
+    });
 
-  // Scroll to Top function
-  function scrollToTop() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-
-  // Show or hide the button based on scroll position
-  window.addEventListener('scroll', function() {
-    var scrollButton = document.getElementById('scrollToTopBtn');
-    if (window.scrollY > 100) {
-      scrollButton.style.display = 'block';
-    } else {
-      scrollButton.style.display = 'none';
-    }
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contactForm');
-    const successMessage = document.getElementById('successMessage');
-  
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the default form submission
-  
-      const formData = new FormData(form);
-  
-      // Use Fetch API to submit the form data asynchronously
-      fetch('submit_contact_form.php', {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => response.json()) // Assuming your PHP script sends back a JSON response
-      .then(data => {
-        console.log(data); // For debugging purposes, to see the response in the console
-        // Check if the submission was successful based on your PHP response
-        if (data.success) {
-          successMessage.style.display = 'block'; // Show success message
-          form.reset(); // Reset the form fields
-          // Optionally, hide the success message after a few seconds
-          setTimeout(() => {
-            successMessage.style.display = 'none';
-          }, 5000); // Adjust time as needed
-        } else {
-          // If the submission was not successful, do nothing or handle as needed
-          // In this case, we simply reset the form without showing any alert message
-          form.reset();
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // If there's an error, reset the form without showing any alert message
-        form.reset();
+    // Scroll to Top function
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
+    }
+
+    // Show or hide the button based on scroll position
+    window.addEventListener('scroll', function() {
+      var scrollButton = document.getElementById('scrollToTopBtn');
+      if (window.scrollY > 100) {
+        scrollButton.style.display = 'block';
+      } else {
+        scrollButton.style.display = 'none';
+      }
+    });
+  </script>
+  <script>
+ document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contactForm');
+  const successMessage = document.getElementById('successMessage');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(form);
+
+    // Use Fetch API to submit the form data asynchronously
+    fetch('submit_contact_form.php', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => {
+      // Check if response is empty
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); // For debugging purposes, to see the response in the console
+      // Check if the submission was successful based on your PHP response
+      if (data.success) {
+        successMessage.style.display = 'block'; // Show success message
+        form.reset(); // Reset the form fields
+        // Optionally, hide the success message after a few seconds
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 5000); // Adjust time as needed
+      } else {
+        // If the submission was not successful, show error message
+        alert(data.message); // Show error message
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Show error message
+      alert('An error occurred while submitting the form. Please try again later.');
     });
   });
+});
+
   </script>
-  
-  
+
+
 </body>
 
 </html>
