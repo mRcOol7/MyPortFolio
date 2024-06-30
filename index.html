@@ -201,13 +201,27 @@
         </div>
         <div class="contact-form" data-aos="fade-up">
           <h3>Contact Form</h3>
-          <form id="contactForm" action="http://localhost:3000/submit_contact_form" method="POST">
-            <input type="text" name="name" id="name" placeholder="Your Name" required>
-            <input type="email" name="email" id="email" placeholder="Your Email" required>
-            <textarea name="message" id="message" placeholder="Your Message" required></textarea>
-            <button type="submit" id="submitBtn">Send Message</button>
+          <form id="contactForm" onsubmit="return sendMail();" method="POST">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" id="submitBtn">Send Message</button>
+            </div>
           </form>
-          <div id="successMessage" style="display: none; color: green;">Message sent successfully!</div>
+          <div class="message-container">
+            <div id="successMessage" style="display: none;">Message sent successfully!</div>
+            <div id="errorMessage" style="display: none;">Failed to send message. Please try again later.</div>
+          </div>
         </div>
         
   </section>
@@ -268,54 +282,86 @@
       }
     });
   </script>
-  <script>
- document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('contactForm');
-  const successMessage = document.getElementById('successMessage');
+  <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+  // Initialize EmailJS with your EmailJS user ID
+  (function(){
+    emailjs.init("mrX-ryn2XWPJBJAbD");
+  })();
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+  // Function to send email using EmailJS and handle form submission
+  function sendMail() {
+    var formData = new FormData(document.getElementById("contactForm"));
+    var params = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message")
+    };
 
-    const formData = new FormData(form);
+    // Validate form fields
+    if (!params.name || !params.email || !params.message) {
+      alert("Please fill in all required fields.");
+      return false;
+    }
 
-    // Use Fetch API to submit the form data asynchronously
-    fetch('submit_contact_form.php', {
+    // Get current date and time
+    var timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+    formData.append('timestamp', timestamp); // Append timestamp to form data
+
+    // Optional: Get user's local time zone offset
+    var timezoneOffset = new Date().getTimezoneOffset();
+    formData.append('timezoneOffset', timezoneOffset); // Append timezone offset to form data
+
+    // Send email using EmailJS
+    emailjs.send("service_8yxflol", "template_kl9t4gj", params)
+      .then(function(response) {
+        console.log("Email sent:", response);
+        document.getElementById("successMessage").style.display = "block";
+        document.getElementById("errorMessage").style.display = "none";
+      })
+      .catch(function(error) {
+        console.error("Error sending email:", error);
+        document.getElementById("errorMessage").style.display = "block";
+        document.getElementById("successMessage").style.display = "none";
+        alert("Failed to send message via email. Please try again later.");
+      });
+
+    // Submit form data to Google Sheets via fetch
+    fetch("https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec", {
       method: 'POST',
-      body: formData,
+      body: formData
     })
-    .then(response => {
-      // Check if response is empty
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data); // For debugging purposes, to see the response in the console
-      // Check if the submission was successful based on your PHP response
-      if (data.success) {
-        successMessage.style.display = 'block'; // Show success message
-        form.reset(); // Reset the form fields
-        // Optionally, hide the success message after a few seconds
-        setTimeout(() => {
-          successMessage.style.display = 'none';
-        }, 5000); // Adjust time as needed
+    .then(function(response) {
+      if (response.ok) {
+        console.log("Form data sent to Google Sheets.");
+        document.getElementById("contactForm").reset(); // Reset the form after successful submission
       } else {
-        // If the submission was not successful, show error message
-        alert(data.message); // Show error message
+        console.error("Failed to send form data to Google Sheets.");
+        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("errorMessage").style.display = "block";
       }
     })
-    .catch(error => {
-      console.error('Error:', error);
-      // Show error message
-      alert('An error occurred while submitting the form. Please try again later.');
+    .catch(function(error) {
+      console.error("Error sending form data to Google Sheets:", error);
+      document.getElementById("successMessage").style.display = "none";
+      document.getElementById("errorMessage").style.display = "block";
     });
-  });
-});
+   // Get current date and time
+   var timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
-  </script>
+// Optional: Get user's local time zone offset
+var timezoneOffset = new Date().getTimezoneOffset();
 
+// Fetch form data
+var formData = new FormData(event.target);
+formData.append('timestamp', timestamp); // Append timestamp to form data
+formData.append('timezoneOffset', timezoneOffset); // Append timezone offset to form data
+    return false; // Prevent the form from submitting via HTML
+  }
+</script>
 
-</body>
+  </body>
 
 </html>
