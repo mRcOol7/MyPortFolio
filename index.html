@@ -287,7 +287,7 @@
 </script>
 <script type="text/javascript">
   // Initialize EmailJS with your EmailJS user ID
-  (function(){
+  (function() {
     emailjs.init("mrX-ryn2XWPJBJAbD");
   })();
 
@@ -348,20 +348,48 @@
       document.getElementById("successMessage").style.display = "none";
       document.getElementById("errorMessage").style.display = "block";
     });
-   // Get current date and time
-   var timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
-// Optional: Get user's local time zone offset
-var timezoneOffset = new Date().getTimezoneOffset();
-
-// Fetch form data
-var formData = new FormData(event.target);
-formData.append('timestamp', timestamp); // Append timestamp to form data
-formData.append('timezoneOffset', timezoneOffset); // Append timezone offset to form data
     return false; // Prevent the form from submitting via HTML
   }
 </script>
+<script type="text/javascript">
+  // Function to increment visit count and store in Google Sheets
+  function incrementVisitCount() {
+    fetch('https://script.google.com/macros/s/AKfycbxvkBGlojl_VKt8kXigPQTheABgWW4qIS9stv2ABLA/exec')
+      .then(response => response.json())
+      .then(data => {
+        var visitCount = data.visitCount || 0; // Default to 0 if visitCount is undefined
+        visitCount++; // Increment visit count
 
+        // Update visit count in Google Sheets via fetch
+        fetch('https://script.google.com/macros/s/AKfycbxvkBGlojl_VKt8kXigPQTheABgWW4qIS9stv2ABLA/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ visitCount: visitCount })
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log("Visit count updated in Google Sheets:", visitCount);
+          } else {
+            console.error("Failed to update visit count in Google Sheets.");
+          }
+        })
+        .catch(error => {
+          console.error("Error updating visit count in Google Sheets:", error);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching current visit count:", error);
+      });
+  }
+
+  // Call incrementVisitCount on page load
+  window.onload = function() {
+    incrementVisitCount();
+  }
+</script>
   </body>
 
 </html>
