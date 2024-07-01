@@ -355,14 +355,14 @@
 <script type="text/javascript">
   // Function to increment visit count and store in Google Sheets
   function incrementVisitCount() {
-    fetch('https://script.google.com/macros/s/AKfycbxvkBGlojl_VKt8kXigPQTheABgWW4qIS9stv2ABLA/exec')
+    fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/get_visit_count', { method: 'GET' })
       .then(response => response.json())
       .then(data => {
         var visitCount = data.visitCount || 0; // Default to 0 if visitCount is undefined
         visitCount++; // Increment visit count
 
         // Update visit count in Google Sheets via fetch
-        fetch('https://script.google.com/macros/s/AKfycbxvkBGlojl_VKt8kXigPQTheABgWW4qIS9stv2ABLA/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/increment_visit_count', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -390,6 +390,7 @@
     incrementVisitCount();
   }
 </script>
+<script src="dist/bundle.js"></script>
   </body>
 
 </html>
