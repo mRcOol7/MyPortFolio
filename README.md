@@ -32,7 +32,7 @@ In this portfolio, I’ve integrated a 3D model of myself to showcase my skills 
   - **Auto-Rotate**: The model automatically rotates to provide a 360-degree view.
   - **Camera Controls**: Users can interact with the model to view it from different angles.
   - **Interaction Prompts**: Guides users on how to interact with the model.
-  - **Augmented Reality (AR): Supports AR modes for an immersive experience on compatible devices, allowing users to place the model in their real-world environment.
+  - **Augmented Reality (AR)**: Supports AR modes for an immersive experience on compatible devices, allowing users to place the model in their real-world environment.
 
 ### Additional Features
   - **AR and XR Modes**: Utilizes AR modes such as scene-viewer, quick-look, webxr, and plane-detection for an immersive augmented reality experience. The xr attribute ensures support for various XR devices.
