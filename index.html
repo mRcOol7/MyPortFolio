@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nehal Chauhan - Portfolio</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css.css">
+  <link rel="icon" type="image/png" href="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" class="round-favicon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* Custom styles for the portfolio section */
+    body {
+      background-color: #1e1e1e;
+      /* Dark background color */
+      color: #fff;
+      /* Light text color */
+    }
+
+    /* Add this CSS to your existing stylesheet or create a new one */
+
+    #portfolio .badge-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      text-align: center;
+      max-width: 150px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transform: scale(1);
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+      /* Adjust the margin as needed */
+    }
+
+    .badge:hover {
+      transform: scale(1.05);
+    }
+
+    .badge img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* Add the following styles to limit text width and handle overflow */
+    .badge p {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 8px 0;
+      /* Adjust the margin as needed */
+    }
+
+    #contact h2 {
+  color: #3498db;
+  text-decoration: underline;
+  text-align: left; /* Adding this line to align the text to the left */
+}
+
+
+    /* Add this CSS to your existing stylesheet or create a new one */
+  </style>
+</head>
+
+<body>
+  <header id="home">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image" class="profile-image">
+        <a class="navbar-brand" href="#">Nehal Chauhan</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="herocontainer">
+        <div class="hero-content" data-aos="fade-up">
+          <h1>Hello, I'm Nehal Chauhan</h1>
+          <p class="typed-text">Welcome to my portfolio.</p>
+          <div class="button-container">
+            <a href="Nehal Chauhan Resume.pdf" download="NehalChauhan_Resume" class="btn btn-download">Download Resume</a>
+          </div>
+        </div>
+        <!-- 3D model viewer -->
+        <div class="model-container">
+          <model-viewer
+            src="models/tmptfwb2a29.gltf"
+            alt="3D model of Nehal Chauhan"
+            auto-rotate
+            camera-controls
+            camera-orbit="30deg 80deg 2m"
+            field-of-view="45deg"
+            shadow-intensity="1"
+            exposure="1.2"
+            poster="path/to/your/poster.jpg"
+            interaction-prompt="auto"
+            interaction-policy="auto"
+            ar
+            ar-modes="scene-viewer quick-look"
+            style="width: 100%; height: 100%;"
+            id="model-viewer"
+          ></model-viewer>
+        </div>
+        
+        
+      </div>
+    </div>
+
+  <section id="about" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>About Me</h2>
+      <div class="row">
+        <div class="col-lg-12" data-aos="fade-up">
+          <p>Greetings! I'm an aspiring <strong>Computer Science and Engineering</strong> student at Parul University, with a keen interest in <strong>technology and web development</strong>. Proficient in <span style="color: #007bff;"><strong>HTML, CSS, JavaScript</strong></span>, and familiar with <span style="color: #28a745;"><strong>React and MongoDB</strong></span>, I'm committed to crafting innovative solutions and embracing new challenges in the digital realm.</p>
+
+          <p>My academic and project work spans from <strong>augmented reality lens creation</strong> to <strong>ethical hacking</strong>, underpinned by a passion for continuous learning and cybersecurity.</p>
+
+          <p>Outside of tech, my world orbits around sports, where I draw inspiration and resilience from <strong>cricket, football, tennis, F1 racing,</strong> and <strong>kabaddi</strong>.</p>
+
+          <p>Welcome to my portfolio. Dive in to explore how I blend <strong>creativity with technical prowess</strong> to drive meaningful digital innovation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>Skills</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Languages & Frameworks</h4>
+            <p>Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Tools & Technologies</h4>
+            <p>Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Interests</h4>
+            <p>Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="skill">
+            <h4>Soft Skills</h4>
+            <p>Time Management, Teamwork, Work Ethic.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="portfolio" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="projects-container">
+        <!-- First project -->
+        <div class="project" data-aos="fade-up">
+          <img src="https://i.ibb.co/bNxhc1T/React-App.png" alt="BMI Calculator" class="project-image">
+          <div class="project-info">
+            <h3 class="project-title">BMI Calculator</h3>
+            <p class="project-description">A web application built using React.js, Node.js, Express.js, and MongoDB for analyzing Body Mass Index (BMI) based on weight and height inputs. The application estimates body fat and provides BMI values along with interpretations, enhancing health awareness.</p>
+            <a href="https://github.com/mRcOol7/body-mass-index-cal" target="_blank" rel="noopener noreferrer" class="github-button">
+              <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Second project -->
+        <div class="project" data-aos="fade-up">
+          <img src="https://i.ibb.co/fNK9jJ5/React-App-1.png" alt="DNA Sequence" class="project-image">
+          <div class="project-info">
+            <h3 class="project-title">DNA Sequence</h3>
+            <p class="project-description">A web application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack for managing and analyzing DNA sequences. The application allows users to store, retrieve, and analyze DNA data, enhancing research in the field of bioinformatics.</p>
+            <a href="https://github.com/MERN-bio-tool/DNA-sequence.git" target="_blank" rel="noopener noreferrer" class="github-button">
+              <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container" data-aos="fade-up">
+      <h2>Contact</h2>
+      <div class="contact-flex-container">
+        <div class="contact-info" data-aos="fade-up">
+          <h3>Get in Touch</h3>
+          <p><img src="https://i.ibb.co/34DhNXw/gmail-732200.png" alt="Email Icon"> <a href="mailto:cnehal194@gmail.com">cnehal194@gmail.com</a></p>
+        </div>
+        <div class="contact-form" data-aos="fade-up">
+          <h3>Contact Form</h3>
+          <form id="contactForm" onsubmit="return sendMail();" method="POST">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" id="submitBtn">Send Message</button>
+            </div>
+          </form>
+          <div class="message-container">
+            <div id="successMessage" style="display: none;">Message sent successfully!</div>
+            <div id="errorMessage" style="display: none;">Failed to send message. Please try again later.</div>
+          </div>
+        </div>
+        
+  </section>
+
+  <section>
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image">
+            <span>Nehal Chauhan</span>
+          </div>
+          <div class="footer-info">
+            <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
+            <ul class="social-icons">
+              <li><a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></li>
+              <li><a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a></li>
+              <li><a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
+              <li><a href="https://medium.com/@cnehal194" target="_blank" rel="noopener noreferrer"><i class="bi bi-medium"></i></a></li>
+
+          </ul>
+          
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>
+  <button onclick="scrollToTop()" id="scrollToTopBtn" aria-label="Scroll to top">
+  </button>
+  <script type="module" src="js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.111.0/index.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize AOS
+      AOS.init();
+    });
+
+    // Scroll to Top function
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Show or hide the button based on scroll position
+    window.addEventListener('scroll', function() {
+      var scrollButton = document.getElementById('scrollToTopBtn');
+      if (window.scrollY > 100) {
+        scrollButton.style.display = 'block';
+      } else {
+        scrollButton.style.display = 'none';
+      }
+    });
+  </script>
+  <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+  // Initialize EmailJS with your EmailJS user ID
+  (function() {
+    emailjs.init("mrX-ryn2XWPJBJAbD");
+  })();
+
+  // Function to send email using EmailJS and handle form submission
+  function sendMail() {
+    var formData = new FormData(document.getElementById("contactForm"));
+    var params = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message")
+    };
+
+    // Validate form fields
+    if (!params.name || !params.email || !params.message) {
+      alert("Please fill in all required fields.");
+      return false;
+    }
+
+    // Get current date and time
+    var timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+    formData.append('timestamp', timestamp); // Append timestamp to form data
+
+    // Optional: Get user's local time zone offset
+    var timezoneOffset = new Date().getTimezoneOffset();
+    formData.append('timezoneOffset', timezoneOffset); // Append timezone offset to form data
+
+    // Send email using EmailJS
+    emailjs.send("service_8yxflol", "template_4rx8387", params)
+      .then(function(response) {
+        console.log("Email sent:", response);
+        document.getElementById("successMessage").style.display = "block";
+        document.getElementById("errorMessage").style.display = "none";
+      })
+      .catch(function(error) {
+        console.error("Error sending email:", error);
+        document.getElementById("errorMessage").style.display = "block";
+        document.getElementById("successMessage").style.display = "none";
+        alert("Failed to send message via email. Please try again later.");
+      });
+
+    // Submit form data to Google Sheets via fetch
+    fetch("https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec", {
+      method: 'POST',
+      body: formData
+    })
+    .then(function(response) {
+      if (response.ok) {
+        console.log("Form data sent to Google Sheets.");
+        document.getElementById("contactForm").reset(); // Reset the form after successful submission
+      } else {
+        console.error("Failed to send form data to Google Sheets.");
+        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("errorMessage").style.display = "block";
+      }
+    })
+    .catch(function(error) {
+      console.error("Error sending form data to Google Sheets:", error);
+      document.getElementById("successMessage").style.display = "none";
+      document.getElementById("errorMessage").style.display = "block";
+    });
+
+    return false; // Prevent the form from submitting via HTML
+  }
+</script>
+<script type="text/javascript">
+  // Function to increment visit count and store in Google Sheets
+  function incrementVisitCount() {
+    fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/get_visit_count', { method: 'GET' })
+      .then(response => response.json())
+      .then(data => {
+        var visitCount = data.visitCount || 0; // Default to 0 if visitCount is undefined
+        visitCount++; // Increment visit count
+
+        // Update visit count in Google Sheets via fetch
+        fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/increment_visit_count', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ visitCount: visitCount })
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log("Visit count updated in Google Sheets:", visitCount);
+          } else {
+            console.error("Failed to update visit count in Google Sheets.");
+          }
+        })
+        .catch(error => {
+          console.error("Error updating visit count in Google Sheets:", error);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching current visit count:", error);
+      });
+  }
+
+  // Call incrementVisitCount on page load
+  window.onload = function() {
+    incrementVisitCount();
+  }
+</script>
+<script src="dist/bundle.js"></script>
+  </body>
+
+</html>
