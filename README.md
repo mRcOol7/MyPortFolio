@@ -13,9 +13,6 @@ I'm Nehal Chauhan, a passionate web developer dedicated to creating visually app
 - **JavaScript**: Adding interactive elements and dynamic features
 - **Vercel**: Deploying my portfolio to make it accessible to everyone
 
-## Visit My Portfolio 🌐
-
-Explore my live portfolio at [https://nehalchauhanportfolio.vercel.app/](https://nehalchauhanportfolio.vercel.app/). 
 
 ## Features ✨
 
@@ -40,3 +37,7 @@ In this portfolio, I’ve integrated a 3D model of myself to showcase my skills 
 ### Additional Features
   - **AR and XR Modes**: Utilizes AR modes such as scene-viewer, quick-look, webxr, and plane-detection for an immersive augmented reality experience. The xr attribute ensures support for various XR devices.
   - **Interactive Controls**: Includes features for zooming and adjusting the camera view both via mouse and touch gestures, providing a smoother interaction experience.
+
+## Visit My Portfolio 🌐
+
+Explore my live portfolio at [https://nehalchauhanportfolio.vercel.app/](https://nehalchauhanportfolio.vercel.app/). 
