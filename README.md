@@ -4,22 +4,35 @@ Welcome to my personal portfolio! 🚀 Here, I showcase my projects and skills a
 
 ## About Me ℹ️
 
-I'm Nehal Chauhan, a passionate web developer with a knack for creating visually appealing and functional websites. With a strong foundation in HTML, CSS, and JavaScript, I enjoy bringing ideas to life through code.
+I'm Nehal Chauhan, a passionate web developer dedicated to creating visually appealing and functional websites. With a solid foundation in HTML, CSS, and JavaScript, I take pride in bringing innovative ideas to life through code.
 
 ## Technologies Used 💻
 
-- HTML
-- CSS
-- JavaScript
-- Vercel(Deploy)
+- **HTML**: Structuring the content of my web projects
+- **CSS**: Designing and styling to ensure a polished and responsive look
+- **JavaScript**: Adding interactive elements and dynamic features
+- **Vercel**: Deploying my portfolio to make it accessible to everyone
 
 ## Visit My Portfolio 🌐
 
-Explore my portfolio live at [https://nehalchauhanportfolio.vercel.app/](https://nehalchauhanportfolio.vercel.app/).
+Explore my live portfolio at [https://nehalchauhanportfolio.vercel.app/](https://nehalchauhanportfolio.vercel.app/). 
 
 ## Features ✨
 
-- Clean and responsive design
-- Projects section showcasing my work
-- Skills section highlighting my expertise
-- Contact section for reaching out to me
+- **Clean and Responsive Design**: Ensures a seamless experience across all devices and screen sizes.
+- **Projects Section**: Showcases a variety of projects that highlight my skills and expertise.
+- **Skills Section**: Displays my proficiency in various web technologies.
+- **Contact Section**: Provides a way for visitors to reach out to me easily.
+
+## 3D Model Integration 🖼️
+
+In this portfolio, I’ve integrated a 3D model of myself to showcase my skills in working with interactive web technologies. This model was created using [Three.js](https://threejs.org/) and the [model-viewer](https://modelviewer.dev/) library to provide an engaging and interactive experience.
+
+### 3D Model Details
+
+- **Model File**: `models/tmptfwb2a29.gltf`
+- **Features**:
+  - **Auto-Rotate**: The model automatically rotates to provide a 360-degree view.
+  - **Camera Controls**: Users can interact with the model to view it from different angles.
+  - **Interaction Prompts**: Guides users on how to interact with the model.
+  - **Augmented Reality (AR)**: Supports AR modes for an immersive experience on compatible devices.
