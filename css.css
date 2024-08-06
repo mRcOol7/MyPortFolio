@@ -199,7 +199,7 @@ model-viewer {
   }
 
   model-viewer {
-    transform: scale(1.4); /* Slightly larger scale for larger tablets */
+    transform: scale(1.4); /* Slightly smaller scale for large tablets */
   }
 }
 
@@ -210,29 +210,29 @@ model-viewer {
   }
 
   model-viewer {
-    transform: scale(1.3); /* Slightly larger scale for tablets */
+    transform: scale(1.3); /* Slightly smaller scale for tablets */
   }
 }
 
 @media (max-width: 768px) {
   .model-container {
-    max-width: 90vw; /* Wider max-width for mobile devices */
-    height: 80vh; /* Adjust height to fit mobile devices */
+    max-width: 70vw; /* Adjust max-width for mobile devices */
+    height: 60vh; /* Adjust height to fit mobile devices */
   }
 
   model-viewer {
-    transform: scale(1.5); /* Larger scale for mobile devices */
+    transform: scale(1.2); /* Slightly smaller scale for mobile devices */
   }
 }
 
 @media (max-width: 576px) {
   .model-container {
-    max-width: 95vw; /* Wider max-width for very small screens */
-    height: 80vh; /* Adjust height for very small screens */
+    max-width: 90vw; /* Wider max-width for very small screens */
+    height: 50vh; /* Adjust height for very small screens */
   }
 
   model-viewer {
-    transform: scale(1.6); /* Larger scale for very small screens */
+    transform: scale(1); /* Normal scale for very small screens */
   }
 }
 
