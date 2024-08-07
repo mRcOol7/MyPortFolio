@@ -415,13 +415,14 @@ footer {
 /* Project Section */
 .section {
   padding: 60px 0;
+  scroll-behavior: smooth;
 }
 
 .section-title {
   text-align: center;
   margin-bottom: 30px;
   font-size: 42px;
-  color: #fff; /* White text color */
+  color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -435,23 +436,16 @@ footer {
 .project {
   width: calc(50% - 15px);
   margin-bottom: 50px;
-  background-color: #1f1f1f; /* Dark background color */
+  background-color: #1f1f1f;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project:hover {
-  transform: translateY(-10px) scale(1.05); /* Hover effect */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Shadow on hover */
-}
-
-.project-link {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .project-image {
@@ -462,47 +456,85 @@ footer {
 }
 
 .project:hover .project-image {
-  filter: brightness(0.8); /* Dim image on hover */
+  filter: brightness(0.8);
 }
 
 .project-info {
   padding: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.project:hover .project-info {
+  background-color: #2a2a2a;
 }
 
 .project-title {
   font-size: 32px;
   margin-bottom: 10px;
-  color: #fff; /* White text color */
+  color: #fff;
+}
+
+.tech-tags {
+  margin-bottom: 10px;
+}
+
+.tech-tag {
+  display: inline-block;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-size: 14px;
 }
 
 .project-description {
   font-size: 18px;
   line-height: 1.6;
-  color: #ccc; /* Light gray text color */
+  color: #ccc;
 }
 
 .github-button {
   display: inline-block;
-  background-color: #4CAF50; /* Green color */
-  color: #fff; /* White text color */
+  background: linear-gradient(45deg, #6e8efb, #a777e3);
+  color: #fff;
   padding: 12px 24px;
   border-radius: 10px;
   text-decoration: none;
   margin-top: 20px;
-  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+  transition: background-color 0.3s, transform 0.3s;
   border: none;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.github-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 60%);
+  transition: transform 0.5s ease;
+  transform: scale(0);
+}
+
+.github-button:hover::before {
+  transform: scale(1);
 }
 
 .github-button:hover {
-  background-color: #45a049; /* Darker green on hover */
-  transform: translateY(-2px); /* Button lift effect */
+  background: linear-gradient(45deg, #5b77eb, #8d64e3);
+  transform: translateY(-2px);
 }
 
 .github-button:active {
-  transform: translateY(2px); /* Button press effect */
+  transform: translateY(2px);
 }
 
 .github-logo {
@@ -513,15 +545,82 @@ footer {
 }
 
 .github-link {
-  color: #fff; /* White text color */
+  color: #fff;
   text-decoration: none;
 }
 
 /* Media Queries */
+@media screen and (max-width: 1024px) {
+  .project {
+    width: calc(50% - 10px);
+  }
+  .section-title {
+    font-size: 36px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .project {
     width: 100%;
   }
+  .section-title {
+    font-size: 32px;
+  }
+  .project-title {
+    font-size: 28px;
+  }
+  .project-description {
+    font-size: 16px;
+  }
+  .github-button {
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .section {
+    padding: 40px 0;
+  }
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .project-info {
+    padding: 20px;
+  }
+  .project-title {
+    font-size: 24px;
+  }
+  .project-description {
+    font-size: 14px;
+  }
+  .github-button {
+    padding: 8px 16px;
+  }
+  .github-logo {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Portfolio section */
+#portfolio h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2ecc71;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+#portfolio h2::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #2ecc71;
+  bottom: 0;
+  left: 0;
 }
 
 /* General Styles */
@@ -606,26 +705,6 @@ p {
   }
 }
 
-
-/* Portfolio section */
-#portfolio h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #2ecc71; /* Green color */
-  position: relative;
-  display: inline-block;
-  padding-bottom: 0.5rem;
-}
-
-#portfolio h2::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background-color: #2ecc71; /* Green color */
-  bottom: 0;
-  left: 0;
-}
 /* Add this CSS to your existing stylesheet or create a new one */
 .profile-image {
   width: 120px; /* Adjust the width as needed */
@@ -716,7 +795,6 @@ nav a {
   background-color: #1e1e1e; /* Dark background */
   color: #ffffff; /* White text */
   padding: 60px 0;
-  text-align: left;
 }
 
 .skills-container {
@@ -727,56 +805,6 @@ nav a {
   gap: 20px;
 }
 
-.skill {
-  background-color: #ffffff; /* White background */
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Combined transition */
-}
-
-.skill:hover {
-  transform: translateY(-10px); /* Lift effect */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-}
-
-.skill h4 {
-  color: #333333; /* Dark grey for titles */
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.skill p {
-  color: #666666; /* Medium grey for descriptions */
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.progress-bar {
-  background-color: #e0e0e0; /* Light grey background */
-  border-radius: 25px;
-  overflow: hidden;
-}
-
-.progress {
-  background-color: #3498db; /* Blue progress fill color */
-  height: 20px;
-  border-radius: 25px;
-  transition: width 0.6s ease; /* Smooth width transition */
-}
-
-.skill:hover .progress {
-  background-color: #2980b9; /* Darker blue on hover */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .skills-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Text Styling */
 #skills h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -794,6 +822,116 @@ nav a {
   background-color: #b1ec0c; /* Green underline */
   bottom: 0;
   left: 0;
+}
+
+.skill-card {
+  background-color: #ffffff; /* White background */
+  padding: 30px;
+  border-radius: 50%; /* Circular shape */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Combined transition */
+  margin-bottom: 20px;
+  width: 240px; /* Fixed width */
+  height: 240px; /* Fixed height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px); /* Lift effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.skill-card .card-body {
+  padding: 0;
+  text-align: center;
+}
+
+.skill-card h4 {
+  color: #333333; /* Dark grey for titles */
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.skill-card p {
+  color: #666666; /* Medium grey for descriptions */
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.skill-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+  color: #007bff; /* Blue color for icons */
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .skill-card {
+    width: 180px;
+    height: 180px;
+    padding: 20px;
+  }
+
+  .skill-icon {
+    font-size: 40px;
+  }
+
+  #skills h2 {
+    font-size: 2rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .skill-card h4 {
+    font-size: 1rem;
+  }
+
+  .skill-card p {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-card {
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+  }
+
+  .skill-icon {
+    font-size: 35px;
+  }
+
+  #skills h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-card h4 {
+    font-size: 0.875rem;
+  }
+
+  .skill-card p {
+    font-size: 0.625rem;
+  }
 }
 
 /* Center the download button */

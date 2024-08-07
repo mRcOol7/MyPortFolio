@@ -9,7 +9,9 @@
   <link rel="stylesheet" type="text/css" href="css.css">
   <link rel="icon" type="image/png" href="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" class="round-favicon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
@@ -161,15 +163,9 @@
           vr-interaction="true"
           vr-navigator="true"
           vr-movement="true"
-          vr-haptics="true"
-          desktop
-          desktop-ui="true"
-          desktop-controls="true"
-          desktop-interaction="true"
-          desktop-keyboard-controls="true"
-          desktop-mouse-controls="true"
-          desktop-custom-controls="true"
-          desktop-fullscreen="true"
+          vr-haptics="true
+          ios-src="models\tmptfwb2a29.usdz"
+          quick-look-browsers="safari chrome"
           disable-zoom
           loading="eager"
           vr-immersive
@@ -263,37 +259,51 @@
     </div>
   </section>
 
-  <section id="skills" class="section">
-    <div class="container" data-aos="fade-up">
-      <h2>Skills</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Languages & Frameworks</h4>
-            <p>Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
+<section id="skills" class="section">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center mb-4">Skills</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-3 d-flex justify-content-center">
+        <div class="card skill-card text-center">
+          <div class="card-body">
+            <i class="fas fa-code skill-icon"></i>
+            <h4 class="card-title">Languages & Frameworks</h4>
+            <p class="card-text">Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Tools & Technologies</h4>
-            <p>Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
+      </div>
+      <div class="col-md-3 d-flex justify-content-center">
+        <div class="card skill-card text-center">
+          <div class="card-body">
+            <i class="fas fa-tools skill-icon"></i>
+            <h4 class="card-title">Tools & Technologies</h4>
+            <p class="card-text">Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Interests</h4>
-            <p>Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
+      </div>
+      <div class="col-md-3 d-flex justify-content-center">
+        <div class="card skill-card text-center">
+          <div class="card-body">
+            <i class="fas fa-lightbulb skill-icon"></i>
+            <h4 class="card-title">Interests</h4>
+            <p class="card-text">Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Soft Skills</h4>
-            <p>Time Management, Teamwork, Work Ethic.</p>
+      </div>
+      <div class="col-md-3 d-flex justify-content-center">
+        <div class="card skill-card text-center">
+          <div class="card-body">
+            <i class="fas fa-user-friends skill-icon"></i>
+            <h4 class="card-title">Soft Skills</h4>
+            <p class="card-text">Time Management, Teamwork, Work Ethic.</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+  
   <section id="portfolio" class="section">
     <div class="container" data-aos="fade-up">
       <h2 class="section-title">Projects</h2>
