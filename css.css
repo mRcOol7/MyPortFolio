@@ -1230,3 +1230,46 @@ nav a {
     padding: 8px 16px;
   }
 }
+/* Global Scrollbar Styles for Webkit Browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar on larger screens */
+  height: 12px; /* Height of the scrollbar on horizontal scroll */
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Background color of the track */
+  border-radius: 10px; /* Rounded corners for the track */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* 3D inset shadow */
+}
+
+/* Scrollbar Thumb */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(145deg, #6e6e6e, #4d4d4d); /* Gradient color for the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.2); /* 3D effect with inner and outer shadows */
+  transition: background 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Scrollbar Thumb on Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(145deg, #5a5a5a, #333333); /* Darker gradient on hover */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.3); /* Enhanced 3D effect on hover */
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px; /* Smaller width for mobile devices */
+    height: 8px; /* Smaller height for horizontal scroll */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px; /* Slightly smaller radius for mobile */
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3), 0 0 4px rgba(0, 0, 0, 0.2); /* Adjust shadow for smaller scrollbar */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.3); /* Enhanced hover effect for mobile */
+  }
+}

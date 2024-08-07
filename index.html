@@ -108,13 +108,14 @@
         <!-- 3D model viewer -->
         <div class="model-container">
           <model-viewer
-          src="models/tmptfwb2a29.gltf"
+          id="model-viewer"
+          src="models/tmpfver_tf0.glb"
           alt="3D model of Nehal Chauhan"
           camera-controls
           camera-orbit="180deg 90deg 2m"
           field-of-view="45deg"
           shadow-intensity="1"
-          exposure="1.2"
+          exposure="1.0"
           poster="path/to/your/poster.jpg"
           interaction-prompt="auto"
           interaction-policy="auto"
@@ -163,81 +164,76 @@
           vr-interaction="true"
           vr-navigator="true"
           vr-movement="true"
-          vr-haptics="true
-          ios-src="models\tmptfwb2a29.usdz"
+          vr-haptics="true"
+          ios-src="models/tmpfver_tf0.usdz"
           quick-look-browsers="safari chrome"
           disable-zoom
           loading="eager"
           vr-immersive
           disable-pan
           spotlight="true"
-          ambient-light="0.7"
+          ambient-light="0.8"
           color="#FFCC00"
           style="width: 100%; height: 100%;"
-          id="model-viewer"
-        >
-        </model-viewer>
+      >
+      </model-viewer>
         
           </div>
         </div>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const modelViewer = document.querySelector('#model-viewer');
-
-    // Automatically start auto-rotation
-    modelViewer.autoRotate = true;
-    modelViewer.autoRotateSpeed = 1.0; // Set the speed of auto-rotation
-
-    // Handle AR session start
-    modelViewer.addEventListener('ar-status', (event) => {
-      if (event.detail.status === 'session-started') {
-        console.log('AR session started.');
-      }
-    });
-
-    // Handle errors in loading the model
-    modelViewer.addEventListener('error', (event) => {
-      console.error('An error occurred while loading the model:', event);
-    });
-
-    // Disable zoom feature
-    modelViewer.addEventListener('wheel', (event) => {
-      event.preventDefault(); // Prevent default zoom behavior
-    });
-
-    // Prevent pinch-to-zoom on touch devices
-    modelViewer.addEventListener('gesturechange', (event) => {
-      event.preventDefault(); // Prevent default pinch-to-zoom behavior
-    });
-
-    // Enhance lighting and shadows after the model is loaded
-    modelViewer.addEventListener('load', () => {
-      const scene = modelViewer.scene;
-
-      // Create a realistic shadow effect
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-      directionalLight.position.set(1, 1, 1).normalize();
-      scene.add(directionalLight);
-
-      // Add ambient light for general illumination
-      const ambientLight = new THREE.AmbientLight(0x404040, 1);
-      scene.add(ambientLight);
-
-      // Spotlight for focused lighting effects
-      const spotLight = new THREE.SpotLight(0xffffff, 1.5);
-      spotLight.position.set(5, 10, 5);
-      spotLight.angle = Math.PI / 6;
-      spotLight.penumbra = 0.1;
-      spotLight.decay = 2;
-      spotLight.distance = 200;
-      scene.add(spotLight);
-
-      // Adjust shadow settings for a more 3D effect
-      modelViewer.shadowIntensity = 2; // Increase shadow intensity
-      modelViewer.shadowSoftness = 0.5; // Apply soft shadows for realism
-    });
-  });
-</script>
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const modelViewer = document.querySelector('#model-viewer');
+    
+            // Automatically start auto-rotation
+            modelViewer.autoRotate = true;
+            modelViewer.autoRotateSpeed = 1.0; // Set the speed of auto-rotation
+    
+            // Handle AR session start
+            modelViewer.addEventListener('ar-status', (event) => {
+              if (event.detail.status === 'session-started') {
+                console.log('AR session started.');
+              }
+            });
+    
+            // Handle errors in loading the model
+            modelViewer.addEventListener('error', (event) => {
+              console.error('An error occurred while loading the model:', event);
+            });
+    
+            // Disable zoom feature
+            modelViewer.addEventListener('wheel', (event) => {
+              event.preventDefault(); // Prevent default zoom behavior
+            });
+    
+            // Prevent pinch-to-zoom on touch devices
+            modelViewer.addEventListener('gesturechange', (event) => {
+              event.preventDefault(); // Prevent default pinch-to-zoom behavior
+            });
+    
+            // Enhance lighting and shadows after the model is loaded
+            modelViewer.addEventListener('load', () => {
+              const scene = modelViewer.scene;
+    
+              // Add realistic lighting and shadows
+              const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+              directionalLight.position.set(1, 1, 1).normalize();
+              scene.add(directionalLight);
+    
+              const ambientLight = new THREE.AmbientLight(0x404040, 1); // Soft white light
+              scene.add(ambientLight);
+    
+              // Add a spotlight for additional realism
+              const spotlight = new THREE.SpotLight(0xffffff, 1);
+              spotlight.position.set(10, 10, 10);
+              spotlight.angle = Math.PI / 6;
+              spotlight.penumbra = 0.2;
+              spotlight.decay = 2;
+              spotlight.distance = 200;
+              scene.add(spotlight);
+            });
+          });
+        </script>
+    
 
       </div>
     </div>
