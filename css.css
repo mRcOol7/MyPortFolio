@@ -24,14 +24,16 @@ nav {
   width: 100%;
   top: 0;
   z-index: 1000;
-  background-color: rgba(44, 62, 80, 0.85); /* Slightly transparent */
-  backdrop-filter: blur(10px); /* Blur effect for the background */
+  background-color: rgba(44, 62, 80, 0.85);
+  backdrop-filter: blur(10px);
   padding: 1rem 0;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 nav.bg-scroll {
-  background-color: #2c3e50; /* Solid color on scroll */
+  background-color: #2c3e50;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 nav .container {
@@ -44,13 +46,15 @@ nav .container {
 }
 
 nav h1 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #ecf0f1;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 1px;
 }
 
 nav h1:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
+  transform: scale(1.05);
+  text-shadow: 0 0 10px rgba(236, 240, 241, 0.5);
 }
 
 nav ul {
@@ -61,25 +65,28 @@ nav ul {
 }
 
 nav li {
-  margin: 0 10px;
+  margin: 0 15px;
 }
 
 nav a {
   text-decoration: none;
   color: #ecf0f1;
-  margin: 0 1rem;
+  font-size: 1.1rem;
   position: relative;
-  transition: color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  padding: 5px 0;
 }
 
-nav a::after {
+nav a::before {
   content: '';
   position: absolute;
-  width: 0;
+  width: 100%;
   height: 2px;
+  bottom: 0;
+  left: 0;
   background-color: #3498db;
-  left: 50%;
-  bottom: -5px;
+  visibility: hidden;
+  transform: scaleX(0);
   transition: all 0.3s ease-in-out;
 }
 
@@ -87,9 +94,9 @@ nav a:hover {
   color: #3498db;
 }
 
-nav a:hover::after {
-  width: 100%;
-  left: 0;
+nav a:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
 }
 
 /* Responsive Navigation styles */
@@ -102,10 +109,51 @@ nav a:hover::after {
   nav ul {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
+    display: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  nav li {
+    margin: 10px 0;
+    width: 100%;
   }
 
   nav a {
-    margin: 0.5rem 0;
+    display: block;
+    padding: 10px 0;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: #ecf0f1;
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active div:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .hamburger.active div:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active div:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
   }
 }
 /* Base Hero section styles */
@@ -778,9 +826,10 @@ nav a {
 }
 /* Skills Section */
 #skills {
-  background-color: #1e1e1e; /* Dark background */
-  color: #ffffff; /* White text */
+  background-color: #1e1e1e; /* Light grey background */
+  color: #333333; /* Dark grey text */
   padding: 60px 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 .skills-container {
@@ -794,12 +843,12 @@ nav a {
 #skills h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #b1ec0c; /* Green color */
+  color: #36d43e; /* Dark grey color */
   position: relative;
   display: inline-block;
   padding-bottom: 0.5rem;
-  font-family: 'Roboto', sans-serif;
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 #skills h2::after {
@@ -807,16 +856,16 @@ nav a {
   position: absolute;
   width: 100%;
   height: 3px;
-  background-color: #b1ec0c; /* Green underline */
+  background-color: #333333; /* Dark grey underline */
   bottom: 0;
   left: 0;
 }
 
 .skill-card {
-  background: #ffffff; /* Solid background */
+  background: linear-gradient(145deg, #e0e0e0, #ffffff); /* Light gradient background */
   padding: 20px;
   border-radius: 20px; /* Rounded corners */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2); /* 3D shadow effect */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow effect */
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
   margin-bottom: 20px;
   width: 100%; /* Full width for mobile */
@@ -826,6 +875,7 @@ nav a {
   justify-content: center;
   position: relative; /* For positioning animations */
   overflow: hidden; /* Ensure content doesn't overflow */
+  animation: fadeInBounce 1s ease-in-out; /* Combined animation */
 }
 
 .skill-card::before {
@@ -847,7 +897,7 @@ nav a {
 
 .skill-card:hover {
   transform: rotateY(10deg) translateY(-20px) scale(1.1); /* 3D rotation and scaling effect */
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 10px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow effect */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow effect */
 }
 
 .skill-card .card-body {
@@ -875,13 +925,31 @@ nav a {
 .skill-icon {
   font-size: 50px; /* Larger icons for prominence */
   margin-bottom: 10px;
-  color: #007bff; /* Blue color for icons */
+  color: #333333; /* Dark grey color for icons */
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .skill-card:hover .skill-icon {
-  color: #00aaff; /* Change icon color on hover */
+  color: #555555; /* Change icon color on hover */
   transform: rotate(360deg); /* Rotating icon effect */
+}
+
+/* Combined Animation */
+@keyframes fadeInBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Responsive Design */
@@ -902,6 +970,7 @@ nav a {
     width: 100%; /* Full width for mobile screens */
     padding: 15px;
     border-radius: 18px; /* Slightly less rounded but still prominent */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05); /* Adjusted shadow for mobile */
   }
 
   .skill-icon {
@@ -927,6 +996,7 @@ nav a {
     width: 100%; /* Ensure full width on very small screens */
     padding: 10px;
     border-radius: 15px; /* Less rounded but still distinct */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05); /* Adjusted shadow for very small screens */
   }
 
   .skill-icon {
@@ -1079,7 +1149,7 @@ nav a {
 /* Scroll to Top Button Styles */
 #scrollToTopBtn {
   position: fixed;
-  bottom: 20px;
+  bottom: 80px; /* Adjusted to ensure it doesn't overlap with the chatbot button */
   right: 30px;
   z-index: 99;
   border: none;
@@ -1118,12 +1188,11 @@ nav a {
 /* Adjustments for smaller screens */
 @media screen and (max-width: 768px) {
   #scrollToTopBtn {
-    bottom: 15px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-    font-size: 14px;
-    padding: 8px;
+    bottom: 80px; /* Adjusted for mobile */
+    right: 15px; /* Adjusted for mobile */
+    width: 40px; /* Smaller size for mobile */
+    height: 40px; /* Smaller size for mobile */
+    font-size: 14px; /* Smaller font size for mobile */
   }
 }
 
@@ -1271,5 +1340,276 @@ nav a {
   
   ::-webkit-scrollbar-thumb:hover {
     box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(0, 0, 0, 0.3); /* Enhanced hover effect for mobile */
+  }
+}
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Chatbot Container Styles */
+#chatbot-container {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  height: 500px;
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  opacity: 0;
+  z-index: 1000;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#chatbot-container.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header */
+#chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#chatbot-close-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#chatbot-close-btn:hover {
+  color: #ff5f5f;
+  transform: rotate(90deg);
+}
+
+/* Messages Area */
+#chatbot-messages {
+  flex: 1;
+  padding: 10px 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #203a43 #0f2027;
+}
+
+#chatbot-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+#chatbot-messages::-webkit-scrollbar-thumb {
+  background: #203a43;
+  border-radius: 5px;
+}
+
+.chatbot-message {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 15px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.user-message {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #56ccf2, #2f80ed);
+  color: #fff;
+}
+
+.bot-message {
+  align-self: flex-start;
+  background: linear-gradient(135deg, #bb67ff, #9b51e0);
+  color: #fff;
+}
+
+.message-timestamp {
+  font-size: 0.8rem;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+/* Typing Indicator */
+#typing-indicator {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.typing-dots .dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+.typing-dots .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Input Area */
+#chatbot-input-container {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: #203a43;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#chatbot-input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  background: #f5f5f5;
+  color: #333;
+  font-size: 1rem;
+  outline: none;
+}
+
+#chatbot-send-btn {
+  margin-left: 10px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+#chatbot-send-btn:hover {
+  background: linear-gradient(135deg, #9b51e0, #56ccf2);
+  transform: scale(1.1);
+}
+
+/* Predefined Options */
+#predefined-options {
+  padding: 10px 20px;
+  background: #1e3c72;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.option-btn:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f);
+  transform: scale(1.1);
+}
+
+/* Tooltip Button */
+#chatbot-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  z-index: 999;
+}
+
+#chatbot-toggle-btn:hover {
+  background: linear-gradient(135deg, #9b51e0, #56ccf2);
+  transform: scale(1.1);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 70px;
+  right: 30px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#chatbot-toggle-btn:hover + .tooltip {
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #chatbot-container {
+    width: 90%;
+    height: 60%;
+    bottom: 50px;
+    right: 5%;
+  }
+
+  #chatbot-header {
+    font-size: 1rem;
+  }
+
+  #chatbot-input {
+    font-size: 0.9rem;
+  }
+
+  .option-btn {
+    font-size: 0.8rem;
   }
 }

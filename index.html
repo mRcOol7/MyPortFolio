@@ -77,12 +77,21 @@
 </head>
 
 <body>
+  <script>
+    // Check if the preloader has been shown
+    if (!localStorage.getItem('preloaderShown')) {
+      window.location.href = 'preloader.html'; // Redirect to preloader.html
+    } else {
+      // Optionally, you can clear the flag if you want the preloader to show again on the next visit
+      // localStorage.removeItem('preloaderShown');
+    }
+  </script>
   <header id="home">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image" class="profile-image">
         <a class="navbar-brand" href="#">Nehal Chauhan</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler hamburger" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -399,13 +408,13 @@
   <button onclick="scrollToTop()" id="scrollToTopBtn" aria-label="Scroll to top">
   </button>
   <script type="module" src="js/main.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.111.0/index.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.111.0/index.min.js" integrity="" crossorigin="anonymous"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize AOS
@@ -538,7 +547,181 @@
     incrementVisitCount();
   }
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('nav ul');
+    const navItems = document.querySelectorAll('nav ul li a');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  });
+</script>
 <script src="dist/bundle.js"></script>
+  <script>
+    const camera = new THREE.PerspectiveCamera(75, globalThis.innerWidth / globalThis.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(globalThis.innerWidth, globalThis.innerHeight);
+
+    const rigidBodies = [];
+    const tmpTrans = new Ammo.btTransform();
+
+    const Ammo = AmmoLib; // Assign to a new variable
+
+    globalThis.addEventListener('resize', () => {
+        renderer.setSize(globalThis.innerWidth, globalThis.innerHeight);
+        camera.aspect = globalThis.innerWidth / globalThis.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+  </script>
+  
+  <!-- Chatbot Container -->
+  <div id="chatbot-container">
+    <div id="chatbot-header">
+      <span>Chat with Nehal</span>
+      <button id="chatbot-close-btn"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div id="typing-indicator" style="display: none;">
+      <span>Bot is typing...</span>
+      <div class="typing-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="Type a message..." />
+      <button id="chatbot-send-btn">Send</button>
+    </div>
+    <div id="predefined-options" class="predefined-options">
+      <button class="option-btn"><i class="fas fa-hand-wave"></i> Hello</button>
+      <button class="option-btn"><i class="fas fa-briefcase"></i> Portfolio</button>
+      <button class="option-btn"><i class="fas fa-tools"></i> Skills</button>
+      <button class="option-btn"><i class="fas fa-envelope"></i> Contact</button>
+      <button class="option-btn"><i class="fas fa-project-diagram"></i> Projects</button>
+      <button class="option-btn"><i class="fas fa-file-alt"></i> Resume</button>
+    </div>
+  </div>
+  <div class="tooltip-container">
+    <button id="chatbot-toggle-btn" title="Chat with Nehal">
+      <i class="fas fa-comments"></i>
+    </button>
+    <span class="tooltip">Chat with Nehal</span>
+  </div>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const chatbotContainer = document.getElementById('chatbot-container');
+      const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+      const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+      const chatbotInput = document.getElementById('chatbot-input');
+      const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+      const chatbotMessages = document.getElementById('chatbot-messages');
+      const predefinedOptions = document.getElementById('predefined-options');
+      const typingIndicator = document.getElementById('typing-indicator');
+
+      // Toggle chatbot visibility with animation
+      chatbotToggleBtn.addEventListener('click', () => {
+        chatbotContainer.style.transition = 'opacity 0.5s ease';
+        chatbotContainer.style.opacity = chatbotContainer.style.opacity === '1' ? '0' : '1';
+        chatbotContainer.style.display = chatbotContainer.style.opacity === '0' ? 'none' : 'flex';
+      });
+
+      // Close chatbot with fade effect
+      chatbotCloseBtn.addEventListener('click', () => {
+        chatbotContainer.style.transition = 'opacity 0.5s ease';
+        chatbotContainer.style.opacity = '0';
+        setTimeout(() => {
+          chatbotContainer.style.display = 'none';
+        }, 500);
+      });
+
+      // Send message with advanced NLP processing
+      chatbotSendBtn.addEventListener('click', () => {
+        sendMessage();
+      });
+
+      chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          sendMessage();
+        }
+      });
+
+      // Add event listeners to predefined option buttons
+      predefinedOptions.querySelectorAll('.option-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          chatbotInput.value = button.textContent.toLowerCase(); // Set input value to button text
+          sendMessage(); // Send the message
+        });
+      });
+
+      const responseMap = {
+        'hello': '👋 Hello! How can I assist you today?',
+        'hi': '😄 Hi there! What information are you seeking?',
+        'portfolio': '🌟 Explore my portfolio projects here: <a href="https://nehalchauhanportfolio.vercel.app/" target="_blank" style="color: #3498db; text-decoration: underline; font-weight: bold;">My Portfolio</a>',
+        'skills': '💻 I specialize in HTML, CSS, JavaScript, React, and MongoDB, with expertise in ethical hacking, augmented reality technologies, and machine learning algorithms.',
+        'contact': '📧 Reach me at <a href="mailto:cnehal194@gmail.com" style="color: #3498db; text-decoration: underline; font-weight: bold;"><i class="fas fa-envelope"></i> cnehal194@gmail.com</a> or connect on <a href="https://linkedin.com/in/nehal-chauhan19" target="_blank" style="color: #0077b5; text-decoration: underline; font-weight: bold;"><i class="fab fa-linkedin"></i> LinkedIn</a> for collaboration on innovative tech projects.',
+        'projects': '🚀 I have developed advanced projects like a BMI Calculator, a DNA Sequence Analyzer, and a real-time data visualization tool. More details are available on my portfolio.',
+        'resume': '📄 Download my resume here: <a href="Nehal Chauhan Resume.pdf" download style="color: #e74c3c; text-decoration: underline; font-weight: bold;"><i class="fas fa-file-download"></i> Nehal Chauhan Resume.pdf</a> to see my full range of skills and experiences.',
+        'technology': '🤖 I am passionate about cutting-edge technology, including AI, blockchain, and IoT, and continuously explore new advancements in these fields.',
+        'sports': '🏆 I enjoy various sports, including cricket, football, tennis, F1 racing, and kabaddi, which keep me energized and focused, enhancing my problem-solving skills.',
+        'education': '🎓 Currently, I am pursuing a degree in Computer Science and Engineering at Parul University, focusing on innovative technologies and their applications in real-world scenarios.',
+        'default': "🤔 I'm sorry, I didn't quite catch that. Could you please rephrase or ask something else? I am equipped to handle a wide range of inquiries."
+      };
+
+      function sendMessage() {
+        const message = chatbotInput.value.trim().toLowerCase();
+        if (message) {
+          addMessage(message, 'user');
+          chatbotInput.value = '';
+          typingIndicator.style.display = 'block'; // Show typing indicator
+
+          // Simulate bot response with a delay
+          setTimeout(() => {
+            typingIndicator.style.display = 'none'; // Hide typing indicator
+            let response = responseMap['default']; // Default response
+            for (const keyword in responseMap) {
+              if (message.includes(keyword)) {
+                response = responseMap[keyword];
+                break;
+              }
+            }
+            addMessage(response, 'bot');
+          }, 1000); // Simulate typing delay
+        }
+      }
+
+      function addMessage(message, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chatbot-message');
+        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+
+        // Get current time
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        // Create message content with timestamp
+        messageElement.innerHTML = `
+          <div class="message-content">${message}</div>
+          <div class="message-timestamp">${timestamp}</div>
+        `;
+
+        chatbotMessages.appendChild(messageElement);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+    });
+  </script>
+
   </body>
 
 </html>
