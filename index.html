@@ -721,6 +721,15 @@
       }
     });
   </script>
+    <script>
+      // Check if the preloader has been shown
+      if (!localStorage.getItem('preloaderShown')) {
+        window.location.href = 'preloader.html'; // Redirect to preloader.html
+      } else {
+        // Optionally, you can clear the flag if you want the preloader to show again on the next visit
+        // localStorage.removeItem('preloaderShown');
+      }
+    </script>
 
   </body>
 
