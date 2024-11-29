@@ -9,7 +9,9 @@
   <link rel="stylesheet" type="text/css" href="css.css">
   <link rel="icon" type="image/png" href="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" class="round-favicon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
@@ -71,19 +73,25 @@
   text-decoration: underline;
   text-align: left; /* Adding this line to align the text to the left */
 }
-
-
-    /* Add this CSS to your existing stylesheet or create a new one */
   </style>
 </head>
 
 <body>
+  <script>
+    // Check if the preloader has been shown
+    if (!localStorage.getItem('preloaderShown')) {
+      window.location.href = 'preloader.html'; // Redirect to preloader.html
+    } else {
+      // Optionally, you can clear the flag if you want the preloader to show again on the next visit
+      // localStorage.removeItem('preloaderShown');
+    }
+  </script>
   <header id="home">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image" class="profile-image">
         <a class="navbar-brand" href="#">Nehal Chauhan</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler hamburger" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -109,25 +117,133 @@
         <!-- 3D model viewer -->
         <div class="model-container">
           <model-viewer
-            src="models/tmptfwb2a29.gltf"
-            alt="3D model of Nehal Chauhan"
-            auto-rotate
-            camera-controls
-            camera-orbit="30deg 80deg 2m"
-            field-of-view="45deg"
-            shadow-intensity="1"
-            exposure="1.2"
-            poster="path/to/your/poster.jpg"
-            interaction-prompt="auto"
-            interaction-policy="auto"
-            ar
-            ar-modes="scene-viewer quick-look"
-            style="width: 100%; height: 100%;"
-            id="model-viewer"
-          ></model-viewer>
+          id="model-viewer"
+          src="models/tmpfver_tf0.glb"
+          alt="3D model of Nehal Chauhan"
+          camera-controls
+          camera-orbit="180deg 90deg 2m"
+          field-of-view="45deg"
+          shadow-intensity="1"
+          exposure="1.0"
+          poster="path/to/your/poster.jpg"
+          interaction-prompt="auto"
+          interaction-policy="auto"
+          ar
+          ar-scale="auto"
+          ar-modes="scene-viewer quick-look webxr plane-detection"
+          ar-hit-test
+          ar-overlay="true"
+          ar-recording="true"
+          ar-save-screenshot="true"
+          ar-sound-feedback="true"
+          ar-placement="auto"
+          ar-placement-mode="horizontal"
+          ar-tracking="true"
+          ar-tracking-lost-message="AR tracking lost. Please move the camera or adjust your environment."
+          ar-ui="true"
+          ar-compatibility="true"
+          ar-scene="custom-scene"
+          ar-scan-mode="auto"
+          ar-relocalize="true"
+          ar-lighting="auto"
+          ar-shadow="true"
+          ar-light-intensity="1"
+          ar-plane-detection="true"
+          ar-interaction="true"
+          ar-ui-controls="true"
+          ar-session-status="true"
+          ar-error-message="Unable to initialize AR session. Ensure your device supports AR and try again."
+          ar-position-reset="true"
+          ar-reset-button="true"
+          ar-collision-detection="true"
+          ar-position-indicator="true"
+          ar-cloud-anchor="true"
+          ar-localization="true"
+          ar-session-tracking="true"
+          ar-environment-mapping="true"
+          anchor="plane"
+          anchor-offset="0 0 0"
+          xr
+          vr
+          vr-mode-ui="true"
+          vr-ui-controls="true"
+          vr-fullscreen="true"
+          vr-immersive="true"
+          vr-controls="true"
+          vr-interaction="true"
+          vr-navigator="true"
+          vr-movement="true"
+          vr-haptics="true"
+          ios-src="models/tmpfver_tf0.usdz"
+          quick-look-browsers="safari chrome"
+          disable-zoom
+          loading="eager"
+          vr-immersive
+          disable-pan
+          spotlight="true"
+          ambient-light="0.8"
+          color="#FFCC00"
+          style="width: 100%; height: 100%;"
+      >
+      </model-viewer>
+        
+          </div>
         </div>
-        
-        
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const modelViewer = document.querySelector('#model-viewer');
+    
+            // Automatically start auto-rotation
+            modelViewer.autoRotate = true;
+            modelViewer.autoRotateSpeed = 1.0; // Set the speed of auto-rotation
+    
+            // Handle AR session start
+            modelViewer.addEventListener('ar-status', (event) => {
+              if (event.detail.status === 'session-started') {
+                console.log('AR session started.');
+              }
+            });
+    
+            // Handle errors in loading the model
+            modelViewer.addEventListener('error', (event) => {
+              console.error('An error occurred while loading the model:', event);
+            });
+    
+            // Disable zoom feature
+            modelViewer.addEventListener('wheel', (event) => {
+              event.preventDefault(); // Prevent default zoom behavior
+            });
+    
+            // Prevent pinch-to-zoom on touch devices
+            modelViewer.addEventListener('gesturechange', (event) => {
+              event.preventDefault(); // Prevent default pinch-to-zoom behavior
+            });
+    
+            // Enhance lighting and shadows after the model is loaded
+            modelViewer.addEventListener('load', () => {
+              const scene = modelViewer.scene;
+    
+              // Add realistic lighting and shadows
+              const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+              directionalLight.position.set(1, 1, 1).normalize();
+              scene.add(directionalLight);
+    
+              const ambientLight = new THREE.AmbientLight(0x404040, 1); // Soft white light
+              scene.add(ambientLight);
+    
+              // Add a spotlight for additional realism
+              const spotlight = new THREE.SpotLight(0xffffff, 1);
+              spotlight.position.set(10, 10, 10);
+              spotlight.angle = Math.PI / 6;
+              spotlight.penumbra = 0.2;
+              spotlight.decay = 2;
+              spotlight.distance = 200;
+              scene.add(spotlight);
+            });
+          });
+        </script>
+    
+
       </div>
     </div>
 
@@ -150,30 +266,34 @@
 
   <section id="skills" class="section">
     <div class="container" data-aos="fade-up">
-      <h2>Skills</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Languages & Frameworks</h4>
-            <p>Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
+      <h2 class="text-center mb-4">Skills</h2>
+      <div class="skills-container">
+        <div class="skill-card">
+          <div class="card-body">
+            <i class="fas fa-code skill-icon"></i>
+            <h4 class="card-title">Languages & Frameworks</h4>
+            <p class="card-text">Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Tools & Technologies</h4>
-            <p>Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
+        <div class="skill-card">
+          <div class="card-body">
+            <i class="fas fa-tools skill-icon"></i>
+            <h4 class="card-title">Tools & Technologies</h4>
+            <p class="card-text">Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Interests</h4>
-            <p>Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
+        <div class="skill-card">
+          <div class="card-body">
+            <i class="fas fa-lightbulb skill-icon"></i>
+            <h4 class="card-title">Interests</h4>
+            <p class="card-text">Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="skill">
-            <h4>Soft Skills</h4>
-            <p>Time Management, Teamwork, Work Ethic.</p>
+        <div class="skill-card">
+          <div class="card-body">
+            <i class="fas fa-user-friends skill-icon"></i>
+            <h4 class="card-title">Soft Skills</h4>
+            <p class="card-text">Time Management, Teamwork, Work Ethic.</p>
           </div>
         </div>
       </div>
@@ -182,27 +302,39 @@
   <section id="portfolio" class="section">
     <div class="container" data-aos="fade-up">
       <h2 class="section-title">Projects</h2>
-
+  
       <div class="projects-container">
         <!-- First project -->
         <div class="project" data-aos="fade-up">
           <img src="https://i.ibb.co/bNxhc1T/React-App.png" alt="BMI Calculator" class="project-image">
           <div class="project-info">
             <h3 class="project-title">BMI Calculator</h3>
-            <p class="project-description">A web application built using React.js, Node.js, Express.js, and MongoDB for analyzing Body Mass Index (BMI) based on weight and height inputs. The application estimates body fat and provides BMI values along with interpretations, enhancing health awareness.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">React.js</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Express.js</span>
+              <span class="tech-tag">MongoDB</span>
+            </div>
+            <p class="project-description">A web application for analyzing Body Mass Index (BMI) based on weight and height inputs. The application estimates body fat and provides BMI values along with interpretations, enhancing health awareness.</p>
             <a href="https://github.com/mRcOol7/body-mass-index-cal" target="_blank" rel="noopener noreferrer" class="github-button">
               <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
               View on GitHub
             </a>
           </div>
         </div>
-
+  
         <!-- Second project -->
         <div class="project" data-aos="fade-up">
           <img src="https://i.ibb.co/fNK9jJ5/React-App-1.png" alt="DNA Sequence" class="project-image">
           <div class="project-info">
             <h3 class="project-title">DNA Sequence</h3>
-            <p class="project-description">A web application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack for managing and analyzing DNA sequences. The application allows users to store, retrieve, and analyze DNA data, enhancing research in the field of bioinformatics.</p>
+            <div class="tech-tags">
+              <span class="tech-tag">MongoDB</span>
+              <span class="tech-tag">Express.js</span>
+              <span class="tech-tag">React.js</span>
+              <span class="tech-tag">Node.js</span>
+            </div>
+            <p class="project-description">A web application for managing and analyzing DNA sequences. The application allows users to store, retrieve, and analyze DNA data, enhancing research in the field of bioinformatics.</p>
             <a href="https://github.com/MERN-bio-tool/DNA-sequence.git" target="_blank" rel="noopener noreferrer" class="github-button">
               <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
               View on GitHub
@@ -212,6 +344,7 @@
       </div>
     </div>
   </section>
+  
 
   <section id="contact" class="section">
     <div class="container" data-aos="fade-up">
@@ -275,13 +408,13 @@
   <button onclick="scrollToTop()" id="scrollToTopBtn" aria-label="Scroll to top">
   </button>
   <script type="module" src="js/main.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.111.0/index.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.111.0/index.min.js" integrity="" crossorigin="anonymous"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize AOS
@@ -414,7 +547,181 @@
     incrementVisitCount();
   }
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('nav ul');
+    const navItems = document.querySelectorAll('nav ul li a');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  });
+</script>
 <script src="dist/bundle.js"></script>
+  <script>
+    const camera = new THREE.PerspectiveCamera(75, globalThis.innerWidth / globalThis.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(globalThis.innerWidth, globalThis.innerHeight);
+
+    const rigidBodies = [];
+    const tmpTrans = new Ammo.btTransform();
+
+    const Ammo = AmmoLib; // Assign to a new variable
+
+    globalThis.addEventListener('resize', () => {
+        renderer.setSize(globalThis.innerWidth, globalThis.innerHeight);
+        camera.aspect = globalThis.innerWidth / globalThis.innerHeight;
+        camera.updateProjectionMatrix();
+    });
+  </script>
+  
+  <!-- Chatbot Container -->
+  <div id="chatbot-container">
+    <div id="chatbot-header">
+      <span>Chat with Nehal</span>
+      <button id="chatbot-close-btn"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div id="typing-indicator" style="display: none;">
+      <span>Bot is typing...</span>
+      <div class="typing-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="Type a message..." />
+      <button id="chatbot-send-btn">Send</button>
+    </div>
+    <div id="predefined-options" class="predefined-options">
+      <button class="option-btn"><i class="fas fa-hand-wave"></i> Hello</button>
+      <button class="option-btn"><i class="fas fa-briefcase"></i> Portfolio</button>
+      <button class="option-btn"><i class="fas fa-tools"></i> Skills</button>
+      <button class="option-btn"><i class="fas fa-envelope"></i> Contact</button>
+      <button class="option-btn"><i class="fas fa-project-diagram"></i> Projects</button>
+      <button class="option-btn"><i class="fas fa-file-alt"></i> Resume</button>
+    </div>
+  </div>
+  <div class="tooltip-container">
+    <button id="chatbot-toggle-btn" title="Chat with Nehal">
+      <i class="fas fa-comments"></i>
+    </button>
+    <span class="tooltip">Chat with Nehal</span>
+  </div>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const chatbotContainer = document.getElementById('chatbot-container');
+      const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+      const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+      const chatbotInput = document.getElementById('chatbot-input');
+      const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+      const chatbotMessages = document.getElementById('chatbot-messages');
+      const predefinedOptions = document.getElementById('predefined-options');
+      const typingIndicator = document.getElementById('typing-indicator');
+
+      // Toggle chatbot visibility with animation
+      chatbotToggleBtn.addEventListener('click', () => {
+        chatbotContainer.style.transition = 'opacity 0.5s ease';
+        chatbotContainer.style.opacity = chatbotContainer.style.opacity === '1' ? '0' : '1';
+        chatbotContainer.style.display = chatbotContainer.style.opacity === '0' ? 'none' : 'flex';
+      });
+
+      // Close chatbot with fade effect
+      chatbotCloseBtn.addEventListener('click', () => {
+        chatbotContainer.style.transition = 'opacity 0.5s ease';
+        chatbotContainer.style.opacity = '0';
+        setTimeout(() => {
+          chatbotContainer.style.display = 'none';
+        }, 500);
+      });
+
+      // Send message with advanced NLP processing
+      chatbotSendBtn.addEventListener('click', () => {
+        sendMessage();
+      });
+
+      chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          sendMessage();
+        }
+      });
+
+      // Add event listeners to predefined option buttons
+      predefinedOptions.querySelectorAll('.option-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          chatbotInput.value = button.textContent.toLowerCase(); // Set input value to button text
+          sendMessage(); // Send the message
+        });
+      });
+
+      const responseMap = {
+        'hello': '👋 Hello! How can I assist you today?',
+        'hi': '😄 Hi there! What information are you seeking?',
+        'portfolio': '🌟 Explore my portfolio projects here: <a href="https://nehalchauhanportfolio.vercel.app/" target="_blank" style="color: #3498db; text-decoration: underline; font-weight: bold;">My Portfolio</a>',
+        'skills': '💻 I specialize in HTML, CSS, JavaScript, React, and MongoDB, with expertise in ethical hacking, augmented reality technologies, and machine learning algorithms.',
+        'contact': '📧 Reach me at <a href="mailto:cnehal194@gmail.com" style="color: #3498db; text-decoration: underline; font-weight: bold;"><i class="fas fa-envelope"></i> cnehal194@gmail.com</a> or connect on <a href="https://linkedin.com/in/nehal-chauhan19" target="_blank" style="color: #0077b5; text-decoration: underline; font-weight: bold;"><i class="fab fa-linkedin"></i> LinkedIn</a> for collaboration on innovative tech projects.',
+        'projects': '🚀 I have developed advanced projects like a BMI Calculator, a DNA Sequence Analyzer, and a real-time data visualization tool. More details are available on my portfolio.',
+        'resume': '📄 Download my resume here: <a href="Nehal Chauhan Resume.pdf" download style="color: #e74c3c; text-decoration: underline; font-weight: bold;"><i class="fas fa-file-download"></i> Nehal Chauhan Resume.pdf</a> to see my full range of skills and experiences.',
+        'technology': '🤖 I am passionate about cutting-edge technology, including AI, blockchain, and IoT, and continuously explore new advancements in these fields.',
+        'sports': '🏆 I enjoy various sports, including cricket, football, tennis, F1 racing, and kabaddi, which keep me energized and focused, enhancing my problem-solving skills.',
+        'education': '🎓 Currently, I am pursuing a degree in Computer Science and Engineering at Parul University, focusing on innovative technologies and their applications in real-world scenarios.',
+        'default': "🤔 I'm sorry, I didn't quite catch that. Could you please rephrase or ask something else? I am equipped to handle a wide range of inquiries."
+      };
+
+      function sendMessage() {
+        const message = chatbotInput.value.trim().toLowerCase();
+        if (message) {
+          addMessage(message, 'user');
+          chatbotInput.value = '';
+          typingIndicator.style.display = 'block'; // Show typing indicator
+
+          // Simulate bot response with a delay
+          setTimeout(() => {
+            typingIndicator.style.display = 'none'; // Hide typing indicator
+            let response = responseMap['default']; // Default response
+            for (const keyword in responseMap) {
+              if (message.includes(keyword)) {
+                response = responseMap[keyword];
+                break;
+              }
+            }
+            addMessage(response, 'bot');
+          }, 1000); // Simulate typing delay
+        }
+      }
+
+      function addMessage(message, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chatbot-message');
+        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+
+        // Get current time
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        // Create message content with timestamp
+        messageElement.innerHTML = `
+          <div class="message-content">${message}</div>
+          <div class="message-timestamp">${timestamp}</div>
+        `;
+
+        chatbotMessages.appendChild(messageElement);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+    });
+  </script>
+
   </body>
 
 </html>

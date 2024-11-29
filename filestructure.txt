@@ -1,0 +1,10 @@
+|-- .gitignore
+|-- css.css
+|-- index.html
+|-- js
+    |-- main.js
+|-- models
+    |-- tmpfver_tf0.glb
+    |-- tmptfwb2a29.usqz
+|-- Nehal Chauhan Resume.pdf
+|-- preloader.html
