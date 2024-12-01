@@ -24,19 +24,20 @@
       align-items: center;
       flex-direction: column;
       z-index: 9999;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
     #preloader.fade-out {
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
     }
 
     .logo {
-      width: 15vw; /* Responsive width */
-      height: 15vw; /* Responsive height */
-      max-width: 120px; /* Maximum size */
-      max-height: 120px; /* Maximum size */
+      width: 15vw;
+      height: 15vw;
+      max-width: 120px;
+      max-height: 120px;
       background: url('https://i.ibb.co/RjgY0Pn/IMG-7601.jpg') no-repeat center center;
       background-size: cover;
       animation: pulse-and-rotate 1.5s infinite;
@@ -77,18 +78,18 @@
     .progress-text {
       color: #F3F4F6;
       margin-top: 10px;
-      font-size: 2.5vw; /* Responsive font size */
+      font-size: 2.5vw;
       font-weight: bold;
     }
 
     @media (max-width: 600px) {
       .logo {
-        width: 20vw; /* Adjusted for smaller screens */
-        height: 20vw; /* Adjusted for smaller screens */
+        width: 20vw;
+        height: 20vw;
       }
 
       .progress-text {
-        font-size: 4vw; /* Adjusted font size for smaller screens */
+        font-size: 4vw;
       }
     }
   </style>
@@ -97,38 +98,41 @@
   <!-- Preloader -->
   <div id="preloader">
     <div class="logo"></div>
-    <div class="MuiCircularProgress-root" style="margin-top: 20px;">
-      <div class="MuiCircularProgress-svg">
-        <svg viewBox="22 22 44 44" class="MuiCircularProgress-circle">
-          <circle class="MuiCircularProgress-circle" cx="44" cy="44" r="20" style="stroke-dasharray: 125.6; stroke-dashoffset: 0;"></circle>
-        </svg>
-      </div>
+    <div class="progress-bar">
+      <div class="progress"></div>
     </div>
     <div class="progress-text">Loading...</div>
   </div>
 
   <script>
-    // Preloader logic
+    // Preloader Logic
     const preloader = document.getElementById('preloader');
     const progressBar = preloader.querySelector('.progress');
+    const preloaderShown = localStorage.getItem('preloaderShown');
 
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += 10;
-      progressBar.style.width = `${progress}%`;
+    if (preloaderShown) {
+      // Skip preloader if already shown
+      preloader.style.display = 'none';
+      window.location.href = 'index.html';
+    } else {
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = `${progress}%`;
 
-      if (progress >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          preloader.classList.add('fade-out');
+        if (progress >= 100) {
+          clearInterval(interval);
           setTimeout(() => {
-            preloader.style.display = 'none';
-            localStorage.setItem('preloaderShown', 'true'); // Set flag in local storage
-            window.location.href = 'index.html'; // Redirect to index.html
-          }, 500);
-        }, 1000); // Delay of 1 second before fading out
-      }
-    }, 300);
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+              preloader.style.display = 'none';
+              localStorage.setItem('preloaderShown', 'true');
+              window.location.href = 'index.html';
+            }, 500);
+          }, 1000);
+        }
+      }, 300);
+    }
   </script>
 </body>
 </html>
