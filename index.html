@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nehal Chauhan - Portfolio</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" type="text/css" href="css.css">
   <link rel="icon" type="image/png" href="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" class="round-favicon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -15,7 +14,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="visitor-badge.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     /* Custom styles for the portfolio section */
     body {
@@ -69,11 +69,125 @@
     }
 
     #contact h2 {
-  color: #3498db;
-  text-decoration: underline;
-  text-align: left; /* Adding this line to align the text to the left */
-}
+      color: #3498db;
+      text-decoration: underline;
+      text-align: left;
+      /* Adding this line to align the text to the left */
+    }
+
+    /* Snapchat Lenses Section Styles */
+    .lenses-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .lens-card {
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .lens-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .lens-media {
+      width: 100%;
+      height: 250px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lens-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-container {
+      height: 100%;
+      padding-top: 0;
+    }
+
+    .lens-info {
+      padding: 1.5rem;
+      background: #ffffff;
+    }
+
+    .lens-info h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .lens-info p {
+      color: #666;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .lens-stats {
+      margin-bottom: 1rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .lens-stats i {
+      color: #007bff;
+      margin-right: 0.5rem;
+    }
+
+    .lens-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: #fffc00;
+      color: #000;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+    }
+
+    .lens-link:hover {
+      transform: scale(1.05);
+    }
+
+    .snapchat-logo {
+      width: 24px;
+      height: 24px;
+      margin-right: 0.5rem;
+    }
+
+    .section-description {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    .video-container {
+      width: 100%;
+      position: relative;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .lens-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   </style>
+
 </head>
 
 <body>
@@ -82,7 +196,8 @@
       <div class="container">
         <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image" class="profile-image">
         <a class="navbar-brand" href="#">Nehal Chauhan</a>
-        <button class="navbar-toggler hamburger" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler hamburger" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -91,6 +206,7 @@
             <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
             <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#snapchat-lenses">Snapchat Lenses</a></li>
             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -102,616 +218,725 @@
           <h1>Hello, I'm Nehal Chauhan</h1>
           <p class="typed-text">Welcome to my portfolio.</p>
           <div class="button-container">
-            <a href="Nehal Chauhan Resume.pdf" download="NehalChauhan_Resume" class="btn btn-download">Download Resume</a>
+            <a href="Nehal_CV.pdf" download="NehalChauhan_Resume" class="btn btn-download">Download
+              Resume</a>
           </div>
         </div>
         <!-- 3D model viewer -->
         <div class="model-container">
-          <model-viewer
-          id="model-viewer"
-          src="models/tmpfver_tf0.glb"
-          alt="3D model of Nehal Chauhan"
-          camera-controls
-          camera-orbit="180deg 90deg 2m"
-          field-of-view="45deg"
-          shadow-intensity="1"
-          exposure="1.0"
-          poster="path/to/your/poster.jpg"
-          interaction-prompt="auto"
-          interaction-policy="auto"
-          ar
-          ar-scale="auto"
-          ar-modes="scene-viewer quick-look webxr plane-detection"
-          ar-hit-test
-          ar-overlay="true"
-          ar-recording="true"
-          ar-save-screenshot="true"
-          ar-sound-feedback="true"
-          ar-placement="auto"
-          ar-placement-mode="horizontal"
-          ar-tracking="true"
-          ar-tracking-lost-message="AR tracking lost. Please move the camera or adjust your environment."
-          ar-ui="true"
-          ar-compatibility="true"
-          ar-scene="custom-scene"
-          ar-scan-mode="auto"
-          ar-relocalize="true"
-          ar-lighting="auto"
-          ar-shadow="true"
-          ar-light-intensity="1"
-          ar-plane-detection="true"
-          ar-interaction="true"
-          ar-ui-controls="true"
-          ar-session-status="true"
-          ar-error-message="Unable to initialize AR session. Ensure your device supports AR and try again."
-          ar-position-reset="true"
-          ar-reset-button="true"
-          ar-collision-detection="true"
-          ar-position-indicator="true"
-          ar-cloud-anchor="true"
-          ar-localization="true"
-          ar-session-tracking="true"
-          ar-environment-mapping="true"
-          anchor="plane"
-          anchor-offset="0 0 0"
-          xr
-          vr
-          vr-mode-ui="true"
-          vr-ui-controls="true"
-          vr-fullscreen="true"
-          vr-immersive="true"
-          vr-controls="true"
-          vr-interaction="true"
-          vr-navigator="true"
-          vr-movement="true"
-          vr-haptics="true"
-          ios-src="models/tmpfver_tf0.usdz"
-          quick-look-browsers="safari chrome"
-          disable-zoom
-          loading="eager"
-          vr-immersive
-          disable-pan
-          spotlight="true"
-          ambient-light="0.8"
-          color="#FFCC00"
-          style="width: 100%; height: 100%;"
-      >
-      </model-viewer>
-        
-          </div>
+          <model-viewer id="model-viewer" src="models/tmpfver_tf0.glb" alt="3D model of Nehal Chauhan" camera-controls
+            camera-orbit="180deg 90deg 2m" field-of-view="45deg" shadow-intensity="1" exposure="1.0"
+            interaction-prompt="auto" interaction-policy="auto" ar ar-scale="auto"
+            ar-modes="scene-viewer quick-look webxr plane-detection" ar-hit-test ar-overlay="true" ar-recording="true"
+            ar-save-screenshot="true" ar-sound-feedback="true" ar-placement="auto" ar-placement-mode="horizontal"
+            ar-tracking="true"
+            ar-tracking-lost-message="AR tracking lost. Please move the camera or adjust your environment." ar-ui="true"
+            ar-compatibility="true" ar-scene="custom-scene" ar-scan-mode="auto" ar-relocalize="true" ar-lighting="auto"
+            ar-shadow="true" ar-light-intensity="1" ar-plane-detection="true" ar-interaction="true"
+            ar-ui-controls="true" ar-session-status="true"
+            ar-error-message="Unable to initialize AR session. Ensure your device supports AR and try again."
+            ar-position-reset="true" ar-reset-button="true" ar-collision-detection="true" ar-position-indicator="true"
+            ar-cloud-anchor="true" ar-localization="true" ar-session-tracking="true" ar-environment-mapping="true"
+            anchor="plane" anchor-offset="0 0 0" xr vr vr-mode-ui="true" vr-ui-controls="true" vr-fullscreen="true"
+            vr-immersive="true" vr-controls="true" vr-interaction="true" vr-navigator="true" vr-movement="true"
+            vr-haptics="true" ios-src="models/tmpfver_tf0.usdz" quick-look-browsers="safari chrome" disable-zoom
+            loading="eager" vr-immersive disable-pan spotlight="true" ambient-light="0.8" color="#FFCC00"
+            style="width: 100%; height: 100%;">
+          </model-viewer>
+
         </div>
-        <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const modelViewer = document.querySelector('#model-viewer');
-    
-            // Automatically start auto-rotation
-            modelViewer.autoRotate = true;
-            modelViewer.autoRotateSpeed = 1.0; // Set the speed of auto-rotation
-    
-            // Handle AR session start
-            modelViewer.addEventListener('ar-status', (event) => {
-              if (event.detail.status === 'session-started') {
-                console.log('AR session started.');
-              }
-            });
-    
-            // Handle errors in loading the model
-            modelViewer.addEventListener('error', (event) => {
-              console.error('An error occurred while loading the model:', event);
-            });
-    
-            // Disable zoom feature
-            modelViewer.addEventListener('wheel', (event) => {
-              event.preventDefault(); // Prevent default zoom behavior
-            });
-    
-            // Prevent pinch-to-zoom on touch devices
-            modelViewer.addEventListener('gesturechange', (event) => {
-              event.preventDefault(); // Prevent default pinch-to-zoom behavior
-            });
-    
-            // Enhance lighting and shadows after the model is loaded
-            modelViewer.addEventListener('load', () => {
-              const scene = modelViewer.scene;
-    
-              // Add realistic lighting and shadows
-              const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-              directionalLight.position.set(1, 1, 1).normalize();
-              scene.add(directionalLight);
-    
-              const ambientLight = new THREE.AmbientLight(0x404040, 1); // Soft white light
-              scene.add(ambientLight);
-    
-              // Add a spotlight for additional realism
-              const spotlight = new THREE.SpotLight(0xffffff, 1);
-              spotlight.position.set(10, 10, 10);
-              spotlight.angle = Math.PI / 6;
-              spotlight.penumbra = 0.2;
-              spotlight.decay = 2;
-              spotlight.distance = 200;
-              scene.add(spotlight);
-            });
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const modelViewer = document.querySelector('#model-viewer');
+
+          // Automatically start auto-rotation
+          modelViewer.autoRotate = true;
+          modelViewer.autoRotateSpeed = 1.0; // Set the speed of auto-rotation
+
+          // Handle AR session start
+          modelViewer.addEventListener('ar-status', (event) => {
+            if (event.detail.status === 'session-started') {
+              console.log('AR session started.');
+            }
           });
-        </script>
-    
 
-      </div>
-    </div>
+          // Handle errors in loading the model
+          modelViewer.addEventListener('error', (event) => {
+            console.error('An error occurred while loading the model:', event);
+          });
 
-  <section id="about" class="section">
-    <div class="container" data-aos="fade-up">
-      <h2>About Me</h2>
-      <div class="row">
-        <div class="col-lg-12" data-aos="fade-up">
-          <p>Greetings! I'm an aspiring <strong>Computer Science and Engineering</strong> student at Parul University, with a keen interest in <strong>technology and web development</strong>. Proficient in <span style="color: #007bff;"><strong>HTML, CSS, JavaScript</strong></span>, and familiar with <span style="color: #28a745;"><strong>React and MongoDB</strong></span>, I'm committed to crafting innovative solutions and embracing new challenges in the digital realm.</p>
+          // Disable zoom feature
+          modelViewer.addEventListener('wheel', (event) => {
+            event.preventDefault(); // Prevent default zoom behavior
+          });
 
-          <p>My academic and project work spans from <strong>augmented reality lens creation</strong> to <strong>ethical hacking</strong>, underpinned by a passion for continuous learning and cybersecurity.</p>
+          // Prevent pinch-to-zoom on touch devices
+          modelViewer.addEventListener('gesturechange', (event) => {
+            event.preventDefault(); // Prevent default pinch-to-zoom behavior
+          });
 
-          <p>Outside of tech, my world orbits around sports, where I draw inspiration and resilience from <strong>cricket, football, tennis, F1 racing,</strong> and <strong>kabaddi</strong>.</p>
+          // Enhance lighting and shadows after the model is loaded
+          modelViewer.addEventListener('load', () => {
+            const scene = modelViewer.scene;
 
-          <p>Welcome to my portfolio. Dive in to explore how I blend <strong>creativity with technical prowess</strong> to drive meaningful digital innovation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+            // Add realistic lighting and shadows
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(1, 1, 1).normalize();
+            scene.add(directionalLight);
 
-  <section id="skills" class="section">
-    <div class="container" data-aos="fade-up">
-      <h2 class="text-center mb-4">Skills</h2>
-      <div class="skills-container">
-        <div class="skill-card">
-          <div class="card-body">
-            <i class="fas fa-code skill-icon"></i>
-            <h4 class="card-title">Languages & Frameworks</h4>
-            <p class="card-text">Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="card-body">
-            <i class="fas fa-tools skill-icon"></i>
-            <h4 class="card-title">Tools & Technologies</h4>
-            <p class="card-text">Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="card-body">
-            <i class="fas fa-lightbulb skill-icon"></i>
-            <h4 class="card-title">Interests</h4>
-            <p class="card-text">Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).</p>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="card-body">
-            <i class="fas fa-user-friends skill-icon"></i>
-            <h4 class="card-title">Soft Skills</h4>
-            <p class="card-text">Time Management, Teamwork, Work Ethic.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="portfolio" class="section">
-    <div class="container" data-aos="fade-up">
-      <h2 class="section-title">Projects</h2>
-  
-      <div class="projects-container">
-        <!-- First project -->
-        <div class="project" data-aos="fade-up">
-          <img src="https://i.ibb.co/bNxhc1T/React-App.png" alt="BMI Calculator" class="project-image">
-          <div class="project-info">
-            <h3 class="project-title">BMI Calculator</h3>
-            <div class="tech-tags">
-              <span class="tech-tag">React.js</span>
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">Express.js</span>
-              <span class="tech-tag">MongoDB</span>
-            </div>
-            <p class="project-description">A web application for analyzing Body Mass Index (BMI) based on weight and height inputs. The application estimates body fat and provides BMI values along with interpretations, enhancing health awareness.</p>
-            <a href="https://github.com/mRcOol7/body-mass-index-cal" target="_blank" rel="noopener noreferrer" class="github-button">
-              <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
-              View on GitHub
-            </a>
-          </div>
-        </div>
-  
-        <!-- Second project -->
-        <div class="project" data-aos="fade-up">
-          <img src="https://i.ibb.co/fNK9jJ5/React-App-1.png" alt="DNA Sequence" class="project-image">
-          <div class="project-info">
-            <h3 class="project-title">DNA Sequence</h3>
-            <div class="tech-tags">
-              <span class="tech-tag">MongoDB</span>
-              <span class="tech-tag">Express.js</span>
-              <span class="tech-tag">React.js</span>
-              <span class="tech-tag">Node.js</span>
-            </div>
-            <p class="project-description">A web application for managing and analyzing DNA sequences. The application allows users to store, retrieve, and analyze DNA data, enhancing research in the field of bioinformatics.</p>
-            <a href="https://github.com/MERN-bio-tool/DNA-sequence.git" target="_blank" rel="noopener noreferrer" class="github-button">
-              <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
-              View on GitHub
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+            const ambientLight = new THREE.AmbientLight(0x404040, 1); // Soft white light
+            scene.add(ambientLight);
 
-  <section id="contact" class="section">
-    <div class="container" data-aos="fade-up">
-      <h2>Contact</h2>
-      <div class="contact-flex-container">
-        <div class="contact-info" data-aos="fade-up">
-          <h3>Get in Touch</h3>
-          <p><img src="https://i.ibb.co/34DhNXw/gmail-732200.png" alt="Email Icon"> <a href="mailto:cnehal194@gmail.com">cnehal194@gmail.com</a></p>
-        </div>
-        <div class="contact-form" data-aos="fade-up">
-          <h3>Contact Form</h3>
-          <form id="contactForm" onsubmit="return sendMail();" method="POST">
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Your Email</label>
-              <input type="email" id="email" name="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Your Message</label>
-              <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-            </div>
-            <div class="form-group">
-              <button type="submit" id="submitBtn">Send Message</button>
-            </div>
-          </form>
-          <div class="message-container">
-            <div id="successMessage" style="display: none;">Message sent successfully!</div>
-            <div id="errorMessage" style="display: none;">Failed to send message. Please try again later.</div>
-          </div>
-        </div>
-        
-  </section>
-
-  <section>
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-logo">
-            <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image">
-            <span>Nehal Chauhan</span>
-          </div>
-          <div class="footer-info">
-            <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
-            <ul class="social-icons">
-              <li><a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></li>
-              <li><a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a></li>
-              <li><a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a></li>
-              <li><a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
-              <li><a href="https://medium.com/@cnehal194" target="_blank" rel="noopener noreferrer"><i class="bi bi-medium"></i></a></li>
-
-          </ul>
-          
-          </div>
-        </div>
-      </div>
-    </footer>
-  </section>
-  <button onclick="scrollToTop()" id="scrollToTopBtn" aria-label="Scroll to top">
-  </button>
-  <script type="module" src="js/main.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js" integrity="" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.111.0/index.min.js" integrity="" crossorigin="anonymous"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize AOS
-      AOS.init();
-    });
-
-    // Scroll to Top function
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-
-    // Show or hide the button based on scroll position
-    window.addEventListener('scroll', function() {
-      var scrollButton = document.getElementById('scrollToTopBtn');
-      if (window.scrollY > 100) {
-        scrollButton.style.display = 'block';
-      } else {
-        scrollButton.style.display = 'none';
-      }
-    });
-  </script>
-  <script type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-<script type="text/javascript">
-  // Initialize EmailJS with your EmailJS user ID
-  (function() {
-    emailjs.init("mrX-ryn2XWPJBJAbD");
-  })();
-
-  // Function to send email using EmailJS and handle form submission
-  function sendMail() {
-    var formData = new FormData(document.getElementById("contactForm"));
-    var params = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message")
-    };
-
-    // Validate form fields
-    if (!params.name || !params.email || !params.message) {
-      alert("Please fill in all required fields.");
-      return false;
-    }
-
-    // Get current date and time
-    var timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-    formData.append('timestamp', timestamp); // Append timestamp to form data
-
-    // Optional: Get user's local time zone offset
-    var timezoneOffset = new Date().getTimezoneOffset();
-    formData.append('timezoneOffset', timezoneOffset); // Append timezone offset to form data
-
-    // Send email using EmailJS
-    emailjs.send("service_8yxflol", "template_4rx8387", params)
-      .then(function(response) {
-        console.log("Email sent:", response);
-        document.getElementById("successMessage").style.display = "block";
-        document.getElementById("errorMessage").style.display = "none";
-      })
-      .catch(function(error) {
-        console.error("Error sending email:", error);
-        document.getElementById("errorMessage").style.display = "block";
-        document.getElementById("successMessage").style.display = "none";
-        alert("Failed to send message via email. Please try again later.");
-      });
-
-    // Submit form data to Google Sheets via fetch
-    fetch("https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec", {
-      method: 'POST',
-      body: formData
-    })
-    .then(function(response) {
-      if (response.ok) {
-        console.log("Form data sent to Google Sheets.");
-        document.getElementById("contactForm").reset(); // Reset the form after successful submission
-      } else {
-        console.error("Failed to send form data to Google Sheets.");
-        document.getElementById("successMessage").style.display = "none";
-        document.getElementById("errorMessage").style.display = "block";
-      }
-    })
-    .catch(function(error) {
-      console.error("Error sending form data to Google Sheets:", error);
-      document.getElementById("successMessage").style.display = "none";
-      document.getElementById("errorMessage").style.display = "block";
-    });
-
-    return false; // Prevent the form from submitting via HTML
-  }
-</script>
-<script type="text/javascript">
-  // Function to increment visit count and store in Google Sheets
-  function incrementVisitCount() {
-    fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/get_visit_count', { method: 'GET' })
-      .then(response => response.json())
-      .then(data => {
-        var visitCount = data.visitCount || 0; // Default to 0 if visitCount is undefined
-        visitCount++; // Increment visit count
-
-        // Update visit count in Google Sheets via fetch
-        fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/increment_visit_count', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ visitCount: visitCount })
-        })
-        .then(response => {
-          if (response.ok) {
-            console.log("Visit count updated in Google Sheets:", visitCount);
-          } else {
-            console.error("Failed to update visit count in Google Sheets.");
-          }
-        })
-        .catch(error => {
-          console.error("Error updating visit count in Google Sheets:", error);
+            // Add a spotlight for additional realism
+            const spotlight = new THREE.SpotLight(0xffffff, 1);
+            spotlight.position.set(10, 10, 10);
+            spotlight.angle = Math.PI / 6;
+            spotlight.penumbra = 0.2;
+            spotlight.decay = 2;
+            spotlight.distance = 200;
+            scene.add(spotlight);
+          });
         });
-      })
-      .catch(error => {
-        console.error("Error fetching current visit count:", error);
+      </script>
+
+
+    </div>
+    </div>
+
+    <section id="about" class="section">
+      <div class="container" data-aos="fade-up">
+        <h2>About Me</h2>
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-up">
+            <p>Greetings! I'm an aspiring <strong>Computer Science and Engineering</strong> student at Parul University,
+              with a keen interest in <strong>technology and web development</strong>. Proficient in <span
+                style="color: #007bff;"><strong>HTML, CSS, JavaScript</strong></span>, and familiar with <span
+                style="color: #28a745;"><strong>React and MongoDB</strong></span>, I'm committed to crafting innovative
+              solutions and embracing new challenges in the digital realm.</p>
+
+            <p>My academic and project work spans from <strong>augmented reality lens creation</strong> to
+              <strong>ethical hacking</strong>, underpinned by a passion for continuous learning and cybersecurity.
+            </p>
+
+            <p>Outside of tech, my world orbits around sports, where I draw inspiration and resilience from
+              <strong>cricket, football, tennis, F1 racing,</strong> and <strong>kabaddi</strong>.
+            </p>
+
+            <p>Welcome to my portfolio. Dive in to explore how I blend <strong>creativity with technical
+                prowess</strong> to drive meaningful digital innovation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center mb-4">Skills</h2>
+        <div class="skills-container">
+          <div class="skill-card">
+            <div class="card-body">
+              <i class="fas fa-code skill-icon"></i>
+              <h4 class="card-title">Languages & Frameworks</h4>
+              <p class="card-text">Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="card-body">
+              <i class="fas fa-tools skill-icon"></i>
+              <h4 class="card-title">Tools & Technologies</h4>
+              <p class="card-text">Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="card-body">
+              <i class="fas fa-lightbulb skill-icon"></i>
+              <h4 class="card-title">Interests</h4>
+              <p class="card-text">Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).
+              </p>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="card-body">
+              <i class="fas fa-user-friends skill-icon"></i>
+              <h4 class="card-title">Soft Skills</h4>
+              <p class="card-text">Time Management, Teamwork, Work Ethic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="portfolio" class="section">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title">Projects</h2>
+
+        <div class="projects-container">
+          <!-- First project -->
+          <div class="project" data-aos="fade-up">
+            <img src="https://i.ibb.co/bNxhc1T/React-App.png" alt="BMI Calculator" class="project-image">
+            <div class="project-info">
+              <h3 class="project-title">BMI Calculator</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">React.js</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Express.js</span>
+                <span class="tech-tag">MongoDB</span>
+              </div>
+              <p class="project-description">A web application for analyzing Body Mass Index (BMI) based on weight and
+                height inputs. The application estimates body fat and provides BMI values along with interpretations,
+                enhancing health awareness.</p>
+              <a href="https://github.com/mRcOol7/body-mass-index-cal" target="_blank" rel="noopener noreferrer"
+                class="github-button">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
+                View on GitHub
+              </a>
+            </div>
+          </div>
+
+          <!-- Second project -->
+          <div class="project" data-aos="fade-up">
+            <img src="https://i.ibb.co/fNK9jJ5/React-App-1.png" alt="DNA Sequence" class="project-image">
+            <div class="project-info">
+              <h3 class="project-title">DNA Sequence</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Express.js</span>
+                <span class="tech-tag">React.js</span>
+                <span class="tech-tag">Node.js</span>
+              </div>
+              <p class="project-description">A web application for managing and analyzing DNA sequences. The application
+                allows users to store, retrieve, and analyze DNA data, enhancing research in the field of
+                bioinformatics.</p>
+              <a href="https://github.com/MERN-bio-tool/DNA-sequence.git" target="_blank" rel="noopener noreferrer"
+                class="github-button">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="snapchat-lenses" class="section">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title">Snapchat Lenses</h2>
+        <p class="section-description">Explore my viral Snapchat lenses that have garnered over 50+ million views globally!
+        </p>
+    
+        <div class="lenses-container">
+          <!-- Lens 1 -->
+          <div class="lens-card" data-aos="fade-up">
+            <div class="lens-media">
+              <img src="https://i.ibb.co/wr8Wmvdv/snapcode.png" alt="Snapchat Lens Preview" class="lens-image">
+            </div>
+            <div class="lens-info">
+              <h3>Selfie With Girl</h3>
+              <p>Selfie with a girl lens.</p>
+              <div class="lens-stats">
+                <span><i class="fas fa-eye"></i> 12M+ Views</span>
+              </div>
+              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=2b1eec8ae81b4c8584a10222b0b4199c&metadata=01"
+                target="_blank" class="lens-link">
+                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
+                Try Lens
+              </a>
+            </div>
+          </div>
+    
+          <!-- Lens 2 -->
+          <div class="lens-card" data-aos="fade-up">
+            <div class="lens-media">
+              <img src="https://i.ibb.co/HTnK3N0c/snapcode.png" alt="Snapchat Lens Preview" class="lens-image">
+            </div>
+            <div class="lens-info">
+              <h3>Gallery</h3>
+              <p>Gallery lens.</p>
+              <div class="lens-stats">
+                <span><i class="fas fa-eye"></i> 34M+ Views</span>
+              </div>
+              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=4eaf9b13c5a0420b841047677c4a32a5&metadata=01"
+                target="_blank" class="lens-link">
+                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
+                Try Lens
+              </a>
+            </div>
+          </div>
+    
+          <!-- Lens 3 -->
+          <div class="lens-card" data-aos="fade-up">
+            <div class="lens-media">
+              <div class="video-container">
+                <video class="lens-video" autoplay loop muted playsinline>
+                  <source src="360.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+            <div class="lens-info">
+              <h3>Stadium 360 lens</h3>
+              <p>Stadium 360 View lens.</p>
+              <div class="lens-stats">
+                <span><i class="fas fa-eye"></i> 670K+ Views</span>
+              </div>
+              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=474d6861833a46e7a85d054c8d1038ea&metadata=01"
+                target="_blank" class="lens-link">
+                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
+                Try Lens
+              </a>
+            </div>
+          </div>
+
+                    <!-- Lens 3 -->
+                    <div class="lens-card" data-aos="fade-up">
+                      <div class="lens-media">
+                        <div class="video-container">
+                          <video class="lens-video" autoplay loop muted playsinline>
+                            <source src="twerking.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
+                      <div class="lens-info">
+                        <h3>Twerking Meg lens</h3>
+                        <p>Twerking Meg lens.</p>
+                        <div class="lens-stats">
+                          <span><i class="fas fa-eye"></i> 215K+ Views</span>
+                        </div>
+                        <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=54ae86ee38cb430c9ce93ad5ed80e59e&metadata=01"
+                          target="_blank" class="lens-link">
+                          <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
+                          Try Lens
+                        </a>
+                      </div>
+                    </div>
+    
+          <!-- Lens 4 -->
+          <div class="lens-card" data-aos="fade-up">
+            <div class="lens-media">
+              <img src="https://i.ibb.co/dJjJQ0cH/starbucks.png" alt="Snapchat Lens Preview" class="lens-image">
+            </div>
+            <div class="lens-info">
+              <h3>Starbucks Girl</h3>
+              <p>Starbucks girl lens.</p>
+              <div class="lens-stats">
+                <span><i class="fas fa-eye"></i> 2.40M+ Views</span>
+              </div>
+              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=13ca7497ad17479dbdce15bd93322f1a&metadata=01"
+                target="_blank" class="lens-link">
+                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
+                Try Lens
+              </a>
+            </div>
+          </div>
+    
+    
+          <!-- Lens 5 -->
+          <div class="lens-card" data-aos="fade-up">
+            <div class="lens-media">
+              <img src="https://i.ibb.co/83DwM3w/cool.png" alt="Snapchat Lens Preview" class="lens-image">
+            </div>
+            <div class="lens-info">
+              <h3>COOL</h3>
+              <p>COOL lens.</p>
+              <div class="lens-stats">
+                <span><i class="fas fa-eye"></i> 735K+ Views</span>
+              </div>
+              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=859d90e08df448bc9a08bcbb4c896b6d&metadata=01"
+                target="_blank" class="lens-link">
+                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
+                Try Lens
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container" data-aos="fade-up">
+        <h2>Contact</h2>
+        <div class="contact-flex-container">
+          <div class="contact-info" data-aos="fade-up">
+            <h3>Get in Touch</h3>
+            <p><img src="https://i.ibb.co/34DhNXw/gmail-732200.png" alt="Email Icon"> <a
+                href="mailto:cnehal194@gmail.com">cnehal194@gmail.com</a></p>
+          </div>
+          <div class="contact-form" data-aos="fade-up">
+            <h3>Contact Form</h3>
+            <form id="contactForm" onsubmit="return sendMail();" method="POST">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+              </div>
+              <div class="form-group">
+                <button type="submit" id="submitBtn">Send Message</button>
+              </div>
+            </form>
+            <div class="message-container">
+              <div id="successMessage" style="display: none;">Message sent successfully!</div>
+              <div id="errorMessage" style="display: none;">Failed to send message. Please try again later.</div>
+            </div>
+          </div>
+
+    </section>
+
+    <section>
+      <footer>
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-logo">
+              <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Profile Image">
+              <span>Nehal Chauhan</span>
+            </div>
+            <div class="footer-info">
+              <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
+              <ul class="social-icons">
+                <li><a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer"><i
+                      class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://github.com/mRcOol7" target="_blank" rel="noopener noreferrer"><i
+                      class="fab fa-github"></i></a></li>
+                <li><a href="https://twitter.com/nehal_chauhan19" target="_blank" rel="noopener noreferrer"><i
+                      class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/nehal_chauhan19/" target="_blank" rel="noopener noreferrer"><i
+                      class="fab fa-instagram"></i></a></li>
+                <li><a href="https://medium.com/@cnehal194" target="_blank" rel="noopener noreferrer"><i
+                      class="bi bi-medium"></i></a></li>
+
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </footer>
+    </section>
+    <button onclick="scrollToTop()" id="scrollToTopBtn" aria-label="Scroll to top">
+    </button>
+    <script type="module" src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity=""
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity=""
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity=""
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js" integrity=""
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three-gltf-loader@1.111.0/index.min.js" integrity=""
+      crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Initialize AOS
+        AOS.init();
       });
-  }
 
-  // Call incrementVisitCount on page load
-  window.onload = function() {
-    incrementVisitCount();
-  }
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('nav ul');
-    const navItems = document.querySelectorAll('nav ul li a');
+      // Scroll to Top function
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+      // Show or hide the button based on scroll position
+      window.addEventListener('scroll', function () {
+        var scrollButton = document.getElementById('scrollToTopBtn');
+        if (window.scrollY > 100) {
+          scrollButton.style.display = 'block';
+        } else {
+          scrollButton.style.display = 'none';
+        }
       });
-    });
-  });
-</script>
-<script src="dist/bundle.js"></script>
-  <script>
-    const camera = new THREE.PerspectiveCamera(75, globalThis.innerWidth / globalThis.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(globalThis.innerWidth, globalThis.innerHeight);
+    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+      // Initialize EmailJS with your EmailJS user ID
+      (function () {
+        emailjs.init("mrX-ryn2XWPJBJAbD");
+      })();
 
-    const rigidBodies = [];
-    const tmpTrans = new Ammo.btTransform();
+      // Function to send email using EmailJS and handle form submission
+      function sendMail() {
+        var formData = new FormData(document.getElementById("contactForm"));
+        var params = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          message: formData.get("message")
+        };
 
-    const Ammo = AmmoLib; // Assign to a new variable
+        // Validate form fields
+        if (!params.name || !params.email || !params.message) {
+          alert("Please fill in all required fields.");
+          return false;
+        }
 
-    globalThis.addEventListener('resize', () => {
+        // Get current date and time
+        var timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+        formData.append('timestamp', timestamp); // Append timestamp to form data
+
+        // Optional: Get user's local time zone offset
+        var timezoneOffset = new Date().getTimezoneOffset();
+        formData.append('timezoneOffset', timezoneOffset); // Append timezone offset to form data
+
+        // Send email using EmailJS
+        emailjs.send("service_8yxflol", "template_4rx8387", params)
+          .then(function (response) {
+            console.log("Email sent:", response);
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("errorMessage").style.display = "none";
+          })
+          .catch(function (error) {
+            console.error("Error sending email:", error);
+            document.getElementById("errorMessage").style.display = "block";
+            document.getElementById("successMessage").style.display = "none";
+            alert("Failed to send message via email. Please try again later.");
+          });
+
+        // Submit form data to Google Sheets via fetch
+        fetch("https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec", {
+          method: 'POST',
+          body: formData
+        })
+          .then(function (response) {
+            if (response.ok) {
+              console.log("Form data sent to Google Sheets.");
+              document.getElementById("contactForm").reset(); // Reset the form after successful submission
+            } else {
+              console.error("Failed to send form data to Google Sheets.");
+              document.getElementById("successMessage").style.display = "none";
+              document.getElementById("errorMessage").style.display = "block";
+            }
+          })
+          .catch(function (error) {
+            console.error("Error sending form data to Google Sheets:", error);
+            document.getElementById("successMessage").style.display = "none";
+            document.getElementById("errorMessage").style.display = "block";
+          });
+
+        return false; // Prevent the form from submitting via HTML
+      }
+    </script>
+    <script type="text/javascript">
+      // Function to increment visit count and store in Google Sheets
+      function incrementVisitCount() {
+        fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/get_visit_count', { method: 'GET' })
+          .then(response => response.json())
+          .then(data => {
+            var visitCount = data.visitCount || 0; // Default to 0 if visitCount is undefined
+            visitCount++; // Increment visit count
+
+            // Update visit count in Google Sheets via fetch
+            fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/increment_visit_count', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ visitCount: visitCount })
+            })
+              .then(response => {
+                if (response.ok) {
+                  console.log("Visit count updated in Google Sheets:", visitCount);
+                } else {
+                  console.error("Failed to update visit count in Google Sheets.");
+                }
+              })
+              .catch(error => {
+                console.error("Error updating visit count in Google Sheets:", error);
+              });
+          })
+          .catch(error => {
+            console.error("Error fetching current visit count:", error);
+          });
+      }
+
+      // Call incrementVisitCount on page load
+      window.onload = function () {
+        incrementVisitCount();
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('nav ul');
+        const navItems = document.querySelectorAll('nav ul li a');
+
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+          item.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      });
+    </script>
+    <script>
+      const camera = new THREE.PerspectiveCamera(75, globalThis.innerWidth / globalThis.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(globalThis.innerWidth, globalThis.innerHeight);
+
+      const rigidBodies = [];
+      const tmpTrans = new Ammo.btTransform();
+
+      const Ammo = AmmoLib; // Assign to a new variable
+
+      globalThis.addEventListener('resize', () => {
         renderer.setSize(globalThis.innerWidth, globalThis.innerHeight);
         camera.aspect = globalThis.innerWidth / globalThis.innerHeight;
         camera.updateProjectionMatrix();
-    });
-  </script>
-  
-  <!-- Chatbot Container -->
-  <div id="chatbot-container">
-    <div id="chatbot-header">
-      <span>Chat with Nehal</span>
-      <button id="chatbot-close-btn"><i class="fas fa-times"></i></button>
-    </div>
-    <div id="chatbot-messages"></div>
-    <div id="typing-indicator" style="display: none;">
-      <span>Nehal is typing...</span>
-      <div class="typing-dots">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+      });
+    </script>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container">
+      <div id="chatbot-header">
+        <span>Chat with Nehal</span>
+        <button id="chatbot-close-btn"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="chatbot-messages"></div>
+      <div id="typing-indicator" style="display: none;">
+        <span>Nehal is typing...</span>
+        <div class="typing-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." />
+        <button id="chatbot-send-btn">Send</button>
+      </div>
+      <div id="predefined-options" class="predefined-options">
+        <button class="option-btn"><i class="fas fa-hand-wave"></i> Hello</button>
+        <button class="option-btn"><i class="fas fa-briefcase"></i> Portfolio</button>
+        <button class="option-btn"><i class="fas fa-tools"></i> Skills</button>
+        <button class="option-btn"><i class="fas fa-envelope"></i> Contact</button>
+        <button class="option-btn"><i class="fas fa-project-diagram"></i> Projects</button>
+        <button class="option-btn"><i class="fas fa-file-alt"></i> Resume</button>
       </div>
     </div>
-    <div id="chatbot-input-container">
-      <input type="text" id="chatbot-input" placeholder="Type a message..." />
-      <button id="chatbot-send-btn">Send</button>
+    <div class="tooltip-container">
+      <button id="chatbot-toggle-btn" title="Chat with Nehal">
+        <i class="fas fa-comments"></i>
+      </button>
+      <span class="tooltip">Chat with Nehal</span>
     </div>
-    <div id="predefined-options" class="predefined-options">
-      <button class="option-btn"><i class="fas fa-hand-wave"></i> Hello</button>
-      <button class="option-btn"><i class="fas fa-briefcase"></i> Portfolio</button>
-      <button class="option-btn"><i class="fas fa-tools"></i> Skills</button>
-      <button class="option-btn"><i class="fas fa-envelope"></i> Contact</button>
-      <button class="option-btn"><i class="fas fa-project-diagram"></i> Projects</button>
-      <button class="option-btn"><i class="fas fa-file-alt"></i> Resume</button>
-    </div>
-  </div>
-  <div class="tooltip-container">
-    <button id="chatbot-toggle-btn" title="Chat with Nehal">
-      <i class="fas fa-comments"></i>
-    </button>
-    <span class="tooltip">Chat with Nehal</span>
-  </div>
 
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const chatbotContainer = document.getElementById('chatbot-container');
-      const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
-      const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-      const chatbotInput = document.getElementById('chatbot-input');
-      const chatbotSendBtn = document.getElementById('chatbot-send-btn');
-      const chatbotMessages = document.getElementById('chatbot-messages');
-      const predefinedOptions = document.getElementById('predefined-options');
-      const typingIndicator = document.getElementById('typing-indicator');
 
-      // Toggle chatbot visibility with animation
-      chatbotToggleBtn.addEventListener('click', () => {
-        chatbotContainer.style.transition = 'opacity 0.5s ease';
-        chatbotContainer.style.opacity = chatbotContainer.style.opacity === '1' ? '0' : '1';
-        chatbotContainer.style.display = chatbotContainer.style.opacity === '0' ? 'none' : 'flex';
-      });
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+        const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const predefinedOptions = document.getElementById('predefined-options');
+        const typingIndicator = document.getElementById('typing-indicator');
 
-      // Close chatbot with fade effect
-      chatbotCloseBtn.addEventListener('click', () => {
-        chatbotContainer.style.transition = 'opacity 0.5s ease';
-        chatbotContainer.style.opacity = '0';
-        setTimeout(() => {
-          chatbotContainer.style.display = 'none';
-        }, 500);
-      });
-
-      // Send message with advanced NLP processing
-      chatbotSendBtn.addEventListener('click', () => {
-        sendMessage();
-      });
-
-      chatbotInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          sendMessage();
-        }
-      });
-
-      // Add event listeners to predefined option buttons
-      predefinedOptions.querySelectorAll('.option-btn').forEach(button => {
-        button.addEventListener('click', () => {
-          chatbotInput.value = button.textContent.toLowerCase(); // Set input value to button text
-          sendMessage(); // Send the message
+        // Toggle chatbot visibility with animation
+        chatbotToggleBtn.addEventListener('click', () => {
+          chatbotContainer.style.transition = 'opacity 0.5s ease';
+          chatbotContainer.style.opacity = chatbotContainer.style.opacity === '1' ? '0' : '1';
+          chatbotContainer.style.display = chatbotContainer.style.opacity === '0' ? 'none' : 'flex';
         });
-      });
 
-      const responseMap = {
-        'hello': '👋 Hello! How can I assist you today?',
-        'hi': '😄 Hi there! What information are you seeking?',
-        'portfolio': '🌟 Explore my portfolio projects here: <a href="https://nehalchauhanportfolio.vercel.app/" target="_blank" style="color: #3498db; text-decoration: underline; font-weight: bold;">My Portfolio</a>',
-        'skills': '💻 I specialize in HTML, CSS, JavaScript, React, and MongoDB, with expertise in ethical hacking, augmented reality technologies, and machine learning algorithms.',
-        'contact': '📧 Reach me at <a href="mailto:cnehal194@gmail.com" style="color: #3498db; text-decoration: underline; font-weight: bold;"><i class="fas fa-envelope"></i> cnehal194@gmail.com</a> or connect on <a href="https://linkedin.com/in/nehal-chauhan19" target="_blank" style="color: #0077b5; text-decoration: underline; font-weight: bold;"><i class="fab fa-linkedin"></i> LinkedIn</a> for collaboration on innovative tech projects.',
-        'projects': '🚀 I have developed advanced projects like a BMI Calculator, a DNA Sequence Analyzer, and a real-time data visualization tool. More details are available on my portfolio.',
-        'resume': '📄 Download my resume here: <a href="Nehal Chauhan Resume.pdf" download style="color: #e74c3c; text-decoration: underline; font-weight: bold;"><i class="fas fa-file-download"></i> Nehal Chauhan Resume.pdf</a> to see my full range of skills and experiences.',
-        'technology': '🤖 I am passionate about cutting-edge technology, including AI, blockchain, and IoT, and continuously explore new advancements in these fields.',
-        'sports': '🏆 I enjoy various sports, including cricket, football, tennis, F1 racing, and kabaddi, which keep me energized and focused, enhancing my problem-solving skills.',
-        'education': '🎓 Currently, I am pursuing a degree in Computer Science and Engineering at Parul University, focusing on innovative technologies and their applications in real-world scenarios.',
-        'default': "🤔 I'm sorry, I didn't quite catch that. Could you please rephrase or ask something else? I am equipped to handle a wide range of inquiries."
-      };
-
-      function sendMessage() {
-        const message = chatbotInput.value.trim().toLowerCase();
-        if (message) {
-          addMessage(message, 'user');
-          chatbotInput.value = '';
-          typingIndicator.style.display = 'block'; // Show typing indicator
-
-          // Simulate bot response with a delay
+        // Close chatbot with fade effect
+        chatbotCloseBtn.addEventListener('click', () => {
+          chatbotContainer.style.transition = 'opacity 0.5s ease';
+          chatbotContainer.style.opacity = '0';
           setTimeout(() => {
-            typingIndicator.style.display = 'none'; // Hide typing indicator
-            let response = responseMap['default']; // Default response
-            for (const keyword in responseMap) {
-              if (message.includes(keyword)) {
-                response = responseMap[keyword];
-                break;
+            chatbotContainer.style.display = 'none';
+          }, 500);
+        });
+
+        // Send message with advanced NLP processing
+        chatbotSendBtn.addEventListener('click', () => {
+          sendMessage();
+        });
+
+        chatbotInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            sendMessage();
+          }
+        });
+
+        // Add event listeners to predefined option buttons
+        predefinedOptions.querySelectorAll('.option-btn').forEach(button => {
+          button.addEventListener('click', () => {
+            chatbotInput.value = button.textContent.toLowerCase(); // Set input value to button text
+            sendMessage(); // Send the message
+          });
+        });
+
+        const responseMap = {
+          'hello': '👋 Hello! How can I assist you today?',
+          'hi': '😄 Hi there! What information are you seeking?',
+          'portfolio': '🌟 Explore my portfolio projects here: <a href="https://nehalchauhanportfolio.vercel.app/" target="_blank" style="color: #3498db; text-decoration: underline; font-weight: bold;">My Portfolio</a>',
+          'skills': '💻 I specialize in HTML, CSS, JavaScript, React, and MongoDB, with expertise in ethical hacking, augmented reality technologies, and machine learning algorithms.',
+          'contact': '📧 Reach me at <a href="mailto:cnehal194@gmail.com" style="color: #3498db; text-decoration: underline; font-weight: bold;"><i class="fas fa-envelope"></i> cnehal194@gmail.com</a> or connect on <a href="https://linkedin.com/in/nehal-chauhan19" target="_blank" style="color: #0077b5; text-decoration: underline; font-weight: bold;"><i class="fab fa-linkedin"></i> LinkedIn</a> for collaboration on innovative tech projects.',
+          'projects': '🚀 I have developed advanced projects like a BMI Calculator, a DNA Sequence Analyzer, and a real-time data visualization tool. More details are available on my portfolio.',
+          'resume': '📄 Download my resume here: <a href="Nehal_CV.pdf" download style="color: #e74c3c; text-decoration: underline; font-weight: bold;"><i class="fas fa-file-download"></i> Nehal Chauhan Resume.pdf</a> to see my full range of skills and experiences.',
+          'technology': '🤖 I am passionate about cutting-edge technology, including AI, blockchain, and IoT, and continuously explore new advancements in these fields.',
+          'sports': '🏆 I enjoy various sports, including cricket, football, tennis, F1 racing, and kabaddi, which keep me energized and focused, enhancing my problem-solving skills.',
+          'education': '🎓 Currently, I am pursuing a degree in Computer Science and Engineering at Parul University, focusing on innovative technologies and their applications in real-world scenarios.',
+          'default': "🤔 I'm sorry, I didn't quite catch that. Could you please rephrase or ask something else? I am equipped to handle a wide range of inquiries."
+        };
+
+        function sendMessage() {
+          const message = chatbotInput.value.trim().toLowerCase();
+          if (message) {
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+            typingIndicator.style.display = 'block'; // Show typing indicator
+
+            // Simulate bot response with a delay
+            setTimeout(() => {
+              typingIndicator.style.display = 'none'; // Hide typing indicator
+              let response = responseMap['default']; // Default response
+              for (const keyword in responseMap) {
+                if (message.includes(keyword)) {
+                  response = responseMap[keyword];
+                  break;
+                }
               }
-            }
-            addMessage(response, 'bot');
-          }, 1000); // Simulate typing delay
+              addMessage(response, 'bot');
+            }, 1000); // Simulate typing delay
+          }
         }
-      }
 
-      function addMessage(message, sender) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('chatbot-message');
-        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+        function addMessage(message, sender) {
+          const messageElement = document.createElement('div');
+          messageElement.classList.add('chatbot-message');
+          messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
 
-        // Get current time
-        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          // Get current time
+          const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        // Create message content with timestamp
-        messageElement.innerHTML = `
+          // Create message content with timestamp
+          messageElement.innerHTML = `
           <div class="message-content">${message}</div>
           <div class="message-timestamp">${timestamp}</div>
         `;
 
-        chatbotMessages.appendChild(messageElement);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-      }
-    });
-  </script>
+          chatbotMessages.appendChild(messageElement);
+          chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+      });
+    </script>
     <script>
       // Check if the preloader has been shown
       if (!localStorage.getItem('preloaderShown')) {
@@ -722,6 +947,20 @@
       }
     </script>
 
-  </body>
+    <!-- Hotjar Tracking Code for https://nehalchauhanportfolio.vercel.app/ -->
+    <script>
+      (function (h, o, t, j, a, r) {
+        h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+        h._hjSettings = { hjid: 5226621, hjsv: 6 };
+        a = o.getElementsByTagName('head')[0];
+        r = o.createElement('script'); r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+
+<script src="visitor-counter.js"></script>
+
+</body>
 
 </html>
