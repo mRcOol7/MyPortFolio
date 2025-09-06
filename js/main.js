@@ -29,11 +29,16 @@ let model, mixer;
 // Create physics world
 let physicsWorld;
 let rigidBodies = [];
-let tmpTrans = new Ammo.btTransform();
+let tmpTrans;
 let physicsInitialized = false;
 
+// Ensure Ammo is defined before using it
+let Ammo; // Declare Ammo
+
 Ammo().then(AmmoLib => {
-  Ammo = AmmoLib;
+  Ammo = AmmoLib; // Initialize Ammo
+
+  tmpTrans = new Ammo.btTransform();
 
   function initPhysics() {
     physicsWorld = new Ammo.btDiscreteDynamicsWorld(
