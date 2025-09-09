@@ -1029,63 +1029,60 @@ nav a {
 .btn-download {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  font-size: 1.1rem; /* Slightly larger font size for better readability */
-  font-weight: 600; /* Slightly bolder font weight */
-  color: #ffffff; /* White text color */
-  background-color: #ff5733; /* Attractive orange-red color */
+  font-size: 1.1rem; 
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #ff5733;
   border: none;
-  border-radius: 50px; /* Fully rounded corners for a modern look */
+  border-radius: 50px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-  margin-top: 1rem; /* Space above the button */
-  box-shadow: 0 2px 4px rgba(255, 87, 51, 0.4); /* Adds subtle shadow for depth */
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(255, 87, 51, 0.4);
 }
 
 /* Style for the portfolio button */
 .btn-portfolio {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  font-size: 1.1rem; /* Slightly larger font size for better readability */
-  font-weight: 600; /* Slightly bolder font weight */
-  color: #ffffff; /* White text color */
-  background-color: #ff5733; /* Attractive orange-red color */
+  font-size: 1.1rem; 
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #ff5733;
   border: none;
-  border-radius: 50px; /* Fully rounded corners for a modern look */
+  border-radius: 50px;
   cursor: pointer;
   text-decoration: none;
   margin-left: 1rem;
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-  margin-top: 1rem; /* Space above the button */
-  box-shadow: 0 2px 4px rgba(255, 87, 51, 0.4); /* Adds subtle shadow for depth */
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(255, 87, 51, 0.4);
 }
 
-.btn-portfolio:hover, .btn-portfolio:focus {
-  background-color: #e54923; /* Darker shade on hover/focus */
-  color: #ffffff; /* Keeps text color consistent */
-  transform: translateY(-2px) scale(1.05); /* Slight lift and grow effect on hover */
-  box-shadow: 0 8px 12px rgba(255, 87, 51, 0.6); /* Enhanced shadow on hover for depth */
-}
-
+.btn-portfolio:hover, .btn-portfolio:focus,
 .btn-download:hover, .btn-download:focus {
-  background-color: #e54923; /* Darker shade on hover/focus */
-  color: #ffffff; /* Keeps text color consistent */
-  transform: translateY(-2px) scale(1.05); /* Slight lift and grow effect on hover */
-  box-shadow: 0 8px 12px rgba(255, 87, 51, 0.6); /* Enhanced shadow on hover for depth */
+  background-color: #e54923;
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 12px rgba(255, 87, 51, 0.6);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .button-container {
-    margin-top: 2rem; /* Adjust margin for smaller screens */
+    flex-direction: column; /* Stack buttons vertically */
+    margin-top: 2rem;
   }
 
   .btn-download, .btn-portfolio {
-    padding: 0.5rem 1rem; /* Adjust padding for smaller screens */
-    font-size: 1rem; /* Adjust font size for smaller screens to ensure readability */
-    margin: 0.5rem 0.5rem 0.5rem 0; /* Adjust margins for mobile */
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    margin: 0.5rem 0; /* Top and bottom margin only */
+    margin-left: 0; /* Remove left margin */
   }
 }
+
 
 /* Contact Section Styles */
 #contact {
