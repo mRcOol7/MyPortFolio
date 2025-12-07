@@ -1949,3 +1949,16 @@ nav a {
     border-left: none;
   }
 }
+
+/* Role Styling */
+.timeline-content .role {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #007bff;
+  background: rgba(0, 123, 255, 0.12);
+  padding: 6px 14px;
+  border-left: 4px solid #007bff;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
