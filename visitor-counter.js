@@ -1,17 +1,12 @@
 // Visitor Counter with Firebase Database Storage
 (function() {
-  // Firebase Configuration - Loaded from separate file
-  const firebaseConfig = typeof FIREBASE_CONFIG !== 'undefined' ? FIREBASE_CONFIG : {
-    // Fallback - replace with your config if not using separate file
-    apiKey: "AIzaSyDCmsbN-x2KyGM4lY-FqtDunKTQHjQX7ls",
-    authDomain: "portfolio-25b4d.firebaseapp.com",
-    projectId: "portfolio-25b4d",
-    databaseURL: "https://portfolio-25b4d-default-rtdb.firebaseio.com",
-    storageBucket: "portfolio-25b4d.firebasestorage.app",
-    messagingSenderId: "379528017404",
-    appId: "1:379528017404:web:cad1cccbce4be0613fae79",
-    measurementId: "G-PWN01TJ6MV"
-  };
+  // Firebase Configuration - Must be loaded from firebase-config.js
+  if (typeof FIREBASE_CONFIG === 'undefined') {
+    console.error('❌ Firebase configuration not found. Please include firebase-config.js before this script.');
+    return;
+  }
+  
+  const firebaseConfig = FIREBASE_CONFIG;
 
   // Initialize Firebase (load from CDN if not already loaded)
   if (typeof firebase === 'undefined') {

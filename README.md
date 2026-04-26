@@ -23,7 +23,11 @@ A modern portfolio website with Firebase visitor tracking - HTML/CSS/JavaScript 
 ```
 
 ### 2. Configure Firebase Credentials
-Edit `firebase-config.js` and replace with your Firebase config:
+For security, Firebase credentials are stored separately:
+
+**Option A: Create your own config file**
+1. Copy `firebase-config.example.js` to `firebase-config.js`
+2. Replace with your Firebase config:
 ```javascript
 const FIREBASE_CONFIG = {
   apiKey: "YOUR_API_KEY",
@@ -36,6 +40,11 @@ const FIREBASE_CONFIG = {
   measurementId: "YOUR_MEASUREMENT_ID"
 };
 ```
+
+**Option B: Get credentials from Firebase Console**
+1. Go to Firebase Console → Project Settings → General
+2. Copy the Firebase config object
+3. Create `firebase-config.js` with your credentials
 
 ### 3. Deploy
 Upload your files to your hosting service. The `firebase-config.js` file is excluded from Git for security.
