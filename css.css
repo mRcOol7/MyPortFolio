@@ -11,7 +11,7 @@ ul {
 
 /* Set minimum height for sections */
 .section {
-  min-height: calc(100vh - 200px);
+  min-height: auto;
   /* Adjust as needed */
 }
 
@@ -221,6 +221,31 @@ nav a:hover::before {
   line-height: 1.5;
 }
 
+.headline-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  border: 2px solid #fffc00;
+  backdrop-filter: blur(10px);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fffc00;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 500;
+}
+
 .hero::before {
   content: "";
   position: absolute;
@@ -408,7 +433,6 @@ model-viewer {
 }
 
 .section {
-  padding: 4rem 0;
   clear: both;
   display: block;
 }
@@ -418,6 +442,19 @@ model-viewer {
   color: #333;
   margin-bottom: 2rem;
   text-align: center;
+}
+
+/* Dynamic section spacing */
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 1rem 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .section {
+    padding: 0.5rem 0;
+  }
 }
 
 /* Footer styles */
@@ -531,7 +568,6 @@ footer {
 
 /* Project Section */
 .section {
-  padding: 60px 0;
   scroll-behavior: smooth;
 }
 
@@ -551,8 +587,7 @@ footer {
 }
 
 .project {
-  width: calc(50% - 15px);
-  margin-bottom: 50px;
+  width: 100%;
   background-color: #1f1f1f;
   border-radius: 20px;
   overflow: hidden;
@@ -565,15 +600,79 @@ footer {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
-.project-image {
+/* Browser Mockup Frame */
+.browser-frame {
   width: 100%;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  transition: filter 0.3s ease;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project:hover .project-image {
-  filter: brightness(0.8);
+.browser-chrome {
+  background: linear-gradient(180deg, #2d2d2d 0%, #1e1e1e 100%);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.browser-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.browser-dot.red { background: #ff5f56; }
+.browser-dot.yellow { background: #ffbd2e; }
+.browser-dot.green { background: #27c93f; }
+
+.browser-address-bar {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-left: 16px;
+  font-size: 12px;
+  color: #888;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.browser-address-bar::before {
+  content: "🔒";
+  font-size: 10px;
+}
+
+.browser-content {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.browser-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.project:hover .browser-frame {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
 }
 
 .project-info {
@@ -666,9 +765,32 @@ footer {
   text-decoration: none;
 }
 
-/* Media Queries */
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: calc(50% - 15px);
+  margin-bottom: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.project-link:hover {
+  text-decoration: none;
+}
+
+.project-link:hover .project {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.project-link .project {
+  margin-bottom: 0;
+  width: 100%;
+}
+
 @media screen and (max-width: 1024px) {
-  .project {
+  .project-link {
     width: calc(50% - 10px);
   }
 
@@ -678,7 +800,7 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-  .project {
+  .project-link {
     width: 100%;
   }
 
@@ -777,12 +899,23 @@ p {
 /* Specific About Me Section Styles */
 #about h2 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #3498db;
   /* Blue color for the title */
   position: relative;
   display: inline-block;
   padding-bottom: 0.5rem;
+}
+
+#about p {
+  margin-bottom: 0.3rem;
+}
+
+.interests-line {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 0.3rem;
 }
 
 #about h2::after {
@@ -932,25 +1065,47 @@ nav a {
   font-family: 'Roboto', sans-serif;
 }
 
-.skills-container {
+.skills-grid {
   max-width: 1200px;
-  /* Increased max-width for larger screens */
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 #skills h2 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   color: #36d43e;
-  /* Dark grey color */
   position: relative;
   display: inline-block;
   padding-bottom: 0.5rem;
   font-weight: 700;
   text-transform: uppercase;
+  animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 #skills h2::after {
@@ -958,194 +1113,207 @@ nav a {
   position: absolute;
   width: 100%;
   height: 3px;
-  background-color: #333333;
-  /* Dark grey underline */
+  background: linear-gradient(90deg, #36d43e, #2ecc71);
   bottom: 0;
   left: 0;
+  animation: widthGrow 1s ease-out;
 }
 
-.skill-card {
-  background: linear-gradient(145deg, #e0e0e0, #ffffff);
-  /* Light gradient background */
-  padding: 20px;
-  border-radius: 20px;
-  /* Rounded corners */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.05);
-  /* Subtle shadow effect */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  /* Smooth transitions */
-  margin-bottom: 20px;
-  width: 100%;
-  /* Full width for mobile */
+@keyframes widthGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.skill-category {
+  background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-height: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  /* For positioning animations */
-  overflow: hidden;
-  /* Ensure content doesn't overflow */
-  animation: fadeInBounce 1s ease-in-out;
-  /* Combined animation */
 }
 
-.skill-card::before {
+.skill-category::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0) 70%);
-  border-radius: 20px;
-  transition: opacity 0.3s ease;
-  opacity: 0.5;
-  /* Highlight effect */
+  background: linear-gradient(90deg, transparent, rgba(54, 212, 62, 0.1), transparent);
+  transition: left 0.6s ease;
 }
 
-.skill-card:hover::before {
-  opacity: 0.3;
-  /* Enhanced highlight effect on hover */
+.skill-category:hover::before {
+  left: 100%;
 }
 
-.skill-card:hover {
-  transform: rotateY(10deg) translateY(-20px) scale(1.1);
-  /* 3D rotation and scaling effect */
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1);
-  /* Stronger shadow effect */
+.skill-category:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(54, 212, 62, 0.2);
+  border-color: rgba(54, 212, 62, 0.3);
 }
 
-.skill-card .card-body {
-  padding: 0;
-  text-align: center;
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
   z-index: 1;
-  /* Ensure text is above the pseudo-element */
 }
 
-.skill-card h4 {
-  color: #333333;
-  /* Dark grey for titles */
-  font-size: 1.125rem;
-  /* Slightly smaller font size */
-  margin-bottom: 10px;
+.category-icon {
+  font-size: 1.5rem;
+  color: #36d43e;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(54, 212, 62, 0.5));
+}
+
+.skill-category:hover .category-icon {
+  transform: rotate(360deg) scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(54, 212, 62, 0.8));
+}
+
+.category-header h4 {
+  color: #fff;
+  font-size: 1.1rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.skill-card p {
-  color: #666666;
-  /* Medium grey for descriptions */
-  font-size: 0.875rem;
-  line-height: 1.4;
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #fff, #36d43e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.skill-icon {
-  font-size: 50px;
-  /* Larger icons for prominence */
-  margin-bottom: 10px;
-  color: #333333;
-  /* Dark grey color for icons */
-  transition: color 0.3s ease, transform 0.3s ease;
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
 }
 
-.skill-card:hover .skill-icon {
-  color: #555555;
-  /* Change icon color on hover */
-  transform: rotate(360deg);
-  /* Rotating icon effect */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(54, 212, 62, 0.08);
+  border: 1px solid rgba(54, 212, 62, 0.25);
+  border-radius: 25px;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  animation: chipFadeIn 0.5s ease-out backwards;
 }
 
-/* Combined Animation */
-@keyframes fadeInBounce {
-  0% {
+.skill-chip:nth-child(1) { animation-delay: 0.1s; }
+.skill-chip:nth-child(2) { animation-delay: 0.15s; }
+.skill-chip:nth-child(3) { animation-delay: 0.2s; }
+.skill-chip:nth-child(4) { animation-delay: 0.25s; }
+.skill-chip:nth-child(5) { animation-delay: 0.3s; }
+.skill-chip:nth-child(6) { animation-delay: 0.35s; }
+.skill-chip:nth-child(7) { animation-delay: 0.4s; }
+.skill-chip:nth-child(8) { animation-delay: 0.45s; }
+.skill-chip:nth-child(9) { animation-delay: 0.5s; }
+
+@keyframes chipFadeIn {
+  from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: scale(0.8);
   }
-
-  50% {
+  to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
+}
 
-  70% {
-    transform: translateY(-10px);
-  }
+.skill-chip i {
+  font-size: 0.9rem;
+  color: #36d43e;
+  transition: all 0.3s ease;
+}
 
-  100% {
-    transform: translateY(0);
-  }
+.skill-chip:hover {
+  background: rgba(54, 212, 62, 0.2);
+  border-color: rgba(54, 212, 62, 0.6);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 20px rgba(54, 212, 62, 0.3);
+}
+
+.skill-chip:hover i {
+  color: #2ecc71;
+  transform: scale(1.2);
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-  .skills-container {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
-}
-
-@media (max-width: 1024px) {
-  .skills-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
-
 @media (max-width: 768px) {
-  .skill-card {
-    width: 100%;
-    /* Full width for mobile screens */
-    padding: 15px;
-    border-radius: 18px;
-    /* Slightly less rounded but still prominent */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
-    /* Adjusted shadow for mobile */
-  }
-
-  .skill-icon {
-    font-size: 40px;
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   #skills h2 {
     font-size: 2rem;
-    padding-bottom: 0.25rem;
   }
 
-  .skill-card h4 {
+  .skill-category {
+    padding: 1.25rem;
+  }
+
+  .category-header h4 {
     font-size: 1rem;
   }
 
-  .skill-card p {
-    font-size: 0.75rem;
+  .skill-chip {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .skill-card {
-    width: 100%;
-    /* Ensure full width on very small screens */
-    padding: 10px;
-    border-radius: 15px;
-    /* Less rounded but still distinct */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
-    /* Adjusted shadow for very small screens */
-  }
-
-  .skill-icon {
-    font-size: 35px;
-  }
-
   #skills h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
   }
 
-  .skill-card h4 {
-    font-size: 0.875rem;
+  .skill-category {
+    padding: 1rem;
   }
 
-  .skill-card p {
-    font-size: 0.625rem;
+  .category-icon {
+    font-size: 1.25rem;
+  }
+
+  .category-header h4 {
+    font-size: 0.9rem;
+  }
+
+  .skill-chip {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .skill-chips {
+    gap: 0.5rem;
   }
 }
 

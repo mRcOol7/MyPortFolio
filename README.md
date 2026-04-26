@@ -1,43 +1,99 @@
-# My Portfolio
+# Nehal Chauhan Portfolio
 
-Welcome to my personal portfolio! 🚀 Here, I showcase my projects and skills as a web developer and designer.
+A modern portfolio website with Firebase visitor tracking - HTML/CSS/JavaScript only.
 
-## About Me ℹ️
+## Setup Instructions
 
-I'm Nehal Chauhan, a passionate web developer dedicated to creating visually appealing and functional websites. With a solid foundation in HTML, CSS, and JavaScript, I take pride in bringing innovative ideas to life through code.
+### 1. Firebase Setup
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project or use existing one
+3. Enable Realtime Database in **locked mode**
+4. Add security rules:
+```json
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "visits": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
+```
 
-## Technologies Used 💻
+### 2. Configure Firebase Credentials
+For security, Firebase credentials are stored separately:
 
-- **HTML**: Structuring the content of my web projects
-- **CSS**: Designing and styling to ensure a polished and responsive look
-- **JavaScript**: Adding interactive elements and dynamic features
-- **Vercel**: Deploying my portfolio to make it accessible to everyone
+**Option A: Create your own config file**
+1. Copy `firebase-config.example.js` to `firebase-config.js`
+2. Replace with your Firebase config:
+```javascript
+const FIREBASE_CONFIG = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+```
 
+**Option B: Get credentials from Firebase Console**
+1. Go to Firebase Console → Project Settings → General
+2. Copy the Firebase config object
+3. Create `firebase-config.js` with your credentials
 
-## Features ✨
+### 3. Deploy
+Upload your files to your hosting service. The `firebase-config.js` file is excluded from Git for security.
 
-- **Clean and Responsive Design**: Ensures a seamless experience across all devices and screen sizes.
-- **Projects Section**: Showcases a variety of projects that highlight my skills and expertise.
-- **Skills Section**: Displays my proficiency in various web technologies.
-- **Contact Section**: Provides a way for visitors to reach out to me easily.
+## Security Notes
+- ✅ `firebase-config.js` is excluded from Git (see `.gitignore`)
+- ✅ Firebase credentials are in a separate file
+- ✅ Database is in locked mode with minimal access rules
+- ✅ Only the `visits` path is publicly accessible
 
-## 3D Model Integration 🖼️
+## File Structure
+```
+├── index.html              # Main portfolio page
+├── css.css                 # Styles
+├── firebase-config.js      # Firebase credentials (excluded from Git)
+├── visitor-counter.js      # Visitor tracking logic
+├── preloader.html          # Loading screen
+└── .gitignore              # Excludes sensitive files
+```
 
-In this portfolio, I’ve integrated a 3D model of myself to showcase my skills in working with interactive web technologies. This model was created using [Three.js](https://threejs.org/) and the [model-viewer](https://modelviewer.dev/) library to provide an engaging and interactive experience.
+## Features
+- 📊 Real-time visitor tracking
+- 🔥 Firebase database storage
+- 🛡️ Secure configuration with separate config file
+- 📱 Responsive design
+- 💬 AI-powered chatbot
+- 🎯 Project showcase with impact metrics
 
-### 3D Model Details
+## Firebase Database Rules
+The database uses locked mode with these rules:
+```json
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "visits": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
+```
 
-- **Model File**: `models/tmptfwb2a29.gltf`
-- **Features**:
-  - **Auto-Rotate**: The model automatically rotates to provide a 360-degree view.
-  - **Camera Controls**: Users can interact with the model to view it from different angles.
-  - **Interaction Prompts**: Guides users on how to interact with the model.
-  - **Augmented Reality (AR)**: Supports AR modes for an immersive experience on compatible devices, allowing users to place the model in their real-world environment.
+This ensures:
+- All data is private by default
+- Only the visitor counter can be accessed publicly
+- Your other Firebase data remains secure
 
-### Additional Features
-  - **AR and XR Modes**: Utilizes AR modes such as scene-viewer, quick-look, webxr, and plane-detection for an immersive augmented reality experience. The xr attribute ensures support for various XR devices.
-  - **Interactive Controls**: Includes features for zooming and adjusting the camera view both via mouse and touch gestures, providing a smoother interaction experience.
-
-## Visit My Portfolio 🌐
-
-Explore my live portfolio at [https://nehalchauhanportfolio.vercel.app/](https://nehalchauhanportfolio.vercel.app/). 
+## For GitHub Deployment
+1. Don't commit `firebase-config.js` (it's in `.gitignore`)
+2. After cloning the repo, create your own `firebase-config.js`
+3. Deploy to your hosting service
