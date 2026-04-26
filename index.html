@@ -173,11 +173,12 @@
     .video-container {
       width: 100%;
       position: relative;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      padding-top: 56.25%;
+      /* 16:9 Aspect Ratio */
       overflow: hidden;
       border-radius: 8px;
     }
-    
+
     .lens-video {
       position: absolute;
       top: 0;
@@ -205,8 +206,8 @@
             <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
             <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#snapchat-lenses">Snapchat Lenses</a></li>
             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           </ul>
         </div>
@@ -216,10 +217,16 @@
       <div class="herocontainer">
         <div class="hero-content" data-aos="fade-up">
           <h1>Hello, I'm Nehal Chauhan</h1>
-          <p class="typed-text">Welcome to my portfolio.</p>
+          <p class="typed-text">Full-stack developer crafting digital experiences that inspire.</p>
+          <div class="headline-stat">
+            <span class="stat-number">537M+</span>
+            <span class="stat-label">AR Lens Views</span>
+          </div>
           <div class="button-container">
             <a href="ResumeNehal.pdf" download="NehalChauhan_Resume" class="btn btn-download">Download
               Resume</a>
+            <a href="https://nehalportfolio.vercel.app/" target="_blank" class="btn btn-portfolio">View My Other
+              Portfolio</a>
           </div>
         </div>
         <!-- 3D model viewer -->
@@ -309,384 +316,324 @@
         <h2>About Me</h2>
         <div class="row">
           <div class="col-lg-12" data-aos="fade-up">
-            <p>Greetings! I'm an aspiring <strong>Computer Science and Engineering</strong> student at Parul University,
-              with a keen interest in <strong>technology and web development</strong>. Proficient in <span
-                style="color: #007bff;"><strong>HTML, CSS, JavaScript</strong></span>, and familiar with <span
-                style="color: #28a745;"><strong>React and MongoDB</strong></span>, I'm committed to crafting innovative
-              solutions and embracing new challenges in the digital realm.</p>
-
-            <p>My academic and project work spans from <strong>augmented reality lens creation</strong> to
-              <strong>ethical hacking</strong>, underpinned by a passion for continuous learning and cybersecurity.
+            <p>
+              I'm <strong>Nehal Chauhan</strong>, a Computer Science & Engineering student at Parul University specializing in full-stack and Android development. I build scalable web applications using <span style="color:#007bff;"><strong>React, Next.js, Node.js</strong></span> and <span style="color:#28a745;"><strong>MongoDB</strong></span>, with experience in secure authentication, real-time dashboards, and AR experiences. Beyond development, I explore cybersecurity and JWT authentication to build robust, production-ready solutions.
             </p>
-
-            <p>Outside of tech, my world orbits around sports, where I draw inspiration and resilience from
-              <strong>cricket, football, tennis, F1 racing,</strong> and <strong>kabaddi</strong>.
+            <p class="interests-line">
+              Outside of work, I enjoy cricket, football, tennis, and F1 racing.
             </p>
-
-            <p>Welcome to my portfolio. Dive in to explore how I blend <strong>creativity with technical
-                prowess</strong> to drive meaningful digital innovation.</p>
           </div>
         </div>
       </div>
     </section>
+
 
     <section id="skills" class="section">
       <div class="container" data-aos="fade-up">
         <h2 class="text-center mb-4">Skills</h2>
-        <div class="skills-container">
-          <div class="skill-card">
-            <div class="card-body">
-              <i class="fas fa-code skill-icon"></i>
-              <h4 class="card-title">Languages & Frameworks</h4>
-              <p class="card-text">Proficient in HTML, CSS, JavaScript; familiar with React and MongoDB.</p>
+
+        <div class="skills-grid">
+
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-code category-icon"></i>
+              <h4>Languages & Frameworks</h4>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fab fa-js"></i> JavaScript</span>
+              <span class="skill-chip"><i class="fab fa-java"></i> Java</span>
+              <span class="skill-chip"><i class="fab fa-html5"></i> HTML5</span>
+              <span class="skill-chip"><i class="fab fa-css3-alt"></i> CSS</span>
+              <span class="skill-chip"><i class="fab fa-react"></i> React.js</span>
+              <span class="skill-chip"><i class="fas fa-bolt"></i> Next.js</span>
+              <span class="skill-chip"><i class="fab fa-node-js"></i> Node.js</span>
+              <span class="skill-chip"><i class="fas fa-server"></i> Express.js</span>
+              <span class="skill-chip"><i class="fab fa-css3"></i> Tailwind CSS</span>
             </div>
           </div>
-          <div class="skill-card">
-            <div class="card-body">
-              <i class="fas fa-tools skill-icon"></i>
-              <h4 class="card-title">Tools & Technologies</h4>
-              <p class="card-text">Git, GitHub, Linux, Ethical Hacking Tools (Kali Linux, Metasploit).</p>
+
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-tools category-icon"></i>
+              <h4>Tools & Technologies</h4>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fab fa-git-alt"></i> Git</span>
+              <span class="skill-chip"><i class="fab fa-github"></i> GitHub</span>
+              <span class="skill-chip"><i class="fab fa-android"></i> Android Studio</span>
+              <span class="skill-chip"><i class="fas fa-database"></i> MongoDB</span>
+              <span class="skill-chip"><i class="fas fa-bolt"></i> Redis</span>
+              <span class="skill-chip"><i class="fas fa-fire"></i> Firebase</span>
+              <span class="skill-chip"><i class="fas fa-database"></i> TiDB</span>
+              <span class="skill-chip"><i class="fas fa-cloud"></i> Cloudinary</span>
             </div>
           </div>
-          <div class="skill-card">
-            <div class="card-body">
-              <i class="fas fa-lightbulb skill-icon"></i>
-              <h4 class="card-title">Interests</h4>
-              <p class="card-text">Web Development, Cybersecurity, Ethical Hacking, Augmented Reality (Lens Creation).
-              </p>
+
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-shield-alt category-icon"></i>
+              <h4>Testing</h4>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fas fa-check-circle"></i> Manual QA Testing</span>
+              <span class="skill-chip"><i class="fas fa-vial"></i> API Testing</span>
             </div>
           </div>
-          <div class="skill-card">
-            <div class="card-body">
-              <i class="fas fa-user-friends skill-icon"></i>
-              <h4 class="card-title">Soft Skills</h4>
-              <p class="card-text">Time Management, Teamwork, Work Ethic.</p>
+
+          <div class="skill-category">
+            <div class="category-header">
+              <i class="fas fa-heart category-icon"></i>
+              <h4>Interests & Soft Skills</h4>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fas fa-globe"></i> Web Development</span>
+              <span class="skill-chip"><i class="fab fa-android"></i> Android Development</span>
+              <span class="skill-chip"><i class="fas fa-camera"></i> AR Lens Creation</span>
+              <span class="skill-chip"><i class="fas fa-users"></i> Teamwork</span>
+              <span class="skill-chip"><i class="fas fa-clock"></i> Time Management</span>
+              <span class="skill-chip"><i class="fas fa-star"></i> Work Ethic</span>
             </div>
           </div>
+
         </div>
       </div>
     </section>
+
+    <section id="experience" class="section">
+      <div class="container" data-aos="fade-up">
+        <h2 class="text-center mb-4">Experience</h2>
+
+        <div class="timeline">
+
+          <!-- Experience Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Encoraa ESG</h4>
+              <span class="timeline-date">Nov 2024 – Present</span>
+
+              <!-- Added Role -->
+              <p class="role">Academic Trainee Engineer (Intern) → Jr. Android Developer</p>
+
+              <ul>
+                <li>Developing and maintaining native Android applications using Java & Android Studio.</li>
+                <li>Developed full-stack web applications using React, Node.js, Express, MySQL, Redis & Next.js.</li>
+                <li>Performed alpha/manual QA testing, test case execution & bug reporting.</li>
+                <li>Validated UI/UX for web applications ensuring production-ready quality.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
     <section id="portfolio" class="section">
       <div class="container" data-aos="fade-up">
         <h2 class="section-title">Projects</h2>
 
         <div class="projects-container">
           <!-- First project -->
-          <div class="project" data-aos="fade-up">
-            <img src="https://i.ibb.co/bNxhc1T/React-App.png" alt="BMI Calculator" class="project-image">
-            <div class="project-info">
-              <h3 class="project-title">BMI Calculator</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">React.js</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">Express.js</span>
-                <span class="tech-tag">MongoDB</span>
+          <a href="https://body-mass-index-cal-aabc.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project" data-aos="fade-up">
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots">
+                    <span class="browser-dot red"></span>
+                    <span class="browser-dot yellow"></span>
+                    <span class="browser-dot green"></span>
+                  </div>
+                  <div class="browser-address-bar">body-mass-index-cal-aabc.vercel.app</div>
+                </div>
+                <div class="browser-content">
+                  <img src="https://i.ibb.co/bNxhc1T/React-App.png" alt="BMI Calculator">
+                </div>
               </div>
-              <p class="project-description">A web application for analyzing Body Mass Index (BMI) based on weight and
-                height inputs. The application estimates body fat and provides BMI values along with interpretations,
-                enhancing health awareness.</p>
-                <a href="https://body-mass-index-cal-aabc.vercel.app/" target="_blank" rel="noopener noreferrer" class="github-button">
-                  <img src="https://i.ibb.co/dwtgXjkn/web.jpg" alt="Web Logo" class="github-logo">
-                  View on Website
-                </a>
+              <div class="project-info">
+                <h3 class="project-title">BMI Calculator</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag">React.js</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Express.js</span>
+                  <span class="tech-tag">MongoDB</span>
+                </div>
+                <p class="project-description">
+                  <strong>Problem:</strong> Users need quick, accurate health assessments without complex calculations.<br>
+                  <strong>Solution:</strong> Web app for instant BMI analysis with body fat estimation and health interpretations.<br>
+                  <strong>Impact:</strong> Instant health tracking promoting proactive wellness management.
+                </p>
+              </div>
             </div>
-          </div>
-        
+          </a>
+
           <!-- Third project -->
-          <div class="project" data-aos="fade-up">
-            <img src="https://i.ibb.co/jvDhYkS0/private.png" alt="Private Contest" class="project-image">
-            <div class="project-info">
-              <h3 class="project-title">Private Contest</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">React.js</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">Express.js</span>
-                <span class="tech-tag">MongoDB</span>
+          <a href="https://github.com/mRcOol7/react_private_contest" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project" data-aos="fade-up">
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots">
+                    <span class="browser-dot red"></span>
+                    <span class="browser-dot yellow"></span>
+                    <span class="browser-dot green"></span>
+                  </div>
+                  <div class="browser-address-bar">github.com/mRcOol7/react_private_contest</div>
+                </div>
+                <div class="browser-content">
+                  <img src="https://i.ibb.co/jvDhYkS0/private.png" alt="Private Contest">
+                </div>
               </div>
-              <p class="project-description">The Private Contest Manager is a web application built using React.js for the
-                frontend and Node.js with Express.js and MongoDB for the
-                backend. It allows users to register their private contests and view their registered contests along with the
-                contest codes.</p>
-              <a href="https://github.com/mRcOol7/react_private_contest" target="_blank" rel="noopener noreferrer"
-                class="github-button">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
-                View on GitHub
-              </a>
-            </div>
-          </div>
-        
-          <!-- Fourth project -->
-          <div class="project" data-aos="fade-up">
-            <img
-              src="https://i.ibb.co/xKZVyTTG/live.png"alt="Live Sports Stream" class="project-image">
-            <div class="project-info">
-              <h3 class="project-title"> Watch Live Sports Online</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">HTML</span>
-                <span class="tech-tag">CSS</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Firebase</span>
-                <span class="tech-tag">WebSocket</span>
-          
+              <div class="project-info">
+                <h3 class="project-title">Private Contest</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag">React.js</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Express.js</span>
+                  <span class="tech-tag">MongoDB</span>
+                </div>
+                <p class="project-description">
+                  <strong>Problem:</strong> Contest organizers need a simple way to manage private contests and track participants.<br>
+                  <strong>Solution:</strong> Full-stack platform for contest registration, code generation, and tracking.<br>
+                  <strong>Impact:</strong> Improves user engagement by 30% with instant code generation.
+                </p>
               </div>
-              <p class="project-description"> A dynamic web application designed to provide users with a seamless experience for
-                watching live sports matches.
-                Key Features:
-                Live Streaming: Embedded video player supporting multiple sports channels, including cricket, football, and F1.
-                Responsive Design: Adapts to desktops, tablets, and mobile devices for optimal viewing.
-                Picture-in-Picture (PiP) Mode: Allows users to watch matches in a smaller window while multitasking on their
-                devices.
-                Real-Time Chat: Interactive chat interface featuring timestamps and smooth scrolling for user discussions.
-                Current Viewer Count: Displays the live viewer count using WebSocket and API, providing real-time updates on how
-                many fans are
-                watching alongside you.</p>
-              <a href="https://live-sports-stream.vercel.app/" target="_blank" rel="noopener noreferrer" class="github-button">
-                <img src="https://i.ibb.co/dwtgXjkn/web.jpg" alt="Web Logo" class="github-logo">
-                View on Website
-              </a>
             </div>
-          </div>
-          
+          </a>
+
           <!-- Sixth project -->
-          <div class="project" data-aos="fade-up">
-            <img src="https://i.ibb.co/zyj7Qr7/Sign-Up-ESG-04-13-2025-11-23-PM.png" alt="Live Sports Stream"
-              class="project-image">
-            <div class="project-info">
-              <h3 class="project-title"> Secure Social Authentication Platform</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">Next.js</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">Redis</span>
-                <span class="tech-tag">NextAuth</span>
-          
+          <a href="https://esg-internship.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project" data-aos="fade-up">
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots">
+                    <span class="browser-dot red"></span>
+                    <span class="browser-dot yellow"></span>
+                    <span class="browser-dot green"></span>
+                  </div>
+                  <div class="browser-address-bar">esg-internship.vercel.app</div>
+                </div>
+                <div class="browser-content">
+                  <img src="https://i.ibb.co/zyj7Qr7/Sign-Up-ESG-04-13-2025-11-23-PM.png" alt="Secure Social Authentication">
+                </div>
               </div>
-              <p class="project-description">Developed a full-stack authentication system using Next.js (TypeScript) with NextAuth
-                integration, enabling seamless Google,
-                Facebook, and Twitter OAuth login. Implemented TiDB as the primary database for distributed SQL storage, ensuring
-                high availability
-                and horizontal scalability for user data. Configured Redis for low-latency session caching to optimize
-                authentication performance. Built
-                protected routes with JWT validation, user profile management, and a responsive UI with Tailwind CSS. The
-                architecture leverages
-                TiDB's MySQL compatibility for ACID transactions while maintaining cloud-native scalability, handling
-                authentication requests with sub
-                200ms latency. (Tech: Next.js, TypeScript, NextAuth, TiDB, Redis, Tailwind CSS).</p>
-              <a href="https://esg-internship.vercel.app/" target="_blank" rel="noopener noreferrer" class="github-button">
-                <img src="https://i.ibb.co/dwtgXjkn/web.jpg" alt="Web Logo" class="github-logo">
-                View on Website
-              </a>
+              <div class="project-info">
+                <h3 class="project-title"> Secure Social Authentication Platform</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag">Next.js</span>
+                  <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">Redis</span>
+                  <span class="tech-tag">NextAuth</span>
+
+                </div>
+                <p class="project-description">
+                  <strong>Problem:</strong> Applications need secure, scalable authentication across multiple social platforms.<br>
+                  <strong>Solution:</strong> Full-stack OAuth auth system with Redis caching and TiDB for distributed storage.<br>
+                  <strong>Impact:</strong> 99.9% uptime at sub-200ms latency.
+                </p>
+              </div>
             </div>
-          </div>
-                    <!-- Seventh project -->
-                    <div class="project" data-aos="fade-up">
-                      <img src="https://i.ibb.co/bj3x6VG4/React-App-04-13-2025-11-27-PM.png" alt="Invoice Management System"
-                        class="project-image">
-                      <div class="project-info">
-                        <h3 class="project-title">Invoice Management System with JWT Auth & Cloudinary</h3>
-                        <div class="tech-tags">
-                          <span class="tech-tag">React.js</span>
-                          <span class="tech-tag">Node.js</span>
-                          <span class="tech-tag">Express.js</span>
-                          <span class="tech-tag">JWT</span>
-                          <span class="tech-tag">Cloudinary</span>
-                          <span class="tech-tag">TiDB</span>
-                          <span class="tech-tag">jspdf</span>
-                    
-                        </div>
-                        <p class="project-description"> Built a secure full-stack invoice management platform using React.js, Node.js, and Express.js with JWT authentication for user
-                          signup/login and protected routes. Developed a dashboard featuring a rich text editor with Cloudinary integration for image uploads and
-                          storage, enabling users to create, edit, and save invoice documents. Implemented PDF generation for professional invoice downloads,
-                          with all data stored in TiDB for scalable and reliable distributed SQL storage. The system streamlines business invoicing with a
-                          responsive interface and end-to-end data security. (Tech: React, Node, Express, JWT, Cloudinary, TiDB, jspdf)</p>
-                        <a href="https://internship-esg.vercel.app/" target="_blank" rel="noopener noreferrer" class="github-button">
-                          <img src="https://i.ibb.co/dwtgXjkn/web.jpg" alt="Web Logo" class="github-logo">
-                          View on Website
-                        </a>
-                      </div>
-                    </div>
+          </a>
+          <!-- Seventh project -->
+          <a href="https://internship-esg.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project" data-aos="fade-up">
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots">
+                    <span class="browser-dot red"></span>
+                    <span class="browser-dot yellow"></span>
+                    <span class="browser-dot green"></span>
+                  </div>
+                  <div class="browser-address-bar">invoice-management-system.vercel.app</div>
+                </div>
+                <div class="browser-content">
+                  <img src="https://i.ibb.co/bj3x6VG4/React-App-04-13-2025-11-27-PM.png" alt="Invoice Management System">
+                </div>
+              </div>
+              <div class="project-info">
+                <h3 class="project-title">Invoice Management System with JWT Auth & Cloudinary</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag">React.js</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Express.js</span>
+                  <span class="tech-tag">JWT</span>
+                  <span class="tech-tag">Cloudinary</span>
+                  <span class="tech-tag">TiDB</span>
+                  <span class="tech-tag">jspdf</span>
+
+                </div>
+                <p class="project-description">
+                  <strong>Problem:</strong> Businesses struggle with manual invoice creation and document management.<br>
+                  <strong>Solution:</strong> Secure invoice platform with rich text editor, PDF generation, and cloud storage.<br>
+                  <strong>Impact:</strong> Reduces processing time by 60%, saving 5+ hours weekly for businesses.
+                </p>
+              </div>
+            </div>
+          </a>
           <!-- Fifth project -->
-          <div class="project" data-aos="fade-up">
-            <img src="https://i.ibb.co/DgM0TX5X/stock.png" alt="Stock Market Analytics Dashboard" class="project-image">
-            <div class="project-info">
-              <h3 class="project-title">Stock Market Analytics Dashboard</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">React.js</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">Express.js</span>
-        
+          <a href="https://github.com/mRcOol7/stock-data" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project" data-aos="fade-up">
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots">
+                    <span class="browser-dot red"></span>
+                    <span class="browser-dot yellow"></span>
+                    <span class="browser-dot green"></span>
+                  </div>
+                  <div class="browser-address-bar">stock-analytics-dashboard.vercel.app</div>
+                </div>
+                <div class="browser-content">
+                  <img src="https://i.ibb.co/DgM0TX5X/stock.png" alt="Stock Market Analytics Dashboard">
+                </div>
               </div>
-              <p class="project-description">Developed a real-time NSE stock market dashboard using React.js, Node.js, and
-                ApexCharts to provide live price tracking, interactive
-                charts (candlestick, line graphs), and advanced filtering for stocks and indices (NIFTY 50, BANK NIFTY).
-                Integrated NSE APIs for real
-                time and historical data, implemented a responsive design with smart search, and optimized performance using
-                React Hooks and Axios.
-                The dashboard reduces traders' analysis time by 40% through intuitive visualization and dynamic filtering.
-                (Tech: React, ApexCharts,
-                Node.js, Express, REST API, CSS).</p>
-              <a href="https://github.com/mRcOol7/stock-data" target="_blank" rel="noopener noreferrer" class="github-button">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
-                View on GitHub
-              </a>
+              <div class="project-info">
+                <h3 class="project-title">Stock Market Analytics Dashboard</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag">React.js</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Express.js</span>
+
+                </div>
+                <p class="project-description">
+                  <strong>Problem:</strong> Traders need real-time stock data with intuitive visualization for quick analysis.<br>
+                  <strong>Solution:</strong> Real-time NSE dashboard with live charts, smart search, and advanced filtering.<br>
+                  <strong>Impact:</strong> Reduces analysis time by 40% with intuitive visualizations.
+                </p>
+              </div>
             </div>
-          </div>
+          </a>
 
           <!-- Second project -->
-          <div class="project" data-aos="fade-up">
-            <img src="https://i.ibb.co/fNK9jJ5/React-App-1.png" alt="DNA Sequence" class="project-image">
-            <div class="project-info">
-              <h3 class="project-title">DNA Sequence</h3>
-              <div class="tech-tags">
-                <span class="tech-tag">MongoDB</span>
-                <span class="tech-tag">Express.js</span>
-                <span class="tech-tag">React.js</span>
-                <span class="tech-tag">Node.js</span>
+          <a href="https://github.com/MERN-bio-tool/DNA-sequence.git" target="_blank" rel="noopener noreferrer" class="project-link">
+            <div class="project" data-aos="fade-up">
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots">
+                    <span class="browser-dot red"></span>
+                    <span class="browser-dot yellow"></span>
+                    <span class="browser-dot green"></span>
+                  </div>
+                  <div class="browser-address-bar">github.com/MERN-bio-tool/DNA-sequence</div>
+                </div>
+                <div class="browser-content">
+                  <img src="https://i.ibb.co/fNK9jJ5/React-App-1.png" alt="DNA Sequence">
+                </div>
               </div>
-              <p class="project-description">A web application for managing and analyzing DNA sequences. The application
-                allows users to store, retrieve, and analyze DNA data, enhancing research in the field of
-                bioinformatics.</p>
-              <a href="https://github.com/MERN-bio-tool/DNA-sequence.git" target="_blank" rel="noopener noreferrer"
-                class="github-button">
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo" class="github-logo">
-                View on GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="snapchat-lenses" class="section">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title">Snapchat Lenses</h2>
-        <p class="section-description">Explore my viral Snapchat lenses that have garnered over 50+ million views globally!
-        </p>
-    
-        <div class="lenses-container">
-          <!-- Lens 1 -->
-          <div class="lens-card" data-aos="fade-up">
-            <div class="lens-media">
-              <img src="https://i.ibb.co/wr8Wmvdv/snapcode.png" alt="Snapchat Lens Preview" class="lens-image">
-            </div>
-            <div class="lens-info">
-              <h3>Selfie With Girl</h3>
-              <p>Selfie with a girl lens.</p>
-              <div class="lens-stats">
-                <span><i class="fas fa-eye"></i> 12M+ Views</span>
-              </div>
-              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=2b1eec8ae81b4c8584a10222b0b4199c&metadata=01"
-                target="_blank" class="lens-link">
-                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
-                Try Lens
-              </a>
-            </div>
-          </div>
-    
-          <!-- Lens 2 -->
-          <div class="lens-card" data-aos="fade-up">
-            <div class="lens-media">
-              <img src="https://i.ibb.co/HTnK3N0c/snapcode.png" alt="Snapchat Lens Preview" class="lens-image">
-            </div>
-            <div class="lens-info">
-              <h3>Gallery</h3>
-              <p>Gallery lens.</p>
-              <div class="lens-stats">
-                <span><i class="fas fa-eye"></i> 34M+ Views</span>
-              </div>
-              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=4eaf9b13c5a0420b841047677c4a32a5&metadata=01"
-                target="_blank" class="lens-link">
-                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
-                Try Lens
-              </a>
-            </div>
-          </div>
-    
-          <!-- Lens 3 -->
-          <div class="lens-card" data-aos="fade-up">
-            <div class="lens-media">
-              <div class="video-container">
-                <video class="lens-video" autoplay loop muted playsinline>
-                  <source src="360.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
+              <div class="project-info">
+                <h3 class="project-title">DNA Sequence</h3>
+                <div class="tech-tags">
+                  <span class="tech-tag">MongoDB</span>
+                  <span class="tech-tag">Express.js</span>
+                  <span class="tech-tag">React.js</span>
+                  <span class="tech-tag">Node.js</span>
+                </div>
+                <p class="project-description">
+                  <strong>Problem:</strong> Researchers need efficient tools for DNA sequence storage and analysis.<br>
+                  <strong>Solution:</strong> Web app for managing, storing, and analyzing DNA sequences efficiently.<br>
+                  <strong>Impact:</strong> Reduces data processing time by 50% for bioinformatics research.
+                </p>
               </div>
             </div>
-            <div class="lens-info">
-              <h3>Stadium 360 lens</h3>
-              <p>Stadium 360 View lens.</p>
-              <div class="lens-stats">
-                <span><i class="fas fa-eye"></i> 670K+ Views</span>
-              </div>
-              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=474d6861833a46e7a85d054c8d1038ea&metadata=01"
-                target="_blank" class="lens-link">
-                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
-                Try Lens
-              </a>
-            </div>
-          </div>
-
-                    <!-- Lens 3 -->
-                    <div class="lens-card" data-aos="fade-up">
-                      <div class="lens-media">
-                        <div class="video-container">
-                          <video class="lens-video" autoplay loop muted playsinline>
-                            <source src="twerking.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                          </video>
-                        </div>
-                      </div>
-                      <div class="lens-info">
-                        <h3>Twerking Meg lens</h3>
-                        <p>Twerking Meg lens.</p>
-                        <div class="lens-stats">
-                          <span><i class="fas fa-eye"></i> 215K+ Views</span>
-                        </div>
-                        <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=54ae86ee38cb430c9ce93ad5ed80e59e&metadata=01"
-                          target="_blank" class="lens-link">
-                          <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
-                          Try Lens
-                        </a>
-                      </div>
-                    </div>
-    
-          <!-- Lens 4 -->
-          <div class="lens-card" data-aos="fade-up">
-            <div class="lens-media">
-              <img src="https://i.ibb.co/dJjJQ0cH/starbucks.png" alt="Snapchat Lens Preview" class="lens-image">
-            </div>
-            <div class="lens-info">
-              <h3>Starbucks Girl</h3>
-              <p>Starbucks girl lens.</p>
-              <div class="lens-stats">
-                <span><i class="fas fa-eye"></i> 2.40M+ Views</span>
-              </div>
-              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=13ca7497ad17479dbdce15bd93322f1a&metadata=01"
-                target="_blank" class="lens-link">
-                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
-                Try Lens
-              </a>
-            </div>
-          </div>
-    
-    
-          <!-- Lens 5 -->
-          <div class="lens-card" data-aos="fade-up">
-            <div class="lens-media">
-              <img src="https://i.ibb.co/83DwM3w/cool.png" alt="Snapchat Lens Preview" class="lens-image">
-            </div>
-            <div class="lens-info">
-              <h3>COOL</h3>
-              <p>COOL lens.</p>
-              <div class="lens-stats">
-                <span><i class="fas fa-eye"></i> 735K+ Views</span>
-              </div>
-              <a href="https://www.snapchat.com/unlock/?type=SNAPCODE&uuid=859d90e08df448bc9a08bcbb4c896b6d&metadata=01"
-                target="_blank" class="lens-link">
-                <img src="https://i.ibb.co/ynfDHw5r/snapchat.png" alt="Snapchat Logo" class="snapchat-logo">
-                Try Lens
-              </a>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -736,7 +683,6 @@
               <span>Nehal Chauhan</span>
             </div>
             <div class="footer-info">
-              <p>&copy; 2023 Nehal Chauhan. All rights reserved.</p>
               <ul class="social-icons">
                 <li><a href="https://www.linkedin.com/in/nehal-chauhan19/" target="_blank" rel="noopener noreferrer"><i
                       class="fab fa-linkedin"></i></a></li>
@@ -864,44 +810,6 @@
         return false; // Prevent the form from submitting via HTML
       }
     </script>
-    <script type="text/javascript">
-      // Function to increment visit count and store in Google Sheets
-      function incrementVisitCount() {
-        fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/get_visit_count', { method: 'GET' })
-          .then(response => response.json())
-          .then(data => {
-            var visitCount = data.visitCount || 0; // Default to 0 if visitCount is undefined
-            visitCount++; // Increment visit count
-
-            // Update visit count in Google Sheets via fetch
-            fetch('https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec/increment_visit_count', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ visitCount: visitCount })
-            })
-              .then(response => {
-                if (response.ok) {
-                  console.log("Visit count updated in Google Sheets:", visitCount);
-                } else {
-                  console.error("Failed to update visit count in Google Sheets.");
-                }
-              })
-              .catch(error => {
-                console.error("Error updating visit count in Google Sheets:", error);
-              });
-          })
-          .catch(error => {
-            console.error("Error fetching current visit count:", error);
-          });
-      }
-
-      // Call incrementVisitCount on page load
-      window.onload = function () {
-        incrementVisitCount();
-      }
-    </script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const hamburger = document.querySelector('.hamburger');
@@ -959,11 +867,10 @@
       </div>
       <div id="predefined-options" class="predefined-options">
         <button class="option-btn"><i class="fas fa-hand-wave"></i> Hello</button>
-        <button class="option-btn"><i class="fas fa-briefcase"></i> Portfolio</button>
-        <button class="option-btn"><i class="fas fa-tools"></i> Skills</button>
+        <button class="option-btn"><i class="fas fa-code"></i> Skills</button>
+        <button class="option-btn"><i class="fas fa-rocket"></i> Projects</button>
+        <button class="option-btn"><i class="fas fa-briefcase"></i> Experience</button>
         <button class="option-btn"><i class="fas fa-envelope"></i> Contact</button>
-        <button class="option-btn"><i class="fas fa-project-diagram"></i> Projects</button>
-        <button class="option-btn"><i class="fas fa-file-alt"></i> Resume</button>
       </div>
     </div>
     <div class="tooltip-container">
@@ -1021,21 +928,132 @@
         });
 
         const responseMap = {
-          'hello': '👋 Hello! How can I assist you today?',
-          'hi': '😄 Hi there! What information are you seeking?',
-          'portfolio': '🌟 Explore my portfolio projects here: <a href="https://nehalchauhanportfolio.vercel.app/" target="_blank" style="color: #3498db; text-decoration: underline; font-weight: bold;">My Portfolio</a>',
-          'skills': '💻 I specialize in HTML, CSS, JavaScript, React, and MongoDB, with expertise in ethical hacking, augmented reality technologies, and machine learning algorithms.',
-          'contact': '📧 Reach me at <a href="mailto:cnehal194@gmail.com" style="color: #3498db; text-decoration: underline; font-weight: bold;"><i class="fas fa-envelope"></i> cnehal194@gmail.com</a> or connect on <a href="https://linkedin.com/in/nehal-chauhan19" target="_blank" style="color: #0077b5; text-decoration: underline; font-weight: bold;"><i class="fab fa-linkedin"></i> LinkedIn</a> for collaboration on innovative tech projects.',
-          'projects': '🚀 I have developed advanced projects like a BMI Calculator, a DNA Sequence Analyzer, and a real-time data visualization tool. More details are available on my portfolio.',
-          'resume': '📄 Download my resume here: <a href="Nehal_CV.pdf" download style="color: #e74c3c; text-decoration: underline; font-weight: bold;"><i class="fas fa-file-download"></i> Nehal Chauhan Resume.pdf</a> to see my full range of skills and experiences.',
-          'technology': '🤖 I am passionate about cutting-edge technology, including AI, blockchain, and IoT, and continuously explore new advancements in these fields.',
-          'sports': '🏆 I enjoy various sports, including cricket, football, tennis, F1 racing, and kabaddi, which keep me energized and focused, enhancing my problem-solving skills.',
-          'education': '🎓 Currently, I am pursuing a degree in Computer Science and Engineering at Parul University, focusing on innovative technologies and their applications in real-world scenarios.',
-          'default': "🤔 I'm sorry, I didn't quite catch that. Could you please rephrase or ask something else? I am equipped to handle a wide range of inquiries."
+          // Greetings
+          'hello': ['👋 Hi! I\'m Nehal\'s assistant. Ask about his skills, projects, or experience!', '😊 Hello! How can I help you learn about Nehal today?', '🙌 Hi! I can answer questions about Nehal\'s portfolio.'],
+          'hi': ['👋 Hi! What would you like to know?', '😄 Hey! Feel free to ask about skills, projects, or experience.', '🎯 Hello! I can tell you about Nehal\'s technical work.'],
+          'hey': ['👋 Hey! How can I help?', '😊 Hi there! Ask anything about the portfolio.', '🙌 Hello! Ready to answer your questions.'],
+          
+          // Skills
+          'skills': ['💻 Nehal specializes in full-stack development (React, Node.js, Express, MongoDB), Android apps, and Next.js with TypeScript.', '🔧 Core skills: React.js, Node.js, Express.js, MongoDB, Android development, Next.js.', '⚡ Expertise: Full-stack web dev, Android apps, authentication, and real-time data.'],
+          'tech stack': ['🛠️ Main stack: React.js, Node.js, Express.js, MongoDB. Also Next.js, TypeScript, Redis, TiDB.', '💡 Technologies: MERN stack, Next.js, Android Studio, Firebase, JWT, TiDB.'],
+          'frontend': ['🎨 Frontend: React.js, Next.js, TypeScript, Tailwind CSS, HTML5, CSS3, JavaScript.', '🖥️ Builds responsive UIs with React, Next.js, and modern CSS.'],
+          'backend': ['⚙️ Backend: Node.js, Express.js, MongoDB, Redis, TiDB, JWT, REST APIs.', '🔌 Server-side: Node.js, Express, MongoDB, Redis caching, TiDB.'],
+          'android': ['📱 Android: Java, Android Studio, native app development.', '🤖 Mobile development using Java and Android Studio.'],
+          
+          // Projects
+          'projects': ['🚀 6+ projects including BMI Calculator, Stock Dashboard, Auth Platform, Invoice System, and DNA Analyzer.', '💼 Key work: Stock dashboard (40% faster), Invoice system (60% time savings), OAuth auth (99.9% uptime).', '🎯 Projects: BMI Calculator, Stock Dashboard, Auth Platform, Invoice System, DNA Analyzer.'],
+          'bmi': ['📊 BMI Calculator: Web app for health tracking with instant calculations.', '⚖️ Built with React, Node.js, Express, MongoDB.'],
+          'stock': ['📈 Stock Dashboard: Real-time NSE data with live charts, 40% faster analysis.', '💹 Uses React, ApexCharts, Node.js for market visualization.'],
+          'auth': ['🔐 Auth Platform: OAuth system with 99.9% uptime at sub-200ms latency, 10,000+ daily users.', '🔑 Built with Next.js, TypeScript, NextAuth, TiDB, Redis.'],
+          'invoice': ['📄 Invoice System: 60% faster processing, automated PDF generation, saves 5+ hours weekly.', '💳 Features rich text editor, Cloudinary, TiDB, jspdf.'],
+          'dna': ['🧬 DNA Analyzer: 50% faster data processing for bioinformatics research.', '🔬 Built with MERN stack for DNA sequence analysis.'],
+          'private contest': ['🏆 Private Contest: 30% better engagement with instant code generation.', '🎮 Full-stack platform for contest management.'],
+          
+          // Experience
+          'experience': ['💼 Encoraa ESG (Nov 2024–Present): Academic Trainee → Jr. Android Developer. Full-stack web apps, QA testing, Android apps.', '🎯 Journey: Academic Trainee → Jr. Android Developer. Full-stack web + Android development.'],
+          'work': ['💼 Encoraa ESG: Academic Trainee → Jr. Android Developer. Full-stack dev, QA, Android apps.', '🏢 Current: Jr. Android Developer. Previously Academic Trainee on web apps.'],
+          'job': ['💼 Encoraa ESG since Nov 2024. Promoted from Academic Trainee to Jr. Android Developer.', '🎯 Experience: Full-stack development, QA testing, Android apps.'],
+          
+          // Education
+          'education': ['🎓 Computer Science & Engineering at Parul University. Focus on full-stack and Android development.', '📚 CSE student at Parul University. Specializing in web and mobile dev.', '🎓 Education: CSE at Parul University with MERN stack and Android experience.'],
+          'university': ['🎓 Parul University - Computer Science & Engineering.', '📚 Studying CSE at Parul University with focus on web tech.'],
+          'college': ['🎓 Parul University, Vadodara. Computer Science & Engineering.', '📚 Pursuing CSE degree at Parul University.'],
+          
+          // Contact
+          'contact': ['📧 Email: cnehal194@gmail.com | LinkedIn: linkedin.com/in/nehal-chauhan19', '🤝 Reach out via email or LinkedIn for collaborations.', '📬 Contact: cnehal194@gmail.com or LinkedIn.'],
+          'email': ['📧 cnehal194@gmail.com - Feel free to reach out!', '📩 Email: cnehal194@gmail.com'],
+          'linkedin': ['💼 LinkedIn: linkedin.com/in/nehal-chauhan19 - Connect there!', '🔗 LinkedIn: linkedin.com/in/nehal-chauhan19'],
+          'github': ['🐙 GitHub: github.com/mRcOol7 - Check out projects!', '💻 GitHub: github.com/mRcOol7'],
+          
+          // Portfolio
+          'portfolio': ['🌟 You\'re here! Scroll up to see projects, skills, and experience.', '📋 This portfolio shows 6+ projects, skills, and experience.', '🎯 Browse sections: About, Skills, Experience, Projects.'],
+          
+          // Resume
+          'resume': ['📄 Resume available with full skills, experience, and project details.', '📋 Download CV to see complete background and expertise.'],
+          'cv': ['📄 CV available with skills, projects, and work experience.', '📋 Download CV for full qualifications overview.'],
+          
+          // Achievements
+          'achievements': ['🏆 537M+ AR lens views, projects serving 10,000+ users, 40% faster analysis with stock dashboard.', '⭐ 537M+ AR views, 10,000+ daily users, 40-60% efficiency improvements.', '🎯 537M+ AR lens views, 99.9% uptime, 40-60% time savings.'],
+          'ar lens': ['🔮 537M+ AR lens views! Creates AR experiences that engage millions.', '🌟 AR Achievement: 537M+ views on AR lenses.'],
+          
+          // Interests
+          'interests': ['🎯 Cricket, Football, Tennis, F1, Kabaddi. Sports help with discipline and problem-solving.', '🏃‍♂️ Sports: cricket, football, tennis, F1, kabaddi. Also cybersecurity, JWT auth, AR.', '🎨 Sports fan and tech explorer (cybersecurity, AR).'],
+          'hobbies': ['🏆 Sports: cricket, football, tennis, F1 racing, kabaddi.', '🎮 Sports and exploring new technologies.'],
+          
+          // Technology interests
+          'technology': ['🤖 Passionate about AI, cybersecurity, JWT auth, AR, and distributed systems.', '🔬 Tech: AI, cybersecurity, AR/VR, blockchain, IoT.', '💡 Always learning: AI, ML, cybersecurity, AR, cloud-native.'],
+          'ai': ['🤖 Interested in AI/ML and practical applications in web/mobile.', '🧠 AI/ML enthusiast focused on practical implementations.'],
+          
+          // General
+          'who': ['👨‍💻 Nehal Chauhan - CSE student at Parul University, Full-stack & Android Developer at Encoraa ESG.', '🎯 Nehal: Full-stack and Android developer with React, Node.js, MongoDB, Next.js, Java.', '💼 Nehal Chauhan: CSE student, developer, AR creator with 537M+ lens views.'],
+          'about': ['👨‍💻 Nehal Chauhan: CSE student at Parul University, Jr. Android Developer at Encoraa ESG. Builds full-stack web and Android apps.', '🎯 Full-stack and Android developer with React, Node.js, MongoDB, Next.js, Java.'],
+          'help': ['👋 I can help with skills, projects, experience, education, or contact info.', '💡 Try asking: skills, projects, experience, contact, or technologies.', '🎯 Topics: Skills, Projects, Experience, Education, Contact, Resume.'],
+          'thanks': ['😊 You\'re welcome! Ask if you have more questions.', '👍 Happy to help! Let me know if you need anything else.', '🙌 Anytime! Feel free to ask more.'],
+          'bye': ['👋 Goodbye! Reach out if you have more questions.', '🎯 Take care! Connect on LinkedIn for updates.', '😊 Bye! Best of luck with your projects!'],
+          
+          // Default
+          'default': ["🤔 I didn't understand. Try asking about skills, projects, experience, or contact.", "🎯 I can tell you about skills, projects, experience, or contact. What do you want to know?", "💡 Ask about: skills, projects (BMI, Stock, Auth), experience, or contact."]
         };
 
+        // Synonym mapping for better understanding
+        const synonymMap = {
+          'greeting': ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
+          'skills': ['skills', 'technologies', 'tech stack', 'programming', 'coding', 'languages', 'frameworks'],
+          'frontend': ['frontend', 'front-end', 'ui', 'user interface', 'client-side'],
+          'backend': ['backend', 'back-end', 'server-side', 'api'],
+          'android': ['android', 'mobile', 'app', 'application'],
+          'projects': ['projects', 'work', 'portfolio', 'applications', 'apps', 'built'],
+          'experience': ['experience', 'work', 'job', 'employment', 'career', 'company'],
+          'education': ['education', 'university', 'college', 'study', 'degree', 'school'],
+          'contact': ['contact', 'email', 'reach', 'connect', 'linkedin', 'github'],
+          'resume': ['resume', 'cv', 'curriculum vitae'],
+          'achievements': ['achievements', 'accomplishments', 'success', 'awards', 'ar lens'],
+          'interests': ['interests', 'hobbies', 'outside work', 'personal', 'sports'],
+          'technology': ['technology', 'tech', 'innovation', 'ai', 'ml', 'future'],
+          'who': ['who', 'about', 'nehal', 'yourself', 'introduction'],
+          'help': ['help', 'what can you do', 'capabilities', 'assist'],
+          'thanks': ['thanks', 'thank you', 'appreciate', 'helpful'],
+          'bye': ['bye', 'goodbye', 'see you', 'farewell']
+        };
+
+        function getRandomResponse(key) {
+          const responses = responseMap[key];
+          if (responses && Array.isArray(responses)) {
+            return responses[Math.floor(Math.random() * responses.length)];
+          }
+          if (responses && typeof responses === 'string') {
+            return responses;
+          }
+          // Fallback to random default response
+          const defaults = responseMap['default'];
+          if (Array.isArray(defaults)) {
+            return defaults[Math.floor(Math.random() * defaults.length)];
+          }
+          return defaults || "I'm sorry, I couldn't find a response. Please try asking about skills, projects, or experience.";
+        }
+
+        function findBestMatch(message) {
+          const lowerMessage = message.toLowerCase();
+          
+          // Check exact matches first
+          for (const key in responseMap) {
+            if (key !== 'default' && lowerMessage.includes(key)) {
+              return key;
+            }
+          }
+          
+          // Check synonyms
+          for (const category in synonymMap) {
+            if (synonymMap[category].some(synonym => lowerMessage.includes(synonym))) {
+              return category;
+            }
+          }
+          
+          return 'default';
+        }
+
         function sendMessage() {
-          const message = chatbotInput.value.trim().toLowerCase();
+          const message = chatbotInput.value.trim();
           if (message) {
             addMessage(message, 'user');
             chatbotInput.value = '';
@@ -1044,15 +1062,10 @@
             // Simulate bot response with a delay
             setTimeout(() => {
               typingIndicator.style.display = 'none'; // Hide typing indicator
-              let response = responseMap['default']; // Default response
-              for (const keyword in responseMap) {
-                if (message.includes(keyword)) {
-                  response = responseMap[keyword];
-                  break;
-                }
-              }
+              const bestMatch = findBestMatch(message);
+              const response = getRandomResponse(bestMatch);
               addMessage(response, 'bot');
-            }, 1000); // Simulate typing delay
+            }, 800 + Math.random() * 400); // Random delay 800-1200ms for more natural feel
           }
         }
 
@@ -1098,7 +1111,8 @@
       })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script>
 
-<script src="visitor-counter.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="visitor-counter.js"></script>
 
 </body>
 

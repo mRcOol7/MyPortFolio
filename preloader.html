@@ -3,136 +3,572 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preloader</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@aceternity/ui/dist/aceternity-ui.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@origin-ui/core/dist/origin-ui.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shadcn/ui/dist/shadcn-ui.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mui/material@5.0.0-alpha.36/umd/material-ui.production.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/@mui/material@5.0.0-alpha.36/umd/material-ui.production.min.js"></script>
+  <title>Nehal Chauhan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    /* Preloader Styles */
+    :root {
+      --bg: #050508;
+      --accent: #4f8ef7;
+      --accent2: #a78bfa;
+      --text: #f0f0f5;
+      --muted: rgba(240,240,245,0.35);
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--bg);
+      overflow: hidden;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── Canvas background ── */
+    #bg-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    /* ── Grain overlay ── */
+    .grain {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      animation: grain-shift 0.4s steps(1) infinite;
+    }
+    @keyframes grain-shift {
+      0%  { background-position: 0 0; }
+      25% { background-position: -64px 32px; }
+      50% { background-position: 32px -64px; }
+      75% { background-position: -32px 64px; }
+    }
+
+    /* ── Main container ── */
     #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1F2937, #3B82F6);
+      position: relative;
+      z-index: 10;
+      width: 100%; height: 100vh;
+      display: grid;
+      place-items: center;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #preloader.fade-out { opacity: 0; }
+
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── Avatar ── */
+    .avatar-wrap {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 36px;
+    }
+
+    .avatar-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: url('https://i.ibb.co/RjgY0Pn/IMG-7601.jpg') center/cover;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
+
+    /* Hexagonal clip via SVG clip */
+    .avatar-inner {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      border: 1.5px solid rgba(79,142,247,0.4);
+    }
+
+    .avatar-inner img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* Rotating rings */
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid transparent;
+    }
+    .ring-1 {
+      width: 120px; height: 120px;
+      border-color: rgba(79,142,247,0.2);
+      border-top-color: rgba(79,142,247,0.8);
+      border-right-color: rgba(79,142,247,0.4);
+      animation: spin-cw 2.5s linear infinite;
+    }
+    .ring-2 {
+      width: 130px; height: 130px;
+      border-color: rgba(167,139,250,0.1);
+      border-bottom-color: rgba(167,139,250,0.6);
+      border-left-color: rgba(167,139,250,0.3);
+      animation: spin-ccw 4s linear infinite;
+    }
+    .ring-3 {
+      width: 140px; height: 140px;
+      border-color: rgba(79,142,247,0.05);
+      border-top-color: rgba(79,142,247,0.2);
+      animation: spin-cw 7s linear infinite;
+    }
+
+    @keyframes spin-cw  { to { transform: translate(-50%, -50%) rotate(360deg); } }
+    @keyframes spin-ccw { to { transform: translate(-50%, -50%) rotate(-360deg); } }
+
+    /* Orbiting dot */
+    .orbit-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      top: calc(50% - 65px);
+      left: 50%;
+      margin-left: -3px;
+      transform-origin: 3px 65px;
+      background: var(--accent);
+      box-shadow: 0 0 10px 2px var(--accent);
+      animation: orbit 2.5s linear infinite;
+    }
+    .orbit-dot-2 {
+      position: absolute;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      top: calc(50% - 75px);
+      left: 50%;
+      margin-left: -2px;
+      transform-origin: 2px 75px;
+      background: var(--accent2);
+      box-shadow: 0 0 8px 2px var(--accent2);
+      animation: orbit 4s linear infinite reverse;
+    }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+
+    /* ── Name ── */
+    .name-block {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .name-chars {
       display: flex;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 9999;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    #preloader.fade-out {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .logo {
-      width: 15vw;
-      height: 15vw;
-      max-width: 120px;
-      max-height: 120px;
-      background: url('https://i.ibb.co/RjgY0Pn/IMG-7601.jpg') no-repeat center center;
-      background-size: cover;
-      animation: pulse-and-rotate 1.5s infinite;
-      box-shadow: 0px 0px 20px 5px rgba(59, 130, 246, 0.5);
-      border-radius: 50%;
-    }
-
-    @keyframes pulse-and-rotate {
-      0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.1) rotate(45deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-
-    .progress-bar {
-      width: 80%;
-      max-width: 300px;
-      height: 10px;
-      background-color: rgba(243, 244, 246, 0.5);
-      border-radius: 5px;
-      margin-top: 20px;
+      gap: 0;
       overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .progress-bar .progress {
+    .char {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 6vw, 44px);
+      font-weight: 800;
+      color: var(--text);
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px) rotate(6deg);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      letter-spacing: -0.01em;
+    }
+    .char.space { width: 0.3em; }
+    .char.visible {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+    .char-accent { color: var(--accent); }
+
+    .tagline {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(10px, 2vw, 12px);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 8px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease 0.8s, transform 0.6s ease 0.8s;
+    }
+    .tagline.visible { opacity: 1; transform: none; }
+
+    /* ── Status line ── */
+    .status-line {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      margin-top: 44px;
+      margin-bottom: 14px;
+      height: 16px;
+      transition: opacity 0.3s;
+    }
+    .status-cursor {
+      display: inline-block;
+      width: 6px; height: 11px;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 0.9s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── Progress ── */
+    .progress-wrap {
+      width: clamp(220px, 50vw, 320px);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 2px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 2px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .progress-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(45deg, #3B82F6, #1F2937, #3B82F6);
-      background-size: 400% 100%;
-      animation: move-stripes 2s linear infinite;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      position: relative;
+      transition: width 0.1s linear;
     }
 
-    @keyframes move-stripes {
-      0% { background-position: 0% 0; }
-      100% { background-position: 100% 0; }
+    .progress-glow {
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px 3px var(--accent), 0 0 20px 6px rgba(79,142,247,0.4);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .progress-fill.active .progress-glow { opacity: 1; }
+
+    .progress-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .progress-text {
-      color: #F3F4F6;
-      margin-top: 10px;
-      font-size: 2.5vw;
-      font-weight: bold;
+    .progress-pct {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
     }
 
-    @media (max-width: 600px) {
-      .logo {
-        width: 20vw;
-        height: 20vw;
-      }
+    .progress-steps {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
 
-      .progress-text {
-        font-size: 4vw;
-      }
+    /* ── Corner decorations ── */
+    .corner {
+      position: absolute;
+      width: 40px; height: 40px;
+      z-index: 5;
+      opacity: 0.25;
+    }
+    .corner svg { width: 100%; height: 100%; }
+    .corner-tl { top: 24px; left: 24px; }
+    .corner-tr { top: 24px; right: 24px; transform: rotate(90deg); }
+    .corner-bl { bottom: 24px; left: 24px; transform: rotate(-90deg); }
+    .corner-br { bottom: 24px; right: 24px; transform: rotate(180deg); }
+
+    /* ── Scanline ── */
+    .scanline {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0,0,0,0.03) 3px,
+        rgba(0,0,0,0.03) 4px
+      );
+    }
+
+    /* ── Data readout chips ── */
+    .chips {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.5s ease 0.5s;
+    }
+    .chips.visible { opacity: 1; }
+    .chip {
+      font-size: 9px;
+      font-family: 'DM Mono', monospace;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      padding: 4px 10px;
+      border: 0.5px solid var(--glass-border);
+      border-radius: 20px;
+      background: var(--glass);
+      white-space: nowrap;
     }
   </style>
 </head>
 <body>
-  <!-- Preloader -->
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="grain"></div>
+  <div class="scanline"></div>
+
+  <!-- Corner brackets -->
+  <div class="corner corner-tl">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 20V2H20" stroke="#4f8ef7" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+  </div>
+  <div class="corner corner-tr">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 20V2H20" stroke="#4f8ef7" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+  </div>
+  <div class="corner corner-bl">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 20V2H20" stroke="#4f8ef7" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+  </div>
+  <div class="corner corner-br">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 20V2H20" stroke="#4f8ef7" stroke-width="1.5" stroke-linecap="square"/>
+    </svg>
+  </div>
+
+  <!-- Bottom chips -->
+  <div class="chips" id="chips">
+    <div class="chip">FULL-STACK</div>
+    <div class="chip">ANDROID DEV</div>
+    <div class="chip">AR · 137M+ VIEWS</div>
+  </div>
+
   <div id="preloader">
-    <div class="logo"></div>
-    <div class="progress-bar">
-      <div class="progress"></div>
+    <div class="center">
+
+      <!-- Avatar -->
+      <div class="avatar-wrap">
+        <div class="ring ring-3"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-1"></div>
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot-2"></div>
+        <div class="avatar-inner">
+          <img src="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" alt="Nehal Chauhan" />
+        </div>
+      </div>
+
+      <!-- Name -->
+      <div class="name-block">
+        <div class="name-chars" id="name-chars"></div>
+        <div class="tagline" id="tagline">Developer · Creator · Engineer</div>
+      </div>
+
+      <!-- Status -->
+      <div class="status-line" id="status-line">
+        <span id="status-text"></span><span class="status-cursor"></span>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill">
+            <div class="progress-glow"></div>
+          </div>
+        </div>
+        <div class="progress-footer">
+          <span class="progress-pct" id="progress-pct">0%</span>
+          <span class="progress-steps" id="progress-steps">INITIALIZING</span>
+        </div>
+      </div>
+
     </div>
-    <div class="progress-text">Loading...</div>
   </div>
 
   <script>
-    // Preloader Logic
-    const preloader = document.getElementById('preloader');
-    const progressBar = preloader.querySelector('.progress');
-    const preloaderShown = localStorage.getItem('preloaderShown');
+  (function () {
+    'use strict';
 
-    if (preloaderShown) {
-      // Skip preloader if already shown
-      preloader.style.display = 'none';
-      window.location.href = 'index.html';
-    } else {
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 10;
-        progressBar.style.width = `${progress}%`;
+    /* ── Particle canvas ── */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], animFrame;
 
-        if (progress >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            preloader.classList.add('fade-out');
-            setTimeout(() => {
-              preloader.style.display = 'none';
-              localStorage.setItem('preloaderShown', 'true');
-              window.location.href = 'index.html';
-            }, 500);
-          }, 1000);
-        }
-      }, 300);
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
     }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function mkParticle() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2 + 0.3,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        o: Math.random() * 0.5 + 0.1,
+        c: Math.random() > 0.5 ? '79,142,247' : '167,139,250'
+      };
+    }
+
+    for (let i = 0; i < 90; i++) particles.push(mkParticle());
+
+    /* Connection lines between close particles */
+    function drawParticles() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c},${p.o})`;
+        ctx.fill();
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(${p.c},${(1 - dist / 90) * 0.18})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      animFrame = requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    /* ── Name letter reveal ── */
+    const name = 'Nehal Chauhan';
+    const charsEl = document.getElementById('name-chars');
+    name.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'char' + (ch === ' ' ? ' space' : '');
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      span.style.transitionDelay = (i * 55 + 200) + 'ms';
+      charsEl.appendChild(span);
+    });
+
+    setTimeout(() => {
+      document.querySelectorAll('.char').forEach(c => c.classList.add('visible'));
+    }, 50);
+
+    setTimeout(() => {
+      document.getElementById('tagline').classList.add('visible');
+    }, 400);
+
+    setTimeout(() => {
+      document.getElementById('chips').classList.add('visible');
+    }, 600);
+
+    /* ── Status messages ── */
+    const stages = [
+      { pct: 0,   label: 'INITIALIZING...',        step: 'BOOT SEQUENCE' },
+      { pct: 20,  label: 'LOADING ASSETS...',       step: 'ASSETS · 1/4' },
+      { pct: 40,  label: 'BUILDING COMPONENTS...',  step: 'COMPONENTS · 2/4' },
+      { pct: 65,  label: 'COMPILING PROJECTS...',   step: 'PROJECTS · 3/4' },
+      { pct: 85,  label: 'ALMOST READY...',         step: 'POLISH · 4/4' },
+      { pct: 100, label: 'READY.',                  step: 'COMPLETE' },
+    ];
+
+    const statusText = document.getElementById('status-text');
+    const progressFill = document.getElementById('progress-fill');
+    const progressPct = document.getElementById('progress-pct');
+    const progressSteps = document.getElementById('progress-steps');
+
+    let progress = 0;
+    let stageIdx = 0;
+    let done = false;
+
+    function getStage(p) {
+      let s = stages[0];
+      for (const st of stages) { if (p >= st.pct) s = st; }
+      return s;
+    }
+
+    function tick() {
+      if (done) return;
+      progress = Math.min(progress + (100 - progress) * 0.012 + 0.35, 100);
+
+      progressFill.style.width = progress.toFixed(2) + '%';
+      progressPct.textContent = Math.round(progress) + '%';
+
+      const stage = getStage(Math.round(progress));
+      if (stage !== stages[stageIdx]) {
+        stageIdx = stages.indexOf(stage);
+        statusText.textContent = stage.label;
+        progressSteps.textContent = stage.step;
+      }
+      progressFill.classList.add('active');
+
+      if (progress >= 100) {
+        done = true;
+        statusText.textContent = 'READY.';
+        progressSteps.textContent = 'COMPLETE';
+        setTimeout(() => {
+          cancelAnimationFrame(animFrame);
+          document.getElementById('preloader').classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 850);
+        }, 500);
+        return;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    statusText.textContent = stages[0].label;
+    progressSteps.textContent = stages[0].step;
+    requestAnimationFrame(tick);
+  })();
   </script>
 </body>
 </html>
