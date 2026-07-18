@@ -174,19 +174,28 @@ function doGet(e) {
       let visits = [];
       if (visitsSheet) {
         const rows = visitsSheet.getDataRange().getValues();
-        totalVisits = Math.max(0, rows.length - 1);
+        
+        // Filter out empty rows (where timestamp is empty)
+        let validRows = [];
+        for (let i = 1; i < rows.length; i++) {
+          if (rows[i][0] && rows[i][0].toString().trim() !== "") {
+            validRows.push(rows[i]);
+          }
+        }
+        totalVisits = validRows.length;
         
         // Retrieve last 300 logs for the dashboard to keep load times lightweight
-        const startIndex = Math.max(1, rows.length - 300);
-        for (let i = rows.length - 1; i >= startIndex; i--) {
+        const startIndex = Math.max(0, validRows.length - 300);
+        for (let i = validRows.length - 1; i >= startIndex; i--) {
+          const r = validRows[i];
           visits.push({
-            timestamp: rows[i][0],
-            location: rows[i][1],
-            timezone: rows[i][2],
-            device: rows[i][3],
-            browserOs: rows[i][4],
-            referrer: rows[i][5],
-            query: rows[i][6]
+            timestamp: r[0],
+            location: r[1] || "Unknown Location",
+            timezone: r[2] || "Unknown Timezone",
+            device: r[3] || "Unknown Device",
+            browserOs: r[4] || "Unknown Browser/OS",
+            referrer: r[5] || "Direct",
+            query: r[6] || "None"
           });
         }
       }
@@ -196,14 +205,17 @@ function doGet(e) {
       let chats = [];
       if (chatsSheet) {
         const rows = chatsSheet.getDataRange().getValues();
-        // Skip header row
+        // Skip header row and check for valid session ID to filter out empty rows
         for (let i = 1; i < rows.length; i++) {
-          chats.push({
-            timestamp: rows[i][0],
-            sessionId: rows[i][1],
-            sender: rows[i][2],
-            message: rows[i][3]
-          });
+          const sessionId = rows[i][1];
+          if (sessionId && sessionId.toString().trim() !== "") {
+            chats.push({
+              timestamp: rows[i][0],
+              sessionId: sessionId,
+              sender: rows[i][2] || "unknown",
+              message: rows[i][3] || ""
+            });
+          }
         }
       }
 
@@ -212,14 +224,17 @@ function doGet(e) {
       let contacts = [];
       if (contactsSheet) {
         const rows = contactsSheet.getDataRange().getValues();
-        // Skip header row
+        // Skip header row and verify name is not empty
         for (let i = 1; i < rows.length; i++) {
-          contacts.push({
-            timestamp: rows[i][0],
-            name: rows[i][1],
-            email: rows[i][2],
-            message: rows[i][3]
-          });
+          const name = rows[i][1];
+          if (name && name.toString().trim() !== "") {
+            contacts.push({
+              timestamp: rows[i][0],
+              name: name,
+              email: rows[i][2] || "",
+              message: rows[i][3] || ""
+            });
+          }
         }
       }
 
@@ -228,14 +243,17 @@ function doGet(e) {
       let events = [];
       if (eventsSheet) {
         const rows = eventsSheet.getDataRange().getValues();
-        // Skip header row
+        // Skip header row and check for valid visit ID
         for (let i = 1; i < rows.length; i++) {
-          events.push({
-            timestamp: rows[i][0],
-            visitId: rows[i][1],
-            eventName: rows[i][2],
-            eventDetail: rows[i][3]
-          });
+          const visitId = rows[i][1];
+          if (visitId && visitId.toString().trim() !== "") {
+            events.push({
+              timestamp: rows[i][0],
+              visitId: visitId,
+              eventName: rows[i][2] || "unknown",
+              eventDetail: rows[i][3] || ""
+            });
+          }
         }
       }
 

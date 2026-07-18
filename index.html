@@ -1422,8 +1422,30 @@
           chatbotMessages.appendChild(messageElement);
           chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
+          // Strip HTML tags for clean logging in Google Sheets
+          let cleanMessage = message;
+          if (sender === 'bot') {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = message;
+            
+            // Format buttons and links as readable bracketed options
+            const buttons = tempDiv.querySelectorAll('button, a');
+            buttons.forEach(btn => {
+              const text = btn.textContent.trim();
+              if (text) {
+                btn.outerHTML = ` [${text}] `;
+              } else {
+                btn.remove();
+              }
+            });
+            
+            cleanMessage = tempDiv.textContent || tempDiv.innerText || message;
+            // Normalize spaces
+            cleanMessage = cleanMessage.replace(/\s+/g, ' ').trim();
+          }
+
           // Log to Google Sheets
-          logChatMessage(sender, message);
+          logChatMessage(sender, cleanMessage);
         }
       });
     </script>
