@@ -968,6 +968,34 @@
             </div>
           </div>
         </div>
+
+        <!-- Visitor Traffic Logs Table -->
+        <div class="visual-block" style="margin-top: 30px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="margin-bottom: 0;"><i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-primary)"></i> Recent Visitors</h3>
+            <div class="search-wrapper" style="width: 220px; position: relative;">
+              <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: var(--text-muted);"></i>
+              <input type="text" id="visitSearchInput" placeholder="Filter by location/OS..." oninput="filterVisits()" style="width: 100%; padding: 8px 10px 8px 35px; font-size: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff;">
+            </div>
+          </div>
+          <div style="overflow-x: auto; width: 100%;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;" id="visitsTable">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--glass-border); color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                  <th style="padding: 12px 10px;">Time</th>
+                  <th style="padding: 12px 10px;">Location</th>
+                  <th style="padding: 12px 10px;">Device</th>
+                  <th style="padding: 12px 10px;">Browser & OS</th>
+                  <th style="padding: 12px 10px;">Referrer</th>
+                  <th style="padding: 12px 10px;">Query Tag</th>
+                </tr>
+              </thead>
+              <tbody id="visitsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       
       <!-- VIEW: CHAT LOGS -->
@@ -1212,6 +1240,7 @@
       document.getElementById("stat-contacts").textContent = contactCount.toLocaleString();
       
       // Trigger lazy render for submenus
+      renderVisitsTable();
       renderChatThreads();
       renderContacts();
     }
@@ -1454,6 +1483,80 @@
       } catch (e) {
         return date.toString();
       }
+    }
+
+    // Render detailed visitor logs table
+    function renderVisitsTable() {
+      const tbody = document.getElementById("visitsTableBody");
+      if (!tbody) return;
+
+      if (!dashboardData || !dashboardData.visits || dashboardData.visits.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="padding: 20px; text-align: center; color: var(--text-muted);">No visit logs recorded yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = "";
+      
+      dashboardData.visits.forEach(visit => {
+        const row = document.createElement("tr");
+        row.style.borderBottom = "1px solid rgba(255,255,255,0.03)";
+        row.className = "visit-row";
+
+        // Format device icon
+        let deviceIcon = '<i class="fa-solid fa-desktop" style="color: var(--accent-primary);" title="Desktop"></i>';
+        if (visit.device === "Mobile") {
+          deviceIcon = '<i class="fa-solid fa-mobile-screen-button" style="color: var(--accent-secondary);" title="Mobile"></i>';
+        } else if (visit.device === "Tablet") {
+          deviceIcon = '<i class="fa-solid fa-tablet-screen-button" style="color: var(--success);" title="Tablet"></i>';
+        }
+
+        // Clean referrer hostname
+        let cleanRefStr = '<span style="color: var(--text-muted);">Direct</span>';
+        if (visit.referrer && visit.referrer !== "Direct / None" && visit.referrer !== "Direct" && visit.referrer !== "None") {
+          try {
+            const url = new URL(visit.referrer);
+            cleanRefStr = `<a href="${visit.referrer}" target="_blank" style="color: var(--accent-primary); text-decoration: none;" title="${visit.referrer}">${url.hostname}</a>`;
+          } catch(e) {
+            cleanRefStr = escapeHtml(visit.referrer);
+          }
+        }
+
+        // Clean Query tag
+        let queryTag = "-";
+        if (visit.query && visit.query !== "None" && visit.query !== "" && visit.query !== "?") {
+          const cleanQuery = visit.query.replace(/^\?/, "");
+          queryTag = `<span style="background: rgba(52, 152, 219, 0.12); border: 1px solid rgba(52, 152, 219, 0.2); color: var(--accent-primary); padding: 2px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 500;">${escapeHtml(cleanQuery)}</span>`;
+        }
+
+        // Format date
+        const dateStr = formatDate(new Date(visit.timestamp));
+
+        row.innerHTML = `
+          <td style="padding: 14px 10px; font-size: 0.85rem; color: var(--text-muted);">${dateStr}</td>
+          <td style="padding: 14px 10px; font-weight: 600; color: #fff;">${escapeHtml(visit.location)} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal; display: block;">${escapeHtml(visit.timezone)}</span></td>
+          <td style="padding: 14px 10px;">${deviceIcon} <span style="font-size: 0.85rem; margin-left: 6px;">${visit.device}</span></td>
+          <td style="padding: 14px 10px; font-size: 0.85rem; color: var(--text-muted);">${escapeHtml(visit.browserOs)}</td>
+          <td style="padding: 14px 10px; font-size: 0.85rem;">${cleanRefStr}</td>
+          <td style="padding: 14px 10px;">${queryTag}</td>
+        `;
+
+        tbody.appendChild(row);
+      });
+    }
+
+    // Filter visitor logs by search query (e.g. location, browser)
+    function filterVisits() {
+      const query = document.getElementById("visitSearchInput").value.toLowerCase();
+      const rows = document.querySelectorAll(".visit-row");
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(query)) {
+          row.style.display = "table-row";
+        } else {
+          row.style.display = "none";
+        }
+      });
     }
 
     // Helper: Escape HTML strings to prevent XSS

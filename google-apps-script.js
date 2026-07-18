@@ -62,21 +62,22 @@ function doPost(e) {
       let sheet = spreadsheet.getSheetByName("Visits");
       if (!sheet) {
         sheet = spreadsheet.insertSheet("Visits");
-        sheet.appendRow(["Total Visits"]);
-        sheet.appendRow([0]);
+        sheet.appendRow(["Timestamp", "Location", "Timezone", "Device Type", "Browser & OS", "Referrer", "Query Params"]);
       }
 
-      const range = sheet.getRange("A2");
-      const currentCount = Number(range.getValue()) || 0;
-      const newCount = currentCount + 1;
-      range.setValue(newCount);
+      const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+      const location = data.location || "Unknown Location";
+      const timezone = data.timezone || "Unknown Timezone";
+      const device = data.device || "Unknown Device";
+      const browserOs = data.browserOs || "Unknown Browser/OS";
+      const referrer = data.referrer || "Direct";
+      const query = data.query || "None";
 
-      const response = ContentService.createTextOutput(JSON.stringify({
-        success: true,
-        count: newCount
+      sheet.appendRow([timestamp, location, timezone, device, browserOs, referrer, query]);
+
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true
       })).setMimeType(ContentService.MimeType.JSON);
-
-      return response;
     }
 
     // ACTION 2: Log Chatbot Message
@@ -146,11 +147,27 @@ function doGet(e) {
 
     // ACTION: Get Admin Dashboard Data
     if (action === 'get_data') {
-      // 1. Get Visits Count
+      // 1. Get Visits Count and Recent Logs
       let visitsSheet = spreadsheet.getSheetByName("Visits");
       let totalVisits = 0;
+      let visits = [];
       if (visitsSheet) {
-        totalVisits = Number(visitsSheet.getRange("A2").getValue()) || 0;
+        const rows = visitsSheet.getDataRange().getValues();
+        totalVisits = Math.max(0, rows.length - 1);
+        
+        // Retrieve last 300 logs for the dashboard to keep load times lightweight
+        const startIndex = Math.max(1, rows.length - 300);
+        for (let i = rows.length - 1; i >= startIndex; i--) {
+          visits.push({
+            timestamp: rows[i][0],
+            location: rows[i][1],
+            timezone: rows[i][2],
+            device: rows[i][3],
+            browserOs: rows[i][4],
+            referrer: rows[i][5],
+            query: rows[i][6]
+          });
+        }
       }
 
       // 2. Get Chats history
@@ -188,6 +205,7 @@ function doGet(e) {
       return ContentService.createTextOutput(JSON.stringify({
         success: true,
         totalVisits: totalVisits,
+        visits: visits,
         chats: chats,
         contacts: contacts
       })).setMimeType(ContentService.MimeType.JSON);
