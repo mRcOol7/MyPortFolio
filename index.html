@@ -260,6 +260,33 @@
           modelViewer.autoRotate = true;
           modelViewer.autoRotateSpeed = 1.0; // Set the speed of auto-rotation
 
+          // Look-at-cursor tracking behavior
+          let mouseTimeout;
+          const defaultTheta = 180;
+          const defaultPhi = 90;
+          const defaultRadius = "2m";
+
+          window.addEventListener('mousemove', (e) => {
+            // Disable auto-rotation when cursor moves
+            modelViewer.autoRotate = false;
+
+            // Calculate normalized cursor coordinates (-0.5 to 0.5)
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+
+            // Map coordinates to degrees around standard orbit (180, 90)
+            const theta = defaultTheta - (x * 40); // Horizontal range: 160deg to 200deg
+            const phi = defaultPhi + (y * 20);     // Vertical range: 80deg to 100deg
+
+            modelViewer.cameraOrbit = `${theta}deg ${phi}deg ${defaultRadius}`;
+
+            // Resume auto-rotation after 3 seconds of cursor inactivity
+            clearTimeout(mouseTimeout);
+            mouseTimeout = setTimeout(() => {
+              modelViewer.autoRotate = true;
+            }, 3000);
+          });
+
           // Handle AR session start
           modelViewer.addEventListener('ar-status', (event) => {
             if (event.detail.status === 'session-started') {
@@ -947,75 +974,289 @@
           });
         });
 
-        const responseMap = {
-          // Greetings
-          'hello': ['👋 Hi! I\'m Nehal\'s assistant. Ask about his skills, projects, or experience!', '😊 Hello! How can I help you learn about Nehal today?', '🙌 Hi! I can answer questions about Nehal\'s portfolio.'],
-          'hi': ['👋 Hi! What would you like to know?', '😄 Hey! Feel free to ask about skills, projects, or experience.', '🎯 Hello! I can tell you about Nehal\'s technical work.'],
-          'hey': ['👋 Hey! How can I help?', '😊 Hi there! Ask anything about the portfolio.', '🙌 Hello! Ready to answer your questions.'],
-
-          // Skills
-          'skills': ['💻 Nehal specializes in full-stack development (React, Node.js, Express, MongoDB), Android apps, and Next.js with TypeScript.', '🔧 Core skills: React.js, Node.js, Express.js, MongoDB, Android development, Next.js.', '⚡ Expertise: Full-stack web dev, Android apps, authentication, and real-time data.'],
-          'tech stack': ['🛠️ Main stack: React.js, Node.js, Express.js, MongoDB. Also Next.js, TypeScript, Redis, TiDB.', '💡 Technologies: MERN stack, Next.js, Android Studio, Firebase, JWT, TiDB.'],
-          'frontend': ['🎨 Frontend: React.js, Next.js, TypeScript, Tailwind CSS, HTML5, CSS3, JavaScript.', '🖥️ Builds responsive UIs with React, Next.js, and modern CSS.'],
-          'backend': ['⚙️ Backend: Node.js, Express.js, MongoDB, Redis, TiDB, JWT, REST APIs.', '🔌 Server-side: Node.js, Express, MongoDB, Redis caching, TiDB.'],
-          'android': ['📱 Android: Java, Android Studio, native app development.', '🤖 Mobile development using Java and Android Studio.'],
-
-          // Projects
-          'projects': ['🚀 6+ projects including BMI Calculator, Stock Dashboard, Auth Platform, Invoice System, and DNA Analyzer.', '💼 Key work: Stock dashboard (40% faster), Invoice system (60% time savings), OAuth auth (99.9% uptime).', '🎯 Projects: BMI Calculator, Stock Dashboard, Auth Platform, Invoice System, DNA Analyzer.'],
-          'bmi': ['📊 BMI Calculator: Web app for health tracking with instant calculations.', '⚖️ Built with React, Node.js, Express, MongoDB.'],
-          'stock': ['📈 Stock Dashboard: Real-time NSE data with live charts, 40% faster analysis.', '💹 Uses React, ApexCharts, Node.js for market visualization.'],
-          'auth': ['🔐 Auth Platform: OAuth system with 99.9% uptime at sub-200ms latency, 10,000+ daily users.', '🔑 Built with Next.js, TypeScript, NextAuth, TiDB, Redis.'],
-          'invoice': ['📄 Invoice System: 60% faster processing, automated PDF generation, saves 5+ hours weekly.', '💳 Features rich text editor, Cloudinary, TiDB, jspdf.'],
-          'dna': ['🧬 DNA Analyzer: 50% faster data processing for bioinformatics research.', '🔬 Built with MERN stack for DNA sequence analysis.'],
-          'private contest': ['🏆 Private Contest: 30% better engagement with instant code generation.', '🎮 Full-stack platform for contest management.'],
-
-          // Experience
-          'experience': ['💼 Encoraa ESG (Nov 2024–Present): Academic Trainee → Jr. Android Developer. Full-stack web apps, QA testing, Android apps.', '🎯 Journey: Academic Trainee → Jr. Android Developer. Full-stack web + Android development.'],
-          'work': ['💼 Encoraa ESG: Academic Trainee → Jr. Android Developer. Full-stack dev, QA, Android apps.', '🏢 Current: Jr. Android Developer. Previously Academic Trainee on web apps.'],
-          'job': ['💼 Encoraa ESG since Nov 2024. Promoted from Academic Trainee to Jr. Android Developer.', '🎯 Experience: Full-stack development, QA testing, Android apps.'],
-
-          // Education
-          'education': ['🎓 Computer Science & Engineering at Parul University. Focus on full-stack and Android development.', '📚 CSE student at Parul University. Specializing in web and mobile dev.', '🎓 Education: CSE at Parul University with MERN stack and Android experience.'],
-          'university': ['🎓 Parul University - Computer Science & Engineering.', '📚 Studying CSE at Parul University with focus on web tech.'],
-          'college': ['🎓 Parul University, Vadodara. Computer Science & Engineering.', '📚 Pursuing CSE degree at Parul University.'],
-
-          // Contact
-          'contact': ['📧 Email: cnehal194@gmail.com | LinkedIn: linkedin.com/in/nehal-chauhan19', '🤝 Reach out via email or LinkedIn for collaborations.', '📬 Contact: cnehal194@gmail.com or LinkedIn.'],
-          'email': ['📧 cnehal194@gmail.com - Feel free to reach out!', '📩 Email: cnehal194@gmail.com'],
-          'linkedin': ['💼 LinkedIn: linkedin.com/in/nehal-chauhan19 - Connect there!', '🔗 LinkedIn: linkedin.com/in/nehal-chauhan19'],
-          'github': ['🐙 GitHub: github.com/mRcOol7 - Check out projects!', '💻 GitHub: github.com/mRcOol7'],
-
-          // Portfolio
-          'portfolio': ['🌟 You\'re here! Scroll up to see projects, skills, and experience.', '📋 This portfolio shows 6+ projects, skills, and experience.', '🎯 Browse sections: About, Skills, Experience, Projects.'],
-
-          // Resume
-          'resume': ['📄 Resume available with full skills, experience, and project details.', '📋 Download CV to see complete background and expertise.'],
-          'cv': ['📄 CV available with skills, projects, and work experience.', '📋 Download CV for full qualifications overview.'],
-
-          // Achievements
-          'achievements': ['🏆 537M+ AR lens views, projects serving 10,000+ users, 40% faster analysis with stock dashboard.', '⭐ 537M+ AR views, 10,000+ daily users, 40-60% efficiency improvements.', '🎯 537M+ AR lens views, 99.9% uptime, 40-60% time savings.'],
-          'ar lens': ['🔮 537M+ AR lens views! Creates AR experiences that engage millions.', '🌟 AR Achievement: 537M+ views on AR lenses.'],
-
-          // Interests
-          'interests': ['🎯 Cricket, Football, Tennis, F1, Kabaddi. Sports help with discipline and problem-solving.', '🏃‍♂️ Sports: cricket, football, tennis, F1, kabaddi. Also cybersecurity, JWT auth, AR.', '🎨 Sports fan and tech explorer (cybersecurity, AR).'],
-          'hobbies': ['🏆 Sports: cricket, football, tennis, F1 racing, kabaddi.', '🎮 Sports and exploring new technologies.'],
-
-          // Technology interests
-          'technology': ['🤖 Passionate about AI, cybersecurity, JWT auth, AR, and distributed systems.', '🔬 Tech: AI, cybersecurity, AR/VR, blockchain, IoT.', '💡 Always learning: AI, ML, cybersecurity, AR, cloud-native.'],
-          'ai': ['🤖 Interested in AI/ML and practical applications in web/mobile.', '🧠 AI/ML enthusiast focused on practical implementations.'],
-
-          // General
-          'who': ['👨‍💻 Nehal Chauhan - CSE student at Parul University, Full-stack & Android Developer at Encoraa ESG.', '🎯 Nehal: Full-stack and Android developer with React, Node.js, MongoDB, Next.js, Java.', '💼 Nehal Chauhan: CSE student, developer, AR creator with 537M+ lens views.'],
-          'about': ['👨‍💻 Nehal Chauhan: CSE student at Parul University, Jr. Android Developer at Encoraa ESG. Builds full-stack web and Android apps.', '🎯 Full-stack and Android developer with React, Node.js, MongoDB, Next.js, Java.'],
-          'help': ['👋 I can help with skills, projects, experience, education, or contact info.', '💡 Try asking: skills, projects, experience, contact, or technologies.', '🎯 Topics: Skills, Projects, Experience, Education, Contact, Resume.'],
-          'thanks': ['😊 You\'re welcome! Ask if you have more questions.', '👍 Happy to help! Let me know if you need anything else.', '🙌 Anytime! Feel free to ask more.'],
-          'bye': ['👋 Goodbye! Reach out if you have more questions.', '🎯 Take care! Connect on LinkedIn for updates.', '😊 Bye! Best of luck with your projects!'],
-
-          // Default
-          'default': ["🤔 I didn't understand. Try asking about skills, projects, experience, or contact.", "🎯 I can tell you about skills, projects, experience, or contact. What do you want to know?", "💡 Ask about: skills, projects (BMI, Stock, Auth), experience, or contact."]
+        // Expose sendChipMessage helper globally
+        window.sendChipMessage = function(val) {
+          chatbotInput.value = val;
+          sendMessage();
         };
 
-        // Synonym mapping for better understanding
+        const responseMap = {
+          // Greetings
+          'hello': [
+            `<p>👋 Good day! I'm Nehal's assistant. Ask about his skills, projects, or background!</p>
+             <div class="chat-chips">
+               <button onclick="sendChipMessage('skills')">🔧 Show Skills</button>
+               <button onclick="sendChipMessage('projects')">🚀 View Projects</button>
+               <button onclick="sendChipMessage('experience')">💼 Experience</button>
+             </div>`,
+            `<p>😊 Hello! How can I help you learn about Nehal today?</p>
+             <div class="chat-chips">
+               <button onclick="sendChipMessage('skills')">🔧 Skills</button>
+               <button onclick="sendChipMessage('projects')">🚀 Projects</button>
+               <button onclick="sendChipMessage('contact')">📬 Contact</button>
+             </div>`
+          ],
+          'hi': [
+            `<p>👋 Hi! What would you like to know?</p>
+             <div class="chat-chips">
+               <button onclick="sendChipMessage('tech stack')">🛠️ Tech Stack</button>
+               <button onclick="sendChipMessage('work')">💼 Experience</button>
+               <button onclick="sendChipMessage('resume')">📄 Resume</button>
+             </div>`
+          ],
+          'hey': [
+            `<p>👋 Hey! How can I help you today?</p>
+             <div class="chat-chips">
+               <button onclick="sendChipMessage('projects')">🚀 Projects</button>
+               <button onclick="sendChipMessage('contact')">📬 Get in Touch</button>
+             </div>`
+          ],
+
+          // Skills
+          'skills': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">🔧 Core Tech Stack</div>
+               <p>Nehal specializes in full-stack development, mobile apps, and database designs:</p>
+               <div class="chat-skills-grid">
+                 <span class="chat-skill-tag">React.js</span>
+                 <span class="chat-skill-tag">Next.js</span>
+                 <span class="chat-skill-tag">Node.js</span>
+                 <span class="chat-skill-tag">MongoDB</span>
+                 <span class="chat-skill-tag">TypeScript</span>
+                 <span class="chat-skill-tag">Java</span>
+                 <span class="chat-skill-tag">Android Studio</span>
+                 <span class="chat-skill-tag">Redis</span>
+               </div>
+             </div>`
+          ],
+          'tech stack': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">🛠️ Detailed Technologies</div>
+               <p>Nehal builds scalable, high-performance systems using:</p>
+               <div class="chat-skills-grid">
+                 <span class="chat-skill-tag">MERN Stack</span>
+                 <span class="chat-skill-tag">Next.js</span>
+                 <span class="chat-skill-tag">TypeScript</span>
+                 <span class="chat-skill-tag">Firebase</span>
+                 <span class="chat-skill-tag">JWT</span>
+                 <span class="chat-skill-tag">TiDB</span>
+                 <span class="chat-skill-tag">Redis Cache</span>
+               </div>
+             </div>`
+          ],
+          'frontend': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">🎨 Frontend Expertise</div>
+               <p>Specializes in crafting beautiful, fluid, and responsive user interfaces:</p>
+               <div class="chat-skills-grid">
+                 <span class="chat-skill-tag">HTML5 / CSS3</span>
+                 <span class="chat-skill-tag">JavaScript (ES6+)</span>
+                 <span class="chat-skill-tag">React.js</span>
+                 <span class="chat-skill-tag">Next.js</span>
+                 <span class="chat-skill-tag">Tailwind CSS</span>
+                 <span class="chat-skill-tag">Responsive Layouts</span>
+               </div>
+             </div>`
+          ],
+          'backend': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">⚙️ Backend & API Design</div>
+               <p>Experience building fast REST APIs and secure authentication platforms:</p>
+               <div class="chat-skills-grid">
+                 <span class="chat-skill-tag">Node.js</span>
+                 <span class="chat-skill-tag">Express.js</span>
+                 <span class="chat-skill-tag">MongoDB</span>
+                 <span class="chat-skill-tag">Redis Caching</span>
+                 <span class="chat-skill-tag">TiDB</span>
+                 <span class="chat-skill-tag">JWT Auth</span>
+               </div>
+             </div>`
+          ],
+          'android': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">📱 Native Android Dev</div>
+               <p>Develops native mobile apps using modern architectures:</p>
+               <div class="chat-skills-grid">
+                 <span class="chat-skill-tag">Java</span>
+                 <span class="chat-skill-tag">Android Studio</span>
+                 <span class="chat-skill-tag">API Integration</span>
+                 <span class="chat-skill-tag">Material Design</span>
+               </div>
+             </div>`
+          ],
+
+          // Projects
+          'projects': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">🚀 Portfolio Projects</div>
+               <p>Here are some of Nehal's featured engineering builds:</p>
+               <div class="chat-list-items">
+                 <div class="chat-list-item"><strong>🔐 Auth Platform</strong>: Next.js + NextAuth serving 10,000+ daily users.</div>
+                 <div class="chat-list-item"><strong>📈 Stock Dashboard</strong>: Real-time NSE charts.</div>
+                 <div class="chat-list-item"><strong>📄 Invoice System</strong>: PDF generator with rich text editor.</div>
+               </div>
+               <div class="chat-chips" style="margin-top: 10px;">
+                 <button onclick="sendChipMessage('auth platform')">Auth Details</button>
+                 <button onclick="sendChipMessage('stock dashboard')">Stock Details</button>
+                 <button onclick="sendChipMessage('invoice system')">Invoice Details</button>
+               </div>
+             </div>`
+          ],
+          'bmi': [
+            `📊 <strong>BMI Calculator</strong>: A responsive health-tracking web application for instant BMI calculations. Built using the MERN stack (React, Node.js, Express, MongoDB).`
+          ],
+          'stock': [
+            `📈 <strong>Stock Dashboard</strong>: Real-time NSE data visualizer providing 40% faster analysis. Uses React, ApexCharts, and Node.js for modern charting.`
+          ],
+          'auth': [
+            `🔐 <strong>Auth Platform</strong>: A high-availability OAuth authentication platform with sub-200ms latency, 99.9% uptime, serving over 10,000+ daily active users. Built with Next.js, NextAuth, TypeScript, TiDB, and Redis.`
+          ],
+          'invoice': [
+            `📄 <strong>Invoice System</strong>: Automated PDF billing processor saving 5+ hours weekly with 60% faster processing. Features rich text editor, Cloudinary storage, and TiDB.`
+          ],
+          'dna': [
+            `🧬 <strong>DNA Analyzer</strong>: Bioinformatics data analyzer facilitating 50% faster data processing. Built using React, Express, and MongoDB.`
+          ],
+          'private contest': [
+            `🏆 <strong>Private Contest Management</strong>: Full-stack online platform delivering 30% better engagement with instant code generation features.`
+          ],
+
+          // Experience
+          'experience': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">💼 Professional Experience</div>
+               <p><strong>Encoraa ESG</strong> (Nov 2024 – Present)</p>
+               <p>Role: Academic Trainee ➔ Jr. Android Developer</p>
+               <div class="chat-list-items" style="margin-top: 5px;">
+                 <div class="chat-list-item">• Developed full-stack web and native Android applications.</div>
+                 <div class="chat-list-item">• Authored automated QA unit tests.</div>
+               </div>
+             </div>`
+          ],
+          'work': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">🏢 Career Overview</div>
+               <p><strong>Jr. Android Developer</strong> at Encoraa ESG. Specializes in building full-stack web applications, native mobile apps, and database scaling.</p>
+             </div>`
+          ],
+          'job': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">🏢 Career Overview</div>
+               <p><strong>Jr. Android Developer</strong> at Encoraa ESG. Specializes in building full-stack web applications, native mobile apps, and database scaling.</p>
+             </div>`
+          ],
+
+          // Education
+          'education': [
+            `🎓 <strong>Education</strong>: Computer Science & Engineering student at Parul University. Specializing in full-stack development, database design, and mobile app design.`
+          ],
+          'university': [
+            `🎓 <strong>Parul University</strong>: Computer Science & Engineering degree path with core specialization in MERN web engineering.`
+          ],
+          'college': [
+            `🎓 <strong>Parul University</strong>: Computer Science & Engineering degree path with focus on web tech.`
+          ],
+
+          // Contact
+          'contact': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">📬 Get in Touch</div>
+               <p>Connect with Nehal directly for work inquiries or collaborations:</p>
+               <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                 <a href="mailto:cnehal194@gmail.com" class="chat-card-btn"><i class="fa-regular fa-envelope"></i> Send Email</a>
+                 <a href="https://linkedin.com/in/nehal-chauhan19" target="_blank" class="chat-card-btn btn-sec"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                 <a href="https://github.com/mRcOol7" target="_blank" class="chat-card-btn btn-sec"><i class="fa-brands fa-github"></i> GitHub</a>
+               </div>
+             </div>`
+          ],
+          'email': [
+            `📧 Direct Email: <a href="mailto:cnehal194@gmail.com" style="color: #56ccf2; text-decoration: underline;">cnehal194@gmail.com</a>. Drop a message anytime!`
+          ],
+          'linkedin': [
+            `💼 LinkedIn Profile: <a href="https://linkedin.com/in/nehal-chauhan19" target="_blank" style="color: #56ccf2; text-decoration: underline;">linkedin.com/in/nehal-chauhan19</a>`
+          ],
+          'github': [
+            `🐙 GitHub Projects: <a href="https://github.com/mRcOol7" target="_blank" style="color: #56ccf2; text-decoration: underline;">github.com/mRcOol7</a>`
+          ],
+
+          // Portfolio
+          'portfolio': [
+            `🌟 You are viewing the live portfolio! Scroll through sections to explore Nehal's skills, projects, and contact forms.`
+          ],
+
+          // Resume
+          'resume': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">📄 Nehal's CV / Resume</div>
+               <p>Download the PDF format CV to view full educational background and work experiences.</p>
+               <a href="ResumeNehal.pdf" download="NehalChauhan_Resume" class="chat-card-btn"><i class="fa-solid fa-download"></i> Download Resume</a>
+             </div>`
+          ],
+          'cv': [
+            `<div class="chat-card-media">
+               <div class="chat-card-title">📄 Nehal's CV / Resume</div>
+               <p>Download the PDF format CV to view full educational background and work experiences.</p>
+               <a href="ResumeNehal.pdf" download="NehalChauhan_Resume" class="chat-card-btn"><i class="fa-solid fa-download"></i> Download Resume</a>
+             </div>`
+          ],
+
+          // Achievements
+          'achievements': [
+            `🏆 <strong>Key Achievements</strong>:<br>• <strong>537M+ views</strong> generated on creative Augmented Reality (AR) lenses.<br>• Built scalable Auth systems serving <strong>10,000+ daily active users</strong>.<br>• Automated PDF billing saving over <strong>5+ hours weekly</strong>.`
+          ],
+          'ar lens': [
+            `🔮 <strong>AR Lens views: 537M+</strong>! Developed highly creative Augmented Reality filters reaching millions of organic views globally.`
+          ],
+
+          // Interests
+          'interests': [
+            `🎨 <strong>Interests & Hobbies</strong>:<br>• Sports: Cricket, Football, Tennis, F1 racing, and Kabaddi.<br>• Exploring Cybersecurity, JWT implementations, and AR/VR systems.`
+          ],
+          'hobbies': [
+            `🎨 <strong>Interests & Hobbies</strong>:<br>• Sports: Cricket, Football, Tennis, F1 racing, and Kabaddi.<br>• Exploring Cybersecurity, JWT implementations, and AR/VR systems.`
+          ],
+
+          // Technology interests
+          'technology': [
+            `🤖 <strong>Tech Focus</strong>: Artificial Intelligence, Cybersecurity, JSON Web Tokens (JWT), AR/VR, and cloud storage systems.`
+          ],
+          'ai': [
+            `🧠 <strong>AI Interest</strong>: Exploring machine learning integrations and AI-based automation logic for full-stack platforms.`
+          ],
+
+          // General
+          'who': [
+            `👨‍💻 <strong>Nehal Chauhan</strong>: CSE student at Parul University & Junior Android Developer at Encoraa ESG. Specialist in high-performance web systems and native mobile architectures.`
+          ],
+          'about': [
+            `👨‍💻 <strong>Nehal Chauhan</strong>: CSE student at Parul University & Junior Android Developer at Encoraa ESG. Specialist in high-performance web systems and native mobile architectures.`
+          ],
+          'help': [
+            `<p>💡 Ask me anything! I can answer queries about: Skills, Projects, Experience, Education, or Contact information.</p>
+             <div class="chat-chips">
+               <button onclick="sendChipMessage('projects')">🚀 Projects</button>
+               <button onclick="sendChipMessage('skills')">🔧 Skills</button>
+               <button onclick="sendChipMessage('resume')">📄 Download CV</button>
+             </div>`
+          ],
+          'thanks': [
+            `😊 You're welcome! Let me know if you want to know anything else about Nehal.`
+          ],
+          'bye': [
+            `👋 Take care! Feel free to reach out via email or LinkedIn if you want to chat further.`
+          ],
+
+          // Default
+          'default': [
+            `<p>🤔 I didn't quite get that. Try asking about skills, projects, experience, or contact!</p>
+             <div class="chat-chips">
+               <button onclick="sendChipMessage('skills')">🔧 Skills</button>
+               <button onclick="sendChipMessage('projects')">🚀 Projects</button>
+               <button onclick="sendChipMessage('contact')">📬 Contact</button>
+             </div>`
+          ]
+        };
+
         const synonymMap = {
           'greeting': ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
           'skills': ['skills', 'technologies', 'tech stack', 'programming', 'coding', 'languages', 'frameworks'],
@@ -1052,24 +1293,75 @@
           return defaults || "I'm sorry, I couldn't find a response. Please try asking about skills, projects, or experience.";
         }
 
-        function findBestMatch(message) {
-          const lowerMessage = message.toLowerCase();
+        // Levenshtein distance for fuzzy search matches
+        function LevenshteinDistance(a, b) {
+          if (a.length === 0) return b.length;
+          if (b.length === 0) return a.length;
 
-          // Check exact matches first
+          const matrix = [];
+          for (let i = 0; i <= b.length; i++) {
+            matrix[i] = [i];
+          }
+          for (let j = 0; j <= a.length; j++) {
+            matrix[0][j] = j;
+          }
+
+          for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+              if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+              } else {
+                matrix[i][j] = Math.min(
+                  matrix[i - 1][j - 1] + 1, // substitution
+                  matrix[i][j - 1] + 1,     // insertion
+                  matrix[i - 1][j] + 1      // deletion
+                );
+              }
+            }
+          }
+          return matrix[b.length][a.length];
+        }
+
+        function findBestMatch(message) {
+          const lowerMessage = message.toLowerCase().trim();
+
+          // Check direct mapping first
           for (const key in responseMap) {
             if (key !== 'default' && lowerMessage.includes(key)) {
               return key;
             }
           }
 
-          // Check synonyms
+          // Check synonym mapping
           for (const category in synonymMap) {
             if (synonymMap[category].some(synonym => lowerMessage.includes(synonym))) {
               return category;
             }
           }
 
-          return 'default';
+          // Simple typo tolerant character overlap distance score
+          let bestCategory = 'default';
+          let maxScore = 0;
+
+          const inputWords = lowerMessage.split(/\s+/).filter(w => w.length > 2);
+
+          for (const category in synonymMap) {
+            synonymMap[category].forEach(synonym => {
+              inputWords.forEach(word => {
+                const distance = LevenshteinDistance(word, synonym);
+                const maxAllowedDistance = synonym.length <= 4 ? 1 : 2;
+                if (distance <= maxAllowedDistance) {
+                  const score = 1 / (distance + 1);
+                  if (score > maxScore) {
+                    maxScore = score;
+                    bestCategory = category;
+                  }
+                }
+              });
+            });
+          }
+
+          return bestCategory;
         }
 
         function sendMessage() {

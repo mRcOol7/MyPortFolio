@@ -70,24 +70,51 @@
 
     let locationStr = "Unknown Location";
 
-    // Abortable geolocation fetch
+    // Robust geolocation resolver with backup providers (ipapi.co, ip-api.com, ipinfo.io)
     const fetchLocation = new Promise((resolve) => {
-      const controller = new AbortController();
-      const id = setTimeout(() => controller.abort(), 1500);
+      const timeoutMs = 1500;
+      
+      function fetchWithTimeout(url) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeoutMs);
+        return fetch(url, { signal: controller.signal })
+          .then(res => res.json())
+          .then(data => {
+            clearTimeout(id);
+            return data;
+          });
+      }
 
-      fetch("https://ipapi.co/json/", { signal: controller.signal })
-        .then(res => res.json())
+      fetchWithTimeout("https://ipapi.co/json/")
         .then(data => {
-          clearTimeout(id);
           if (data && (data.city || data.country_name)) {
             resolve(`${data.city || 'Unknown City'}, ${data.country_name || 'Unknown Country'}`);
           } else {
-            resolve("Unknown Location");
+            throw new Error("Invalid ipapi data");
           }
         })
         .catch(() => {
-          clearTimeout(id);
-          resolve("Unknown Location");
+          fetchWithTimeout("https://ip-api.com/json/")
+            .then(data => {
+              if (data && data.status === "success") {
+                resolve(`${data.city || 'Unknown City'}, ${data.country || 'Unknown Country'}`);
+              } else {
+                throw new Error("Invalid ip-api data");
+              }
+            })
+            .catch(() => {
+              fetchWithTimeout("https://ipinfo.io/json")
+                .then(data => {
+                  if (data && data.city) {
+                    resolve(`${data.city || 'Unknown City'}, ${data.country || 'Unknown Country'}`);
+                  } else {
+                    resolve("Unknown Location");
+                  }
+                })
+                .catch(() => {
+                  resolve("Unknown Location");
+                });
+            });
         });
     });
 
