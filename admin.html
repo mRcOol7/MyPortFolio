@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nehal Chauhan - Portfolio Admin Dashboard</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-color: #080b11;
+      --panel-bg: rgba(17, 24, 39, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent-primary: #3498db;
+      --accent-secondary: #8e44ad;
+      --accent-gradient: linear-gradient(135deg, #3498db, #8e44ad);
+      --success: #2ecc71;
+      --error: #e74c3c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Animated Decorative Blobs */
+    .blob {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 0;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .blob-1 {
+      top: -10%;
+      left: -10%;
+      background: var(--accent-primary);
+      animation: float 20s infinite alternate;
+    }
+    .blob-2 {
+      bottom: -10%;
+      right: -10%;
+      background: var(--accent-secondary);
+      animation: float 25s infinite alternate-reverse;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(80px, 50px) scale(1.2); }
+    }
+
+    /* GLASS CONTAINER TEMPLATE */
+    .glass-card {
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    /* LOGIN SCREEN CONTAINER */
+    #login-container {
+      width: 90%;
+      max-width: 420px;
+      padding: 40px 30px;
+      text-align: center;
+      animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .logo-area {
+      margin-bottom: 30px;
+    }
+    .logo-area i {
+      font-size: 3rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 15px rgba(52, 152, 219, 0.3));
+    }
+    .logo-area h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .logo-area p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .input-wrapper {
+      position: relative;
+    }
+    .input-wrapper i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+    .input-wrapper input {
+      width: 100%;
+      padding: 14px 45px 14px 45px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .input-wrapper input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+    }
+    .input-wrapper .toggle-password {
+      position: absolute;
+      right: 15px;
+      left: auto;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .input-wrapper .toggle-password:hover {
+      color: var(--text-main);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent-gradient);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+    }
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    #login-error {
+      color: var(--error);
+      font-size: 0.85rem;
+      margin-top: 15px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* MAIN DASHBOARD APPLICATION WRAPPER */
+    #dashboard-wrapper {
+      width: 95%;
+      max-width: 1280px;
+      height: 90vh;
+      max-height: 850px;
+      display: none; /* Hidden initially */
+      grid-template-columns: 260px 1fr;
+      overflow: hidden;
+      animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: rgba(10, 15, 30, 0.6);
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      padding: 30px 20px;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      padding-left: 8px;
+    }
+    .sidebar-header i {
+      font-size: 1.6rem;
+      color: var(--accent-primary);
+    }
+    .sidebar-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover, .nav-item.active {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .nav-item.active {
+      background: rgba(52, 152, 219, 0.15);
+      border-left: 3px solid var(--accent-primary);
+      color: #fff;
+    }
+    .nav-item i {
+      width: 20px;
+      font-size: 1.1rem;
+    }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--glass-border);
+      padding-top: 20px;
+    }
+    .btn-logout {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: transparent;
+      border: none;
+      color: var(--error);
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .btn-logout:hover {
+      background: rgba(231, 76, 60, 0.1);
+    }
+
+    /* MAIN CONTENT AREA */
+    .main-content {
+      padding: 35px;
+      overflow-y: auto;
+      background: rgba(13, 18, 30, 0.2);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .view-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .view-title h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .view-title p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 3px;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-refresh {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-refresh:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* PANELS (VIEWS) */
+    .dashboard-view {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .dashboard-view.active {
+      display: block;
+    }
+
+    /* OVERVIEW STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--accent-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .stat-card:hover::after {
+      opacity: 1;
+    }
+    .stat-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 14px;
+      background: rgba(52, 152, 219, 0.1);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .stat-card:nth-child(2) .stat-icon {
+      background: rgba(142, 68, 173, 0.1);
+      color: var(--accent-secondary);
+    }
+    .stat-card:nth-child(3) .stat-icon {
+      background: rgba(46, 204, 113, 0.1);
+      color: var(--success);
+    }
+    .stat-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    /* VISUALIZATIONS SECTION */
+    .visual-block {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .visual-block h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .system-status {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .status-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+    .status-value {
+      font-weight: 600;
+    }
+    .status-badge {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .badge-ok {
+      background: rgba(46, 204, 113, 0.15);
+      color: var(--success);
+    }
+
+    /* CHATS VIEW LAYOUT */
+    .chats-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 25px;
+      flex: 1;
+      height: calc(100% - 80px);
+      min-height: 0; /* Important for flex container height */
+    }
+
+    /* THREADS LIST (LEFT) */
+    .threads-container {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+    }
+    .threads-search {
+      padding: 15px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .search-wrapper {
+      position: relative;
+    }
+    .search-wrapper i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .search-wrapper input {
+      width: 100%;
+      padding: 10px 10px 10px 35px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+    .search-wrapper input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+    .threads-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .thread-item {
+      padding: 15px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 8px;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .thread-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .thread-item.active {
+      background: rgba(52, 152, 219, 0.1);
+      border-color: rgba(52, 152, 219, 0.2);
+    }
+    .thread-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .thread-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+    .thread-badge {
+      background: var(--accent-primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .thread-preview {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .thread-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* ACTIVE CONVERSATION PANEL (RIGHT) */
+    .chat-panel {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      height: 100%;
+    }
+    .chat-panel-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .chat-panel-title h4 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .chat-panel-title p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .chat-messages-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .chat-msg {
+      max-width: 70%;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--accent-gradient);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-msg.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--glass-border);
+      border-bottom-left-radius: 4px;
+    }
+    .msg-meta {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      align-self: flex-end;
+    }
+    .chat-msg.bot .msg-meta {
+      color: var(--text-muted);
+    }
+    .no-chat-selected {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--text-muted);
+      gap: 15px;
+    }
+    .no-chat-selected i {
+      font-size: 3rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.6;
+    }
+
+    /* CONTACTS VIEW LAYOUT */
+    .contacts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-2px);
+    }
+    .contact-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+    .contact-sender-info h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .contact-sender-info a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .contact-sender-info a:hover {
+      text-decoration: underline;
+    }
+    .contact-time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .contact-body {
+      color: var(--text-main);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border-left: 3px solid var(--accent-primary);
+    }
+
+    /* CONFIGURATION SETTINGS VIEW */
+    .settings-form {
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 30px;
+    }
+    .settings-form h3 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .settings-input-group {
+      margin-bottom: 25px;
+    }
+    .settings-input-group label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .settings-input-group input {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    .settings-input-group input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+    .btn-save-settings {
+      padding: 12px 24px;
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-save-settings:hover {
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    /* UTILITY SPINNERS & ANIMATIONS */
+    .spinner {
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 1024px) {
+      #dashboard-wrapper {
+        grid-template-columns: 80px 1fr;
+      }
+      .sidebar-header h2, .nav-item span {
+        display: none;
+      }
+      .sidebar {
+        align-items: center;
+        padding: 30px 10px;
+      }
+      .nav-item {
+        justify-content: center;
+        padding: 12px;
+        width: 50px;
+        height: 50px;
+      }
+      .sidebar-header {
+        justify-content: center;
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        align-items: start;
+        padding: 20px 10px;
+      }
+      #dashboard-wrapper {
+        height: auto;
+        max-height: none;
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        flex-direction: row;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        justify-content: space-between;
+        padding: 15px;
+      }
+      .sidebar-header, .sidebar-footer {
+        margin-bottom: 0;
+        padding-top: 0;
+        border-top: none;
+      }
+      .nav-menu {
+        flex-direction: row;
+        flex: none;
+        gap: 10px;
+      }
+      .nav-item {
+        margin-bottom: 0;
+      }
+      .main-content {
+        padding: 20px 10px;
+      }
+      .chats-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .chat-panel {
+        height: 450px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative Blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- LOGIN CONTAINER -->
+  <div id="login-container" class="glass-card">
+    <div class="logo-area">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h1>Portfolio Admin</h1>
+      <p>Secure Console Login</p>
+    </div>
+    
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="password">Enter Access Password</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" id="password" placeholder="••••••••••••" required autocomplete="current-password">
+          <i class="fa-solid fa-eye-slash toggle-password" id="togglePasswordBtn" onclick="togglePasswordVisibility()"></i>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn-submit" id="loginBtn">
+        <span>Sign In</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </form>
+    
+    <div id="login-error">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span id="error-text">Incorrect Password</span>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD CONTAINER -->
+  <div id="dashboard-wrapper" class="glass-card">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <i class="fa-solid fa-server"></i>
+        <h2>Nehal's Portfolio</h2>
+      </div>
+      
+      <nav class="nav-menu">
+        <div class="nav-item active" onclick="switchView('overview', this)">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Overview</span>
+        </div>
+        <div class="nav-item" onclick="switchView('chats', this)">
+          <i class="fa-solid fa-comments"></i>
+          <span>Chat logs</span>
+        </div>
+        <div class="nav-item" onclick="switchView('contacts', this)">
+          <i class="fa-solid fa-envelope-open-text"></i>
+          <span>Contacts</span>
+        </div>
+        <div class="nav-item" onclick="switchView('settings', this)">
+          <i class="fa-solid fa-gears"></i>
+          <span>Settings</span>
+        </div>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn-logout" onclick="handleLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Log Out</span>
+        </button>
+      </div>
+    </aside>
+    
+    <!-- MAIN DISPLAY PANEL -->
+    <main class="main-content">
+      <!-- HEADER -->
+      <div class="view-header">
+        <div class="view-title">
+          <h1 id="current-view-title">Dashboard Overview</h1>
+          <p id="current-view-subtitle">Real-time stats from Google Sheets backend</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-refresh" onclick="refreshData()">
+            <i class="fa-solid fa-arrows-rotate" id="refreshIcon"></i>
+            <span>Refresh Stats</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- VIEW: OVERVIEW -->
+      <div id="view-overview" class="dashboard-view active">
+        <div class="stats-grid">
+          <!-- Total Visits Card -->
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Total Visits</span>
+              <span class="stat-number" id="stat-visits">0</span>
+            </div>
+          </div>
+          <!-- Chat Sessions Card -->
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Chat sessions</span>
+              <span class="stat-number" id="stat-chats">0</span>
+            </div>
+          </div>
+          <!-- Contact submissions Card -->
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-paper-plane"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Contact Forms</span>
+              <span class="stat-number" id="stat-contacts">0</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="visual-block">
+          <h3><i class="fa-solid fa-circle-nodes" style="color: var(--success)"></i> Connection Quality Status</h3>
+          <div class="system-status">
+            <div class="status-row">
+              <span class="status-label"><i class="fa-solid fa-link"></i> Endpoint Target</span>
+              <span class="status-value" id="status-target" style="font-size: 0.85rem; color: var(--text-muted)">Connecting...</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label"><i class="fa-solid fa-signal"></i> Network Handshake</span>
+              <span class="status-badge badge-ok">Authorized</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- VIEW: CHAT LOGS -->
+      <div id="view-chats" class="dashboard-view">
+        <div class="chats-layout">
+          <!-- Left List Pane -->
+          <div class="threads-container">
+            <div class="threads-search">
+              <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="chatSearchInput" placeholder="Search logs..." oninput="filterChatThreads()">
+              </div>
+            </div>
+            <div class="threads-list" id="threadsListContainer">
+              <!-- Render threads lists here dynamically -->
+            </div>
+          </div>
+          
+          <!-- Right Active Chat Pane -->
+          <div class="chat-panel">
+            <div id="activeChatWindow" class="no-chat-selected">
+              <i class="fa-solid fa-comments"></i>
+              <p>Select a conversation from the left to read history</p>
+            </div>
+            <div id="chatMessageThreadContainer" style="display: none; height: 100%; flex-direction: column;">
+              <div class="chat-panel-header">
+                <div class="chat-panel-title">
+                  <h4 id="activeChatTitle">Session Detail</h4>
+                  <p id="activeChatSubtitle">Session ID info</p>
+                </div>
+              </div>
+              <div class="chat-messages-container" id="chatMessagesBody">
+                <!-- Render dialogue bubbles here dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- VIEW: CONTACTS -->
+      <div id="view-contacts" class="dashboard-view">
+        <div class="contacts-list" id="contactsListContainer">
+          <!-- Render contact entries dynamically -->
+        </div>
+      </div>
+      
+      <!-- VIEW: SETTINGS -->
+      <div id="view-settings" class="dashboard-view">
+        <div class="settings-form">
+          <h3>Google Sheets Integration Settings</h3>
+          <div class="settings-input-group">
+            <label for="scriptUrlInput">Apps Script Web App URL</label>
+            <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec">
+          </div>
+          <button class="btn-save-settings" onclick="saveSettings()">Save Configuration</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Config: Default Google Sheets Script URL
+    const DEFAULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOTTcZXe5e5JGbC1aHWXTINU-TGmwpgSvi_dEmYdKUQh5wHPzJGsCMQC-gXhYj8z-H/exec";
+    
+    // Globals
+    let activePassword = "";
+    let dashboardData = null;
+
+    // Run on startup
+    document.addEventListener("DOMContentLoaded", () => {
+      // Set default script URL if not already in local storage, or migration from old placeholder
+      const oldUrl = "https://script.google.com/macros/s/AKfycbzK_pcwc2WKc3Yw60SCS9_IBWtu5ysSJwao3xviNk1szeftkQlQ-NizRUh5ta1CDz3Z/exec";
+      if (!localStorage.getItem("admin_script_url") || localStorage.getItem("admin_script_url") === oldUrl) {
+        localStorage.setItem("admin_script_url", DEFAULT_SCRIPT_URL);
+      }
+      document.getElementById("scriptUrlInput").value = localStorage.getItem("admin_script_url");
+      
+      // Auto login if password stored in session
+      const savedPass = sessionStorage.getItem("admin_auth_pass");
+      if (savedPass) {
+        activePassword = savedPass;
+        doAuthentication(savedPass, true);
+      }
+    });
+
+    // Toggle password input visibility
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById("password");
+      const toggleBtn = document.getElementById("togglePasswordBtn");
+      if (passInput.type === "password") {
+        passInput.type = "text";
+        toggleBtn.classList.replace("fa-eye-slash", "fa-eye");
+      } else {
+        passInput.type = "password";
+        toggleBtn.classList.replace("fa-eye", "fa-eye-slash");
+      }
+    }
+
+    // Handles form login submission
+    function handleLogin(e) {
+      e.preventDefault();
+      const passInput = document.getElementById("password");
+      const passwordValue = passInput.value.trim();
+      
+      if (!passwordValue) return;
+      doAuthentication(passwordValue);
+    }
+
+    // Authenticates credentials against Google Apps Script Web App
+    function doAuthentication(password, isAutologin = false) {
+      const loginBtn = document.getElementById("loginBtn");
+      const loginError = document.getElementById("login-error");
+      
+      if (!isAutologin) {
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '<i class="fa-solid fa-spinner spinner"></i> Authenticating...';
+        loginError.style.display = "none";
+      }
+
+      const scriptUrl = localStorage.getItem("admin_script_url");
+      
+      // Call GET method with action 'get_data' and the password
+      fetch(`${scriptUrl}?action=get_data&password=${encodeURIComponent(password)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.success) {
+            // Authentication successful!
+            activePassword = password;
+            sessionStorage.setItem("admin_auth_pass", password);
+            dashboardData = data;
+            
+            // Swap Screen Displays
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("dashboard-wrapper").style.display = "grid";
+            document.body.style.alignItems = "center";
+            
+            // Fill stats
+            fillDashboardStats(data);
+            
+            console.log("🔓 Authenticated and loaded successfully");
+          } else {
+            // Failure
+            sessionStorage.removeItem("admin_auth_pass");
+            showLoginError(data.error || "Incorrect password or network error");
+          }
+        })
+        .catch(err => {
+          console.error("Auth fetch failed:", err);
+          showLoginError("Connection failed. Check Web App URL in settings.");
+        })
+        .finally(() => {
+          if (!isAutologin) {
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<span>Sign In</span> <i class="fa-solid fa-arrow-right"></i>';
+          }
+        });
+    }
+
+    function showLoginError(msg) {
+      const errorDiv = document.getElementById("login-error");
+      const errorText = document.getElementById("error-text");
+      errorText.textContent = msg;
+      errorDiv.style.display = "flex";
+      
+      // Shake animation
+      const container = document.getElementById("login-container");
+      container.style.animation = 'none';
+      setTimeout(() => {
+        container.style.animation = 'shake 0.4s ease';
+      }, 10);
+    }
+
+    // CSS shake keyframe injector
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-8px); }
+        75% { transform: translateX(8px); }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // Refresh database stats
+    function refreshData() {
+      const refreshIcon = document.getElementById("refreshIcon");
+      refreshIcon.classList.add("spinner");
+      
+      const scriptUrl = localStorage.getItem("admin_script_url");
+      
+      fetch(`${scriptUrl}?action=get_data&password=${encodeURIComponent(activePassword)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.success) {
+            dashboardData = data;
+            fillDashboardStats(data);
+            
+            // Re-render current active view lists
+            const activeViewItem = document.querySelector(".nav-item.active");
+            if (activeViewItem) {
+              const view = activeViewItem.textContent.trim().toLowerCase();
+              if (view.includes("chat")) renderChatThreads();
+              if (view.includes("contact")) renderContacts();
+            }
+            
+            console.log("🔄 Data refreshed successfully");
+          } else {
+            alert("Refresh failed: " + (data.error || "Unauthorized"));
+            if (data.error && data.error.includes("Unauthorized")) {
+              handleLogout();
+            }
+          }
+        })
+        .catch(err => {
+          console.error("Refresh failed:", err);
+          alert("Refresh failed. Unable to connect to backend endpoint.");
+        })
+        .finally(() => {
+          setTimeout(() => {
+            refreshIcon.classList.remove("spinner");
+          }, 400);
+        });
+    }
+
+    // Process and populate statistics onto the UI elements
+    function fillDashboardStats(data) {
+      document.getElementById("stat-visits").textContent = data.totalVisits.toLocaleString();
+      document.getElementById("status-target").textContent = localStorage.getItem("admin_script_url");
+      
+      // Count unique chatbot sessions
+      const sessions = {};
+      if (data.chats) {
+        data.chats.forEach(chat => {
+          if (chat.sessionId) sessions[chat.sessionId] = true;
+        });
+      }
+      const uniqueSessionsCount = Object.keys(sessions).length;
+      document.getElementById("stat-chats").textContent = uniqueSessionsCount.toLocaleString();
+      
+      // Count contact forms
+      const contactCount = data.contacts ? data.contacts.length : 0;
+      document.getElementById("stat-contacts").textContent = contactCount.toLocaleString();
+      
+      // Trigger lazy render for submenus
+      renderChatThreads();
+      renderContacts();
+    }
+
+    // Sidebar navigation view switcher
+    function switchView(viewName, element) {
+      // Set active menu highlight
+      document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+      element.classList.add("active");
+      
+      // Set Header titles
+      const titles = {
+        'overview': { t: 'Dashboard Overview', s: 'Real-time stats from Google Sheets backend' },
+        'chats': { t: 'Chat Conversations', s: 'Browse logged conversations with Nehal\'s Assistant' },
+        'contacts': { t: 'Contact Enquiries', s: 'Messages submitted through your portfolio contact form' },
+        'settings': { t: 'Dashboard Settings', s: 'Configure Google Apps Script API endpoints' }
+      };
+      document.getElementById("current-view-title").textContent = titles[viewName].t;
+      document.getElementById("current-view-subtitle").textContent = titles[viewName].s;
+      
+      // Swap display viewport panel
+      document.querySelectorAll(".dashboard-view").forEach(view => view.classList.remove("active"));
+      document.getElementById(`view-${viewName}`).classList.add("active");
+    }
+
+    // LOG OUT USER
+    function handleLogout() {
+      activePassword = "";
+      sessionStorage.removeItem("admin_auth_pass");
+      document.getElementById("password").value = "";
+      document.getElementById("dashboard-wrapper").style.display = "none";
+      document.getElementById("login-container").style.display = "block";
+      document.body.style.alignItems = "center";
+    }
+
+    // SAVE INTEGRATION SETTINGS
+    function saveSettings() {
+      const url = document.getElementById("scriptUrlInput").value.trim();
+      if (!url) {
+        alert("Please enter a valid Google Apps Script Web App URL.");
+        return;
+      }
+      localStorage.setItem("admin_script_url", url);
+      document.getElementById("status-target").textContent = url;
+      alert("Settings saved successfully! Loading database data...");
+      
+      if (activePassword) {
+        doAuthentication(activePassword);
+      } else {
+        handleLogout();
+      }
+    }
+
+    // --- RENDER VIEWS CODE ---
+
+    // Gathers chats, groups by Session ID, sorts by timestamp descending
+    function getGroupedChatConversations() {
+      if (!dashboardData || !dashboardData.chats) return [];
+      
+      const groups = {};
+      dashboardData.chats.forEach(msg => {
+        const sid = msg.sessionId || "unknown_session";
+        if (!groups[sid]) {
+          groups[sid] = {
+            sessionId: sid,
+            messages: [],
+            startTime: null,
+            lastMessageText: ""
+          };
+        }
+        groups[sid].messages.push(msg);
+      });
+      
+      const threadList = Object.values(groups).map(thread => {
+        // Sort thread messages in chronological order
+        thread.messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        
+        thread.startTime = thread.messages[0] ? new Date(thread.messages[0].timestamp) : new Date();
+        
+        // Find last user/bot message text
+        const lastMsg = thread.messages[thread.messages.length - 1];
+        thread.lastMessageText = lastMsg ? lastMsg.message : "Empty convo";
+        
+        return thread;
+      });
+      
+      // Sort threads list so the most recent conversation is first
+      threadList.sort((a, b) => b.startTime - a.startTime);
+      return threadList;
+    }
+
+    // Renders Chat Threads list in Left pane
+    function renderChatThreads() {
+      const listContainer = document.getElementById("threadsListContainer");
+      if (!listContainer) return;
+      
+      const threads = getGroupedChatConversations();
+      
+      if (threads.length === 0) {
+        listContainer.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted)">No chat logs found.</div>';
+        return;
+      }
+      
+      listContainer.innerHTML = "";
+      
+      threads.forEach(thread => {
+        const item = document.createElement("div");
+        item.className = "thread-item";
+        item.setAttribute("data-session-id", thread.sessionId);
+        
+        // Format time nicely
+        const dateStr = formatDate(thread.startTime);
+        
+        // Find first user message as title, or fall back to session id
+        const firstUserMsg = thread.messages.find(m => m.sender === 'user');
+        const displayTitle = firstUserMsg ? firstUserMsg.message : `Conversation #${thread.sessionId.slice(-5)}`;
+        
+        item.innerHTML = `
+          <div class="thread-header">
+            <span class="thread-title" title="${displayTitle}">${displayTitle}</span>
+            <span class="thread-badge">${thread.messages.length}</span>
+          </div>
+          <div class="thread-preview" title="${thread.lastMessageText}">${thread.lastMessageText}</div>
+          <div class="thread-time">${dateStr}</div>
+        `;
+        
+        item.onclick = () => selectChatThread(thread.sessionId, item);
+        listContainer.appendChild(item);
+      });
+    }
+
+    // Open chat thread details
+    function selectChatThread(sessionId, element) {
+      // Highlight active item
+      document.querySelectorAll(".thread-item").forEach(item => item.classList.remove("active"));
+      if (element) element.classList.add("active");
+      
+      // Fetch thread group
+      const threads = getGroupedChatConversations();
+      const activeThread = threads.find(t => t.sessionId === sessionId);
+      
+      if (!activeThread) return;
+      
+      // Hide Placeholder, Show chat window
+      document.getElementById("activeChatWindow").style.display = "none";
+      document.getElementById("chatMessageThreadContainer").style.display = "flex";
+      
+      // Load details
+      document.getElementById("activeChatTitle").textContent = `Conversation: #${sessionId.substring(8, 16).toUpperCase()}`;
+      document.getElementById("activeChatSubtitle").textContent = `Session ID: ${sessionId} | Total Messages: ${activeThread.messages.length}`;
+      
+      // Render bubbles
+      const body = document.getElementById("chatMessagesBody");
+      body.innerHTML = "";
+      
+      activeThread.messages.forEach(msg => {
+        const bubble = document.createElement("div");
+        bubble.className = `chat-msg ${msg.sender === 'user' ? 'user' : 'bot'}`;
+        
+        const timestamp = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        bubble.innerHTML = `
+          <div>${escapeHtml(msg.message)}</div>
+          <span class="msg-meta">${msg.sender.toUpperCase()} • ${timestamp}</span>
+        `;
+        
+        body.appendChild(bubble);
+      });
+      
+      // Scroll to bottom
+      body.scrollTop = body.scrollHeight;
+    }
+
+    // Filter chat threads by search query
+    function filterChatThreads() {
+      const query = document.getElementById("chatSearchInput").value.toLowerCase();
+      const items = document.querySelectorAll(".thread-item");
+      
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(query)) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    }
+
+    // Render Contact submission entries
+    function renderContacts() {
+      const container = document.getElementById("contactsListContainer");
+      if (!container) return;
+      
+      if (!dashboardData || !dashboardData.contacts || dashboardData.contacts.length === 0) {
+        container.innerHTML = '<div style="padding:30px;text-align:center;color:var(--text-muted);" class="visual-block">No form submissions received yet.</div>';
+        return;
+      }
+      
+      container.innerHTML = "";
+      
+      // Sort contacts by date descending
+      const contacts = [...dashboardData.contacts];
+      contacts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      
+      contacts.forEach(contact => {
+        const card = document.createElement("div");
+        card.className = "contact-card";
+        
+        const dateStr = formatDate(new Date(contact.timestamp));
+        
+        card.innerHTML = `
+          <div class="contact-header">
+            <div class="contact-sender-info">
+              <h4>${escapeHtml(contact.name)}</h4>
+              <a href="mailto:${escapeHtml(contact.email)}"><i class="fa-regular fa-envelope"></i> ${escapeHtml(contact.email)}</a>
+            </div>
+            <span class="contact-time">${dateStr}</span>
+          </div>
+          <div class="contact-body">
+            ${escapeHtml(contact.message).replace(/\n/g, '<br>')}
+          </div>
+        `;
+        
+        container.appendChild(card);
+      });
+    }
+
+    // Helper: Dates formatting
+    function formatDate(date) {
+      try {
+        const d = new Date(date);
+        return d.toLocaleDateString('en-IN', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        });
+      } catch (e) {
+        return date.toString();
+      }
+    }
+
+    // Helper: Escape HTML strings to prevent XSS
+    function escapeHtml(text) {
+      if (!text) return "";
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.toString().replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+  </script>
+</body>
+</html>
