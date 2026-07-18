@@ -62,7 +62,7 @@ function doPost(e) {
       let sheet = spreadsheet.getSheetByName("Visits");
       if (!sheet) {
         sheet = spreadsheet.insertSheet("Visits");
-        sheet.appendRow(["Timestamp", "Location", "Timezone", "Device Type", "Browser & OS", "Referrer", "Query Params"]);
+        sheet.appendRow(["Timestamp", "Location", "Timezone", "Device Type", "Browser & OS", "Referrer", "Query Params", "Visit ID"]);
       }
 
       const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
@@ -72,8 +72,29 @@ function doPost(e) {
       const browserOs = data.browserOs || "Unknown Browser/OS";
       const referrer = data.referrer || "Direct";
       const query = data.query || "None";
+      const visitId = data.visitId || "unknown";
 
-      sheet.appendRow([timestamp, location, timezone, device, browserOs, referrer, query]);
+      sheet.appendRow([timestamp, location, timezone, device, browserOs, referrer, query, visitId]);
+
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // ACTION 1.5: Track Engagement Events
+    if (action === 'track_event') {
+      let sheet = spreadsheet.getSheetByName("Events");
+      if (!sheet) {
+        sheet = spreadsheet.insertSheet("Events");
+        sheet.appendRow(["Timestamp", "Visit ID", "Event Name", "Event Detail"]);
+      }
+
+      const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+      const visitId = data.visitId || "unknown";
+      const eventName = data.eventName || "unknown";
+      const eventDetail = data.eventDetail || "";
+
+      sheet.appendRow([timestamp, visitId, eventName, eventDetail]);
 
       return ContentService.createTextOutput(JSON.stringify({
         success: true
@@ -202,12 +223,29 @@ function doGet(e) {
         }
       }
 
+      // 4. Get Engagement Events
+      let eventsSheet = spreadsheet.getSheetByName("Events");
+      let events = [];
+      if (eventsSheet) {
+        const rows = eventsSheet.getDataRange().getValues();
+        // Skip header row
+        for (let i = 1; i < rows.length; i++) {
+          events.push({
+            timestamp: rows[i][0],
+            visitId: rows[i][1],
+            eventName: rows[i][2],
+            eventDetail: rows[i][3]
+          });
+        }
+      }
+
       return ContentService.createTextOutput(JSON.stringify({
         success: true,
         totalVisits: totalVisits,
         visits: visits,
         chats: chats,
-        contacts: contacts
+        contacts: contacts,
+        events: events
       })).setMimeType(ContentService.MimeType.JSON);
     }
 

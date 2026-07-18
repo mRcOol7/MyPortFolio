@@ -7,6 +7,7 @@
   <!-- Google Fonts & FontAwesome Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <style>
     :root {
@@ -349,10 +350,90 @@
     /* OVERVIEW STATS GRID */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 24px;
       margin-bottom: 40px;
     }
+
+    /* CHARTS SECTION */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+    @media (max-width: 900px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .chart-card {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: 380px;
+      position: relative;
+    }
+    .chart-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+    }
+    .chart-container {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+    /* LOCATION PROGRESS LIST */
+    .location-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .location-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .location-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    .location-name {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+    .location-count-pct {
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+    .location-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .location-bar-fill {
+      height: 100%;
+      background: var(--accent-gradient);
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     .stat-card {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--glass-border);
@@ -953,6 +1034,76 @@
               <span class="stat-number" id="stat-contacts">0</span>
             </div>
           </div>
+          <!-- Interaction Rate Card -->
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(241, 196, 15, 0.1); color: #f1c40f;">
+              <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Interaction Rate</span>
+              <span class="stat-number" id="stat-conversion">0%</span>
+            </div>
+          </div>
+          <!-- Total Messages Card -->
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(230, 126, 34, 0.1); color: #e67e22;">
+              <i class="fa-solid fa-message"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Total Messages</span>
+              <span class="stat-number" id="stat-messages">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHARTS GRID -->
+        <div class="charts-grid">
+          <!-- Traffic Trend -->
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-chart-area" style="color: var(--accent-primary)"></i> Traffic Trend (Last 14 Days)</h3>
+            <div class="chart-container">
+              <canvas id="trafficTrendChart"></canvas>
+            </div>
+          </div>
+          <!-- Device Breakdown -->
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-laptop-code" style="color: var(--accent-secondary)"></i> Device Breakdown</h3>
+            <div class="chart-container">
+              <canvas id="deviceBreakdownChart"></canvas>
+            </div>
+          </div>
+          <!-- Traffic Sources -->
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-globe" style="color: var(--success)"></i> Top Traffic Sources</h3>
+            <div class="chart-container">
+              <canvas id="trafficSourcesChart"></canvas>
+            </div>
+          </div>
+          <!-- Geolocation Breakdown -->
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-map-location-dot" style="color: #f1c40f"></i> Top Visitor Locations</h3>
+            <div class="chart-container" style="overflow-y: auto;">
+              <div class="location-list" id="locationListContainer">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+          <!-- Scroll Depth Funnel -->
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-filter" style="color: #e74c3c"></i> Visitor Scroll Funnel</h3>
+            <div class="chart-container" style="overflow-y: auto;">
+              <div class="location-list" id="scrollFunnelContainer">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+          <!-- Interactive CTA Link Clicks -->
+          <div class="chart-card">
+            <h3><i class="fa-solid fa-hand-pointer" style="color: #3498db"></i> Interactive CTA Clicks</h3>
+            <div class="chart-container">
+              <canvas id="ctaClicksChart"></canvas>
+            </div>
+          </div>
         </div>
         
         <div class="visual-block">
@@ -1063,6 +1214,10 @@
     // Globals
     let activePassword = "";
     let dashboardData = null;
+    let trafficTrendChartInstance = null;
+    let deviceBreakdownChartInstance = null;
+    let trafficSourcesChartInstance = null;
+    let ctaClicksChartInstance = null;
 
     // Run on startup
     document.addEventListener("DOMContentLoaded", () => {
@@ -1222,7 +1377,8 @@
 
     // Process and populate statistics onto the UI elements
     function fillDashboardStats(data) {
-      document.getElementById("stat-visits").textContent = data.totalVisits.toLocaleString();
+      const totalVisits = data.totalVisits || 0;
+      document.getElementById("stat-visits").textContent = totalVisits.toLocaleString();
       document.getElementById("status-target").textContent = localStorage.getItem("admin_script_url");
       
       // Count unique chatbot sessions
@@ -1239,10 +1395,372 @@
       const contactCount = data.contacts ? data.contacts.length : 0;
       document.getElementById("stat-contacts").textContent = contactCount.toLocaleString();
       
+      // Calculate Interaction / Conversion Rate
+      const interactionRate = totalVisits > 0 
+        ? (((uniqueSessionsCount + contactCount) / totalVisits) * 100).toFixed(1) 
+        : "0.0";
+      document.getElementById("stat-conversion").textContent = interactionRate + "%";
+
+      // Total messages sent
+      const totalMessages = data.chats ? data.chats.length : 0;
+      document.getElementById("stat-messages").textContent = totalMessages.toLocaleString();
+      
+      // Trigger charts update
+      updateCharts(data);
+
       // Trigger lazy render for submenus
       renderVisitsTable();
       renderChatThreads();
       renderContacts();
+    }
+
+    // Helper to extract clean date string (e.g. "Jul 18")
+    function getLocalDateString(timestampStr) {
+      try {
+        const date = new Date(timestampStr);
+        if (isNaN(date.getTime())) {
+          const parts = timestampStr.split(",");
+          return parts[0].trim();
+        }
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      } catch (e) {
+        return "Unknown Date";
+      }
+    }
+
+    // Populate and update all charts
+    function updateCharts(data) {
+      if (!window.Chart) {
+        console.error("Chart.js not loaded.");
+        return;
+      }
+
+      // Configure Chart.js dark mode styling defaults
+      Chart.defaults.color = '#9ca3af';
+      Chart.defaults.font.family = "'Outfit', 'Plus Jakarta Sans', sans-serif";
+      Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+      Chart.defaults.plugins.tooltip.borderColor = 'rgba(255, 255, 255, 0.1)';
+      Chart.defaults.plugins.tooltip.borderWidth = 1;
+      Chart.defaults.plugins.tooltip.titleColor = '#fff';
+      Chart.defaults.plugins.tooltip.bodyColor = '#f3f4f6';
+      Chart.defaults.plugins.tooltip.padding = 12;
+      Chart.defaults.plugins.tooltip.cornerRadius = 8;
+
+      // 1. TRAFFIC TREND (LINE CHART - Last 14 Days)
+      const labels = [];
+      const dateCounts = {};
+      for (let i = 13; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        labels.push(label);
+        dateCounts[label] = 0;
+      }
+
+      if (data.visits) {
+        data.visits.forEach(visit => {
+          const dateLabel = getLocalDateString(visit.timestamp);
+          if (dateLabel in dateCounts) {
+            dateCounts[dateLabel]++;
+          }
+        });
+      }
+      const trafficTrendData = labels.map(l => dateCounts[l]);
+
+      if (trafficTrendChartInstance) {
+        trafficTrendChartInstance.destroy();
+      }
+
+      const trafficCtx = document.getElementById('trafficTrendChart').getContext('2d');
+      const trafficGradient = trafficCtx.createLinearGradient(0, 0, 0, 300);
+      trafficGradient.addColorStop(0, 'rgba(52, 152, 219, 0.35)');
+      trafficGradient.addColorStop(1, 'rgba(52, 152, 219, 0.0)');
+
+      trafficTrendChartInstance = new Chart(trafficCtx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Page Views',
+            data: trafficTrendData,
+            borderColor: '#3498db',
+            borderWidth: 3,
+            backgroundColor: trafficGradient,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#3498db',
+            pointBorderColor: 'rgba(255, 255, 255, 0.2)',
+            pointHoverRadius: 7
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#9ca3af' }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#9ca3af', precision: 0 },
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // 2. DEVICE BREAKDOWN (DOUGHNUT CHART)
+      const deviceCounts = { Desktop: 0, Mobile: 0, Tablet: 0 };
+      if (data.visits) {
+        data.visits.forEach(v => {
+          const dev = v.device || "Desktop";
+          if (dev in deviceCounts) {
+            deviceCounts[dev]++;
+          } else {
+            deviceCounts[dev] = (deviceCounts[dev] || 0) + 1;
+          }
+        });
+      }
+
+      if (deviceBreakdownChartInstance) {
+        deviceBreakdownChartInstance.destroy();
+      }
+
+      const deviceCtx = document.getElementById('deviceBreakdownChart').getContext('2d');
+      deviceBreakdownChartInstance = new Chart(deviceCtx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(deviceCounts),
+          datasets: [{
+            data: Object.values(deviceCounts),
+            backgroundColor: ['#3498db', '#8e44ad', '#2ecc71'],
+            borderColor: '#0e1520',
+            borderWidth: 2,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                boxWidth: 12,
+                padding: 15,
+                color: '#9ca3af'
+              }
+            }
+          },
+          cutout: '70%'
+        }
+      });
+
+      // 3. TOP REFERRAL SOURCES (HORIZONTAL BAR CHART)
+      const referrers = {};
+      if (data.visits) {
+        data.visits.forEach(v => {
+          let ref = v.referrer || "Direct";
+          if (ref === "Direct / None" || ref === "Direct" || ref === "None" || ref === "") {
+            ref = "Direct";
+          } else {
+            try {
+              const url = new URL(ref);
+              ref = url.hostname.replace("www.", "");
+            } catch(e) {
+              ref = ref.replace(/https?:\/\/(www\.)?/, "").split("/")[0];
+            }
+          }
+          referrers[ref] = (referrers[ref] || 0) + 1;
+        });
+      }
+
+      const sortedReferrers = Object.entries(referrers).sort((a, b) => b[1] - a[1]);
+      const topReferrers = sortedReferrers.slice(0, 5);
+      const otherReferrersCount = sortedReferrers.slice(5).reduce((sum, item) => sum + item[1], 0);
+      if (otherReferrersCount > 0) {
+        topReferrers.push(["Other", otherReferrersCount]);
+      }
+
+      if (trafficSourcesChartInstance) {
+        trafficSourcesChartInstance.destroy();
+      }
+
+      const refCtx = document.getElementById('trafficSourcesChart').getContext('2d');
+      trafficSourcesChartInstance = new Chart(refCtx, {
+        type: 'bar',
+        data: {
+          labels: topReferrers.map(r => r[0]),
+          datasets: [{
+            label: 'Referrals',
+            data: topReferrers.map(r => r[1]),
+            backgroundColor: 'rgba(142, 68, 173, 0.75)',
+            borderColor: '#8e44ad',
+            borderWidth: 1,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#9ca3af', precision: 0 },
+              beginAtZero: true
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: '#9ca3af' }
+            }
+          }
+        }
+      });
+
+      // 4. TOP VISITOR LOCATIONS (PROGRESS BARS)
+      const locations = {};
+      if (data.visits) {
+        data.visits.forEach(v => {
+          const loc = v.location || "Unknown Location";
+          locations[loc] = (locations[loc] || 0) + 1;
+        });
+      }
+
+      const topLocations = Object.entries(locations)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+      const locationContainer = document.getElementById("locationListContainer");
+      if (locationContainer) {
+        locationContainer.innerHTML = "";
+        
+        if (topLocations.length === 0) {
+          locationContainer.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted)">No location data.</div>';
+        } else {
+          const totalVisits = data.totalVisits || 1;
+          topLocations.forEach(([locName, count]) => {
+            const pct = ((count / totalVisits) * 100).toFixed(1);
+            const item = document.createElement("div");
+            item.className = "location-item";
+            item.innerHTML = `
+              <div class="location-details">
+                <span class="location-name">${escapeHtml(locName)}</span>
+                <span class="location-count-pct">${count} visits (${pct}%)</span>
+              </div>
+              <div class="location-bar-bg">
+                <div class="location-bar-fill" style="width: ${pct}%"></div>
+              </div>
+            `;
+            locationContainer.appendChild(item);
+          });
+        }
+      }
+
+      // 5. SCROLL ENGAGEMENT FUNNEL (PROGRESS BARS)
+      const visitScrolls = {};
+      if (data.events) {
+        data.events.forEach(evt => {
+          if (evt.eventName === 'scroll') {
+            const milestone = evt.eventDetail; // e.g. "25%"
+            const vid = evt.visitId || "unknown";
+            if (!visitScrolls[milestone]) {
+              visitScrolls[milestone] = new Set();
+            }
+            visitScrolls[milestone].add(vid);
+          }
+        });
+      }
+
+      const scrollContainer = document.getElementById("scrollFunnelContainer");
+      if (scrollContainer) {
+        scrollContainer.innerHTML = "";
+        const milestones = ['25%', '50%', '75%', '100%'];
+        const totalVisits = data.totalVisits || 1;
+        
+        milestones.forEach(m => {
+          const count = visitScrolls[m] ? visitScrolls[m].size : 0;
+          const pct = Math.min(100, (count / totalVisits) * 100).toFixed(1);
+          const item = document.createElement("div");
+          item.className = "location-item";
+          item.innerHTML = `
+            <div class="location-details">
+              <span class="location-name"><i class="fa-solid fa-angle-right"></i> Reached ${m} depth</span>
+              <span class="location-count-pct">${count} sessions (${pct}%)</span>
+            </div>
+            <div class="location-bar-bg">
+              <div class="location-bar-fill" style="width: ${pct}%; background: linear-gradient(135deg, #e74c3c, #c0392b);"></div>
+            </div>
+          `;
+          scrollContainer.appendChild(item);
+        });
+      }
+
+      // 6. INTERACTIVE CTA LINK CLICKS (BAR CHART)
+      const clickCounts = {
+        'Resume Downloads': 0,
+        'GitHub Links': 0,
+        'LinkedIn Links': 0,
+        'Email Clicks': 0,
+        'Phone Calls': 0,
+        'External Clicks': 0
+      };
+
+      if (data.events) {
+        data.events.forEach(evt => {
+          if (evt.eventName === 'download_resume') clickCounts['Resume Downloads']++;
+          else if (evt.eventName === 'click_github') clickCounts['GitHub Links']++;
+          else if (evt.eventName === 'click_linkedin') clickCounts['LinkedIn Links']++;
+          else if (evt.eventName === 'click_email') clickCounts['Email Clicks']++;
+          else if (evt.eventName === 'click_call') clickCounts['Phone Calls']++;
+          else if (evt.eventName === 'click_external_link') clickCounts['External Clicks']++;
+        });
+      }
+
+      if (ctaClicksChartInstance) {
+        ctaClicksChartInstance.destroy();
+      }
+
+      const ctaCtx = document.getElementById('ctaClicksChart').getContext('2d');
+      ctaClicksChartInstance = new Chart(ctaCtx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(clickCounts),
+          datasets: [{
+            label: 'Clicks',
+            data: Object.values(clickCounts),
+            backgroundColor: 'rgba(52, 152, 219, 0.75)',
+            borderColor: '#3498db',
+            borderWidth: 1,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#9ca3af' }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#9ca3af', precision: 0 },
+              beginAtZero: true
+            }
+          }
+        }
+      });
     }
 
     // Sidebar navigation view switcher
