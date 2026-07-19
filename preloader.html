@@ -557,6 +557,7 @@
           cancelAnimationFrame(animFrame);
           document.getElementById('preloader').classList.add('fade-out');
           setTimeout(() => {
+            localStorage.setItem('preloaderShown', 'true');
             window.location.href = 'index.html';
           }, 850);
         }, 500);
