@@ -65,8 +65,7 @@
 
   <link rel="stylesheet" type="text/css" href="css.css">
   <link rel="icon" type="image/png" href="https://i.ibb.co/RjgY0Pn/IMG-7601.jpg" class="round-favicon">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
@@ -971,7 +970,7 @@
         <button id="chatbot-send-btn">Send</button>
       </div>
       <div id="predefined-options" class="predefined-options">
-        <button class="option-btn"><i class="fas fa-hand-wave"></i> Hello</button>
+        <button class="option-btn"><i class="fa-solid fa-hands-waving"></i> Hello</button>
         <button class="option-btn"><i class="fas fa-code"></i> Skills</button>
         <button class="option-btn"><i class="fas fa-rocket"></i> Projects</button>
         <button class="option-btn"><i class="fas fa-briefcase"></i> Experience</button>
@@ -1510,11 +1509,10 @@
 
     <script>
       // Check if the preloader has been shown
-      if (!localStorage.getItem('preloaderShown')) {
+      // Prevent search bots and crawlers from redirecting to preloader.html
+      const isBotPattern = /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
+      if (!isBotPattern && !localStorage.getItem('preloaderShown')) {
         window.location.href = 'preloader.html'; // Redirect to preloader.html
-      } else {
-        // Optionally, you can clear the flag if you want the preloader to show again on the next visit
-        // localStorage.removeItem('preloaderShown');
       }
     </script>
 
