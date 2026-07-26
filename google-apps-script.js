@@ -62,11 +62,22 @@ function doPost(e) {
       let sheet = spreadsheet.getSheetByName("Visits");
       if (!sheet) {
         sheet = spreadsheet.insertSheet("Visits");
-        sheet.appendRow(["Timestamp", "Location", "Timezone", "Device Type", "Browser & OS", "Referrer", "Query Params", "Visit ID"]);
+        sheet.appendRow(["Timestamp", "IP Address", "Location", "Latitude", "Longitude", "Timezone", "Device Type", "Browser & OS", "Referrer", "Query Params", "Visit ID"]);
+      } else {
+        // Ensure header row (row 1) is always synced to modern 11 columns
+        try {
+          const firstRow = sheet.getRange(1, 1, 1, 11).getValues()[0];
+          if (!firstRow[1] || !firstRow[1].toString().toLowerCase().includes("ip")) {
+            sheet.getRange(1, 1, 1, 11).setValues([["Timestamp", "IP Address", "Location", "Latitude", "Longitude", "Timezone", "Device Type", "Browser & OS", "Referrer", "Query Params", "Visit ID"]]);
+          }
+        } catch(e) {}
       }
 
       const timestamp = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+      const ip = data.ip || "Unknown IP";
       const location = data.location || "Unknown Location";
+      const latitude = data.latitude || data.lat || "N/A";
+      const longitude = data.longitude || data.lng || "N/A";
       const timezone = data.timezone || "Unknown Timezone";
       const device = data.device || "Unknown Device";
       const browserOs = data.browserOs || "Unknown Browser/OS";
@@ -74,7 +85,7 @@ function doPost(e) {
       const query = data.query || "None";
       const visitId = data.visitId || "unknown";
 
-      sheet.appendRow([timestamp, location, timezone, device, browserOs, referrer, query, visitId]);
+      sheet.appendRow([timestamp, ip, location, latitude, longitude, timezone, device, browserOs, referrer, query, visitId]);
 
       return ContentService.createTextOutput(JSON.stringify({
         success: true
@@ -184,18 +195,78 @@ function doGet(e) {
         }
         totalVisits = validRows.length;
         
+        // Helper to test if value is numeric coordinate
+        function isNum(val) {
+          if (val === null || val === undefined || val === "") return false;
+          return !isNaN(Number(val));
+        }
+
         // Retrieve last 300 logs for the dashboard to keep load times lightweight
         const startIndex = Math.max(0, validRows.length - 300);
         for (let i = validRows.length - 1; i >= startIndex; i--) {
           const r = validRows[i];
+
+          let ip = "N/A";
+          let location = "Unknown Location";
+          let latitude = "N/A";
+          let longitude = "N/A";
+          let timezone = "Unknown Timezone";
+          let device = "Unknown Device";
+          let browserOs = "Unknown Browser/OS";
+          let referrer = "Direct";
+          let query = "None";
+
+          const col1Str = r[1] ? r[1].toString() : "";
+          const isCol1Ip = col1Str.includes(".") || col1Str.includes(":");
+
+          // Case 1: Standard 11-column row [Timestamp, IP, Location, Lat, Lng, Timezone, Device, Browser/OS, Referrer, Query, VisitID]
+          if (isCol1Ip && isNum(r[3])) {
+            ip = col1Str || "Unknown IP";
+            location = r[2] || "Unknown Location";
+            latitude = r[3] !== undefined && r[3] !== "" ? r[3] : "N/A";
+            longitude = r[4] !== undefined && r[4] !== "" ? r[4] : "N/A";
+            timezone = r[5] || "Unknown Timezone";
+            device = r[6] || "Unknown Device";
+            browserOs = r[7] || "Unknown Browser/OS";
+            referrer = r[8] || "Direct";
+            query = r[9] || "None";
+          }
+          // Case 2: 9-column row [Timestamp, IP, Location, Timezone, Device, Browser/OS, Referrer, Query, VisitID]
+          else if (isCol1Ip) {
+            ip = col1Str || "Unknown IP";
+            location = r[2] || "Unknown Location";
+            latitude = "N/A";
+            longitude = "N/A";
+            timezone = r[3] || "Unknown Timezone";
+            device = r[4] || "Unknown Device";
+            browserOs = r[5] || "Unknown Browser/OS";
+            referrer = r[6] || "Direct";
+            query = r[7] || "None";
+          }
+          // Case 3: Old 8-column row [Timestamp, Location, Timezone, Device, Browser/OS, Referrer, Query, VisitID]
+          else {
+            ip = "N/A";
+            location = col1Str || "Unknown Location";
+            latitude = "N/A";
+            longitude = "N/A";
+            timezone = r[2] || "Unknown Timezone";
+            device = r[3] || "Unknown Device";
+            browserOs = r[4] || "Unknown Browser/OS";
+            referrer = r[5] || "Direct";
+            query = r[6] || "None";
+          }
+
           visits.push({
             timestamp: r[0],
-            location: r[1] || "Unknown Location",
-            timezone: r[2] || "Unknown Timezone",
-            device: r[3] || "Unknown Device",
-            browserOs: r[4] || "Unknown Browser/OS",
-            referrer: r[5] || "Direct",
-            query: r[6] || "None"
+            ip: ip,
+            location: location,
+            latitude: latitude,
+            longitude: longitude,
+            timezone: timezone,
+            device: device,
+            browserOs: browserOs,
+            referrer: referrer,
+            query: query
           });
         }
       }

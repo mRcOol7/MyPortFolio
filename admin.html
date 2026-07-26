@@ -1227,9 +1227,15 @@
         <div class="visual-block" style="margin-top: 30px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
             <h3 style="margin-bottom: 0;"><i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-primary)"></i> Recent Visitors</h3>
-            <div class="search-wrapper" style="width: 220px; position: relative;">
-              <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: var(--text-muted);"></i>
-              <input type="text" id="visitSearchInput" placeholder="Filter by location/OS..." oninput="filterVisits()" style="width: 100%; padding: 8px 10px 8px 35px; font-size: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff;">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button class="btn-export" onclick="exportVisitsToExcel()" style="padding: 8px 14px; background: linear-gradient(135deg, #2ecc71, #27ae60); border: none; border-radius: 8px; color: #fff; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                <i class="fa-solid fa-file-excel"></i>
+                <span>Export to Excel</span>
+              </button>
+              <div class="search-wrapper" style="width: 220px; position: relative;">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: var(--text-muted);"></i>
+                <input type="text" id="visitSearchInput" placeholder="Filter IP, location, OS..." oninput="filterVisits()" style="width: 100%; padding: 8px 10px 8px 35px; font-size: 0.85rem; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff;">
+              </div>
             </div>
           </div>
           <div style="overflow-x: auto; width: 100%;">
@@ -1237,7 +1243,9 @@
               <thead>
                 <tr style="border-bottom: 1px solid var(--glass-border); color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">
                   <th style="padding: 12px 10px;">Time</th>
+                  <th style="padding: 12px 10px;">IP Address</th>
                   <th style="padding: 12px 10px;">Location</th>
+                  <th style="padding: 12px 10px;">Lat / Long</th>
                   <th style="padding: 12px 10px;">Device</th>
                   <th style="padding: 12px 10px;">Browser & OS</th>
                   <th style="padding: 12px 10px;">Referrer</th>
@@ -2122,7 +2130,7 @@
       if (!tbody) return;
 
       if (!dashboardData || !dashboardData.visits || dashboardData.visits.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="padding: 20px; text-align: center; color: var(--text-muted);">No visit logs recorded yet.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="padding: 20px; text-align: center; color: var(--text-muted);">No visit logs recorded yet.</td></tr>';
         return;
       }
 
@@ -2162,9 +2170,22 @@
         // Format date
         const dateStr = formatDate(new Date(visit.timestamp));
 
+        // Format IP display
+        const ipDisplay = visit.ip && visit.ip !== "N/A"
+          ? `<span style="background: rgba(52, 152, 219, 0.1); border: 1px solid rgba(52, 152, 219, 0.25); padding: 3px 8px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; color: #3498db; display: inline-flex; align-items: center; gap: 4px;"><i class="fa-solid fa-network-wired" style="font-size: 0.7rem; opacity: 0.8;"></i> ${escapeHtml(visit.ip)}</span>`
+          : `<span style="color: var(--text-muted); font-size: 0.8rem;">N/A</span>`;
+
+        // Format Lat/Long coordinates
+        let coordsDisplay = '<span style="color: var(--text-muted); font-size: 0.8rem;">N/A</span>';
+        if (visit.latitude && visit.latitude !== "N/A" && visit.longitude && visit.longitude !== "N/A") {
+          coordsDisplay = `<a href="https://maps.google.com/?q=${encodeURIComponent(visit.latitude)},${encodeURIComponent(visit.longitude)}" target="_blank" style="color: #f1c40f; text-decoration: none; font-size: 0.8rem; font-family: monospace; display: inline-flex; align-items: center; gap: 4px;" title="View on Google Maps"><i class="fa-solid fa-location-dot" style="font-size: 0.75rem;"></i> ${escapeHtml(visit.latitude)}, ${escapeHtml(visit.longitude)}</a>`;
+        }
+
         row.innerHTML = `
           <td style="padding: 14px 10px; font-size: 0.85rem; color: var(--text-muted);">${dateStr}</td>
+          <td style="padding: 14px 10px;">${ipDisplay}</td>
           <td style="padding: 14px 10px; font-weight: 600; color: #fff;">${escapeHtml(visit.location)} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal; display: block;">${escapeHtml(visit.timezone)}</span></td>
+          <td style="padding: 14px 10px;">${coordsDisplay}</td>
           <td style="padding: 14px 10px;">${deviceIcon} <span style="font-size: 0.85rem; margin-left: 6px;">${visit.device}</span></td>
           <td style="padding: 14px 10px; font-size: 0.85rem; color: var(--text-muted);">${escapeHtml(visit.browserOs)}</td>
           <td style="padding: 14px 10px; font-size: 0.85rem;">${cleanRefStr}</td>
@@ -2175,7 +2196,7 @@
       });
     }
 
-    // Filter visitor logs by search query (e.g. location, browser)
+    // Filter visitor logs by search query (e.g. location, IP, browser, lat/long)
     function filterVisits() {
       const query = document.getElementById("visitSearchInput").value.toLowerCase();
       const rows = document.querySelectorAll(".visit-row");
@@ -2188,6 +2209,47 @@
           row.style.display = "none";
         }
       });
+    }
+
+    // Export visitor logs data to Excel CSV format
+    function exportVisitsToExcel() {
+      if (!dashboardData || !dashboardData.visits || dashboardData.visits.length === 0) {
+        alert("No visit records available to export.");
+        return;
+      }
+
+      const headers = ["Timestamp", "IP Address", "Location", "Latitude", "Longitude", "Timezone", "Device", "Browser & OS", "Referrer", "Query Tag"];
+      
+      // Add UTF-8 BOM for Microsoft Excel compatibility
+      let csvContent = "\uFEFF";
+      csvContent += headers.map(h => `"${h}"`).join(",") + "\n";
+
+      dashboardData.visits.forEach(v => {
+        const row = [
+          `"${(v.timestamp || '').toString().replace(/"/g, '""')}"`,
+          `"${(v.ip || 'N/A').toString().replace(/"/g, '""')}"`,
+          `"${(v.location || '').toString().replace(/"/g, '""')}"`,
+          `"${(v.latitude || 'N/A').toString().replace(/"/g, '""')}"`,
+          `"${(v.longitude || 'N/A').toString().replace(/"/g, '""')}"`,
+          `"${(v.timezone || '').toString().replace(/"/g, '""')}"`,
+          `"${(v.device || '').toString().replace(/"/g, '""')}"`,
+          `"${(v.browserOs || '').toString().replace(/"/g, '""')}"`,
+          `"${(v.referrer || '').toString().replace(/"/g, '""')}"`,
+          `"${(v.query || '').toString().replace(/"/g, '""')}"`
+        ];
+        csvContent += row.join(",") + "\n";
+      });
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      const dateToday = new Date().toISOString().slice(0, 10);
+      link.setAttribute("download", `Portfolio_Visitor_Logs_${dateToday}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     }
 
     // Helper: Escape HTML strings to prevent XSS

@@ -69,8 +69,11 @@
     const browserOs = getBrowserOS();
 
     let locationStr = "Unknown Location";
+    let userIpStr = "Unknown IP";
+    let userLat = "N/A";
+    let userLng = "N/A";
 
-    // Robust geolocation resolver with backup providers (ipapi.co, ip-api.com, ipinfo.io)
+    // Robust, zero-prompt IP-based geolocation, IP, and Lat/Long resolver
     const fetchLocation = new Promise((resolve) => {
       const timeoutMs = 1500;
       
@@ -85,45 +88,86 @@
           });
       }
 
-      fetchWithTimeout("https://ipapi.co/json/")
+      // Try freeipapi.com first (highly accurate database for city matching)
+      fetchWithTimeout("https://freeipapi.com/api/json")
         .then(data => {
-          if (data && (data.city || data.country_name)) {
-            resolve(`${data.city || 'Unknown City'}, ${data.country_name || 'Unknown Country'}`);
+          if (data && (data.cityName || data.countryName)) {
+            const loc = `${data.cityName || 'Unknown City'}, ${data.countryName || 'Unknown Country'}`;
+            const ip = data.ipAddress || data.ip || "Unknown IP";
+            const lat = data.latitude !== undefined ? data.latitude : "N/A";
+            const lng = data.longitude !== undefined ? data.longitude : "N/A";
+            resolve({ location: loc, ip: ip, latitude: lat, longitude: lng });
           } else {
-            throw new Error("Invalid ipapi data");
+            throw new Error("Invalid freeipapi data");
           }
         })
         .catch(() => {
-          fetchWithTimeout("https://ip-api.com/json/")
+          // Fallback to ipapi.co
+          fetchWithTimeout("https://ipapi.co/json/")
             .then(data => {
-              if (data && data.status === "success") {
-                resolve(`${data.city || 'Unknown City'}, ${data.country || 'Unknown Country'}`);
+              if (data && (data.city || data.country_name)) {
+                const loc = `${data.city || 'Unknown City'}, ${data.country_name || 'Unknown Country'}`;
+                const ip = data.ip || "Unknown IP";
+                const lat = data.latitude !== undefined ? data.latitude : "N/A";
+                const lng = data.longitude !== undefined ? data.longitude : "N/A";
+                resolve({ location: loc, ip: ip, latitude: lat, longitude: lng });
               } else {
-                throw new Error("Invalid ip-api data");
+                throw new Error("Invalid ipapi data");
               }
             })
             .catch(() => {
-              fetchWithTimeout("https://ipinfo.io/json")
+              // Fallback to ip-api.com
+              fetchWithTimeout("https://ip-api.com/json/")
                 .then(data => {
-                  if (data && data.city) {
-                    resolve(`${data.city || 'Unknown City'}, ${data.country || 'Unknown Country'}`);
+                  if (data && data.status === "success") {
+                    const loc = `${data.city || 'Unknown City'}, ${data.country || 'Unknown Country'}`;
+                    const ip = data.query || "Unknown IP";
+                    const lat = data.lat !== undefined ? data.lat : "N/A";
+                    const lng = data.lon !== undefined ? data.lon : "N/A";
+                    resolve({ location: loc, ip: ip, latitude: lat, longitude: lng });
                   } else {
-                    resolve("Unknown Location");
+                    throw new Error("Invalid ip-api data");
                   }
                 })
                 .catch(() => {
-                  resolve("Unknown Location");
+                  // Fallback to ipinfo.io
+                  fetchWithTimeout("https://ipinfo.io/json")
+                    .then(data => {
+                      if (data && data.city) {
+                        const loc = `${data.city || 'Unknown City'}, ${data.country || 'Unknown Country'}`;
+                        const ip = data.ip || "Unknown IP";
+                        let lat = "N/A", lng = "N/A";
+                        if (data.loc) {
+                          const parts = data.loc.split(",");
+                          lat = parts[0] || "N/A";
+                          lng = parts[1] || "N/A";
+                        }
+                        resolve({ location: loc, ip: ip, latitude: lat, longitude: lng });
+                      } else {
+                        resolve({ location: "Unknown Location", ip: data.ip || "Unknown IP", latitude: "N/A", longitude: "N/A" });
+                      }
+                    })
+                    .catch(() => {
+                      resolve({ location: "Unknown Location", ip: "Unknown IP", latitude: "N/A", longitude: "N/A" });
+                    });
                 });
             });
         });
     });
 
-    fetchLocation.then((resolvedLocation) => {
-      locationStr = resolvedLocation;
+    fetchLocation.then((res) => {
+      locationStr = res.location || "Unknown Location";
+      userIpStr = res.ip || "Unknown IP";
+      userLat = res.latitude !== undefined ? res.latitude : "N/A";
+      userLng = res.longitude !== undefined ? res.longitude : "N/A";
+      console.log(`📍 Geolocation resolved silently: ${locationStr} | IP: ${userIpStr} | Lat: ${userLat}, Lng: ${userLng}`);
 
       const formData = new FormData();
       formData.append('action', 'track_visit');
+      formData.append('ip', userIpStr);
       formData.append('location', locationStr);
+      formData.append('latitude', userLat);
+      formData.append('longitude', userLng);
       formData.append('timezone', timezone);
       formData.append('device', device);
       formData.append('browserOs', browserOs);
